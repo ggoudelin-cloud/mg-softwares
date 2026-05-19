@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /?/
-Disallow: /_archive/
-
-Sitemap: https://mg-softwares.fr/sitemap.xml
