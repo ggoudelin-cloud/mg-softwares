@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoZen — Carnet d'entretien automobile intelligent</title>
+<meta name="description" content="AutoZen — Suivez l'entretien de votre véhicule, gérez vos contrats, recevez vos rappels de révision. Vos données sur votre Google Drive personnel.">
+<!-- ─── SEO ─── -->
+<meta name="keywords" content="AutoZen, carnet entretien automobile, suivi véhicule, réparations voiture, rappels révision, contrats entretien, Google Drive, MG Softwares">
+<meta name="author" content="Gilles Goudelin — MG Softwares">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mg-softwares.fr/autozen.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#060912">
+<!-- Sécurité -->
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mg-softwares.fr/autozen.html">
+<meta property="og:title" content="AutoZen — Carnet d'entretien automobile intelligent">
+<meta property="og:description" content="Suivez l'entretien de votre véhicule, gérez vos contrats, recevez vos rappels de révision. Vos données sauvegardées sur votre Google Drive personnel.">
+<meta property="og:image" content="https://mg-softwares.fr/android-chrome-512x512.png">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="MG Softwares">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AutoZen — Carnet d'entretien automobile">
+<meta name="twitter:description" content="Suivi véhicule, réparations, contrats, rappels révision. Données sur votre Google Drive.">
+<meta name="twitter:image" content="https://mg-softwares.fr/android-chrome-512x512.png">
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AutoZen",
+  "operatingSystem": "Web",
+  "applicationCategory": "UtilitiesApplication",
+  "description": "Carnet d'entretien automobile intelligent. Suivez réparations, contrats et rappels de révision. Sauvegarde sur Google Drive personnel.",
+  "url": "https://mg-softwares.fr/autozen.html",
+  "author": { "@type": "Organization", "name": "MG Softwares" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060912;--bg2:#0d1425;--bg3:#131d30;
+  --ac:#3b6cf7;--ac2:#6b8ffb;--acg:linear-gradient(135deg,#3b6cf7 0%,#5b8fff 50%,#a78bfa 100%);
+  --ok:#0fcf8a;--wn:#f5a623;--er:#f04f55;--pu:#a78bfa;
+  --tx:#e8edf5;--tx2:#8d9db5;--tx3:#3d4d63;
+  --bd:rgba(255,255,255,.07);--gl:rgba(255,255,255,.04);--r:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;line-height:1.6}
+h1,h2,h3{font-family:'Syne',sans-serif}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 50% at 20% -10%,rgba(59,108,247,.22),transparent),
+             radial-gradient(ellipse 60% 40% at 85% 110%,rgba(167,139,250,.14),transparent);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;background:rgba(6,9,18,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--bd);transition:border-color .3s;}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-icon{font-size:1.5rem;filter:drop-shadow(0 0 12px rgba(59,108,247,.7))}
+.nav-logo-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:-.5px}
+.nav-logo-sub{font-size:.62rem;color:var(--tx3);letter-spacing:1.5px;text-transform:uppercase;margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{color:var(--tx2);font-size:.85rem;text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--tx)}
+.nav-cta{padding:9px 22px;background:var(--acg);color:#fff;border-radius:40px;font-size:.82rem;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(59,108,247,.35);transition:all .2s;}
+.nav-cta:hover{opacity:.9;transform:translateY(-1px)}
+
+/* HERO */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 40px 80px;text-align:center;gap:28px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(59,108,247,.12);border:1px solid rgba(59,108,247,.25);border-radius:40px;font-size:.73rem;font-weight:600;color:var(--ac2);letter-spacing:.8px;text-transform:uppercase;animation:fadeUp .6s ease both;}
+.hero-title{font-size:clamp(2rem,8vw,5.5rem);font-weight:800;letter-spacing:-2.5px;line-height:.95;animation:fadeUp .7s .1s ease both;}
+.hero-title .grad{background:var(--acg);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:clamp(.95rem,2vw,1.15rem);color:var(--tx2);max-width:520px;font-weight:300;animation:fadeUp .7s .2s ease both;}
+.hero-btns{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;animation:fadeUp .7s .3s ease both;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;background:var(--acg);color:#fff;border-radius:40px;font-weight:700;font-size:.9rem;text-decoration:none;box-shadow:0 8px 32px rgba(59,108,247,.45);transition:all .2s;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(59,108,247,.55)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;background:var(--gl);border:1px solid var(--bd);color:var(--tx);border-radius:40px;font-weight:600;font-size:.9rem;text-decoration:none;backdrop-filter:blur(12px);transition:all .2s;}
+.btn-secondary:hover{background:rgba(255,255,255,.08);transform:translateY(-2px)}
+
+/* PHONE MOCKUP */
+.hero-mockup{position:relative;animation:fadeUp .8s .4s ease both;margin-top:20px;width:600px;max-width:100vw;display:flex;justify-content:center;}
+.phone{width:230px;background:var(--bg2);border-radius:38px;border:2px solid rgba(255,255,255,.12);box-shadow:0 0 0 1px rgba(0,0,0,.5),0 40px 80px rgba(0,0,0,.7),0 0 60px rgba(59,108,247,.15);overflow:hidden;position:relative;}
+.phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:24px;background:var(--bg);border-radius:0 0 16px 16px;z-index:2;}
+.phone-screen{padding:28px 12px 12px}
+.ph-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;padding:0 2px}
+.ph-brand{display:flex;align-items:center;gap:6px}
+.ph-brand-ico{font-size:.9rem}
+.ph-brand-nm{font-size:.65rem;font-weight:800;font-family:'Syne',sans-serif}
+.ph-brand-sub{font-size:.42rem;color:var(--tx3);letter-spacing:.5px}
+.ph-icons{display:flex;gap:4px}
+.ph-ico{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.6rem}
+.ph-veh{font-size:.62rem;font-weight:700;margin-bottom:9px;padding:0 2px}
+.ph-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:9px}
+.ph-stat{background:rgba(59,108,247,.1);border:1px solid rgba(59,108,247,.15);border-radius:10px;padding:7px 4px;text-align:center}
+.ph-stat-v{font-size:.8rem;font-weight:900;color:var(--ac2)}
+.ph-stat-l{font-size:.38rem;color:var(--tx3);margin-top:1px;text-transform:uppercase;letter-spacing:.4px}
+.ph-ctr{background:rgba(15,207,138,.06);border:1px solid rgba(15,207,138,.15);border-radius:11px;padding:9px;margin-bottom:8px}
+.ph-ctr-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.ph-ctr-nm{font-size:.6rem;font-weight:700}
+.ph-badge-ok{padding:2px 7px;border-radius:10px;font-size:.42rem;font-weight:700;background:rgba(15,207,138,.15);color:var(--ok)}
+.ph-badge-er{padding:2px 7px;border-radius:10px;font-size:.42rem;font-weight:700;background:rgba(245,166,35,.15);color:var(--wn)}
+.ph-bar{height:3px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+.ph-bar-inner{height:100%;border-radius:2px}
+.ph-rem{display:flex;align-items:center;gap:6px;padding:7px 8px;border-radius:9px;border:1px solid;margin-bottom:5px}
+.ph-rem.due{background:rgba(240,79,85,.07);border-color:rgba(240,79,85,.25)}
+.ph-rem.ok{background:rgba(15,207,138,.06);border-color:rgba(15,207,138,.2)}
+.ph-rem-ico{font-size:.8rem;flex-shrink:0}
+.ph-rem-nm{font-size:.55rem;font-weight:600}
+.ph-rem-dt{font-size:.45rem;color:var(--tx3)}
+.ph-rem-pill{font-size:.45rem;font-weight:700;padding:2px 6px;border-radius:8px;margin-left:auto;flex-shrink:0}
+.ph-rep{display:flex;align-items:center;gap:6px;padding:7px 8px;background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:9px;margin-bottom:5px}
+.ph-rep-ico{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0}
+.ph-rep-nm{font-size:.58rem;font-weight:600}
+.ph-rep-dt{font-size:.46rem;color:var(--tx3)}
+.ph-rep-price{font-size:.6rem;font-weight:800;color:var(--ac2);margin-left:auto;flex-shrink:0}
+.ph-nav{display:flex;justify-content:space-around;padding:7px 0 0;border-top:1px solid var(--bd);margin-top:6px}
+.ph-nav-it{display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.45rem;color:var(--tx3)}
+.ph-nav-it.on{color:var(--ac2)}
+.ph-nav-it span:first-child{font-size:.8rem}
+.phone-glow{position:absolute;inset:-40px;background:radial-gradient(ellipse at 50% 60%,rgba(59,108,247,.2),transparent 70%);pointer-events:none;z-index:-1;border-radius:50%;}
+
+/* BADGES FLOTTANTS */
+.float-badge{position:absolute;background:var(--bg2);border:1px solid var(--bd);border-radius:14px;padding:8px 13px;display:flex;align-items:center;gap:9px;box-shadow:0 8px 32px rgba(0,0,0,.4);backdrop-filter:blur(12px);animation:float 4s ease-in-out infinite;white-space:nowrap;}
+.float-badge.left{left:0;top:30%;animation-delay:.5s}
+.float-badge.right{right:0;top:58%;animation-delay:1.5s}
+.fb-ico{font-size:1.1rem}
+.fb-txt{font-size:.65rem;line-height:1.3}
+.fb-txt strong{display:block;font-size:.72rem;color:var(--tx)}
+.fb-txt span{color:var(--tx2)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* SCROLL HINT */
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--tx3);font-size:.7rem;letter-spacing:1px;text-transform:uppercase;animation:fadeUp 1s .8s ease both;}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--ac),transparent);animation:scrollPulse 2s ease-in-out infinite;}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(.8)}50%{opacity:1;transform:scaleY(1)}}
+
+/* LOGOS BAR */
+.logos-bar{position:relative;z-index:1;padding:22px 40px;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+.logos-bar-lbl{font-size:.68rem;color:var(--tx3);letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+.logo-pill{display:flex;align-items:center;gap:7px;padding:7px 16px;background:var(--gl);border:1px solid var(--bd);border-radius:40px;font-size:.75rem;color:var(--tx2);transition:all .2s}
+.logo-pill:hover{background:rgba(255,255,255,.07);color:var(--tx)}
+.logo-pill .lp-ico{font-size:1rem}
+
+/* GOOGLE PLAY BADGE */
+.gplay-badge{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;text-decoration:none;color:var(--tx);transition:all .2s;margin-top:4px}
+.gplay-badge:hover{background:rgba(255,255,255,.09);transform:translateY(-1px)}
+.gplay-badge-ico{font-size:1.6rem;flex-shrink:0}
+.gplay-badge-txt{text-align:left}
+.gplay-badge-sub{font-size:.6rem;color:var(--tx3);text-transform:uppercase;letter-spacing:.8px;display:block}
+.gplay-badge-name{font-size:.88rem;font-weight:700;display:block;margin-top:1px}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:100px 40px}
+.container{max-width:1100px;margin:0 auto}
+.sec-eyebrow{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;background:rgba(59,108,247,.1);border:1px solid rgba(59,108,247,.2);border-radius:40px;font-size:.68rem;color:var(--ac2);font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:20px;}
+.sec-title{font-size:clamp(1.5rem,5vw,3.2rem);font-weight:800;letter-spacing:-1.5px;line-height:1.05;margin-bottom:16px;}
+.sec-sub{color:var(--tx2);font-size:1rem;font-weight:300;max-width:500px;line-height:1.7}
+
+/* FEATURES GRID */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:60px;}
+.feat-card{background:var(--gl);border:1px solid var(--bd);border-radius:var(--r);padding:30px;position:relative;overflow:hidden;transition:all .3s;cursor:default;}
+.feat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,108,247,.06),transparent);opacity:0;transition:opacity .3s;pointer-events:none;}
+.feat-card:hover{border-color:rgba(59,108,247,.3);transform:translateY(-3px)}
+.feat-card:hover::before{opacity:1}
+.feat-card.large{grid-column:span 2}
+.feat-ico{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:20px;}
+.feat-ico.blue{background:rgba(59,108,247,.12);border:1px solid rgba(59,108,247,.2)}
+.feat-ico.green{background:rgba(15,207,138,.1);border:1px solid rgba(15,207,138,.2)}
+.feat-ico.purple{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.2)}
+.feat-ico.orange{background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.2)}
+.feat-title{font-size:1.1rem;font-weight:700;margin-bottom:10px;letter-spacing:-.3px}
+.feat-desc{font-size:.85rem;color:var(--tx2);line-height:1.6}
+.feat-tag{display:inline-flex;align-items:center;gap:5px;margin-top:14px;padding:4px 12px;background:rgba(15,207,138,.1);border:1px solid rgba(15,207,138,.2);border-radius:40px;font-size:.68rem;color:var(--ok);font-weight:600;}
+
+/* SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.split.reverse{direction:rtl}
+.split.reverse>*{direction:ltr}
+.split-visual{background:var(--bg2);border:1px solid var(--bd);border-radius:24px;padding:28px;position:relative;overflow:hidden;}
+.split-visual::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(59,108,247,.07),transparent 60%);pointer-events:none;}
+.check-list{display:flex;flex-direction:column;gap:13px;margin-top:28px}
+.check-item{display:flex;align-items:center;gap:10px;font-size:.85rem}
+.check-item span:first-child{color:var(--ok);font-size:1.1rem;flex-shrink:0}
+
+/* MOCKUP ITEMS */
+.mockup-list{display:flex;flex-direction:column;gap:10px}
+.mockup-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:12px;transition:all .2s}
+.mockup-item:hover{background:rgba(59,108,247,.08);border-color:rgba(59,108,247,.2);transform:translateX(4px)}
+.mi-ico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.mi-info{flex:1}
+.mi-nm{font-size:.82rem;font-weight:600}
+.mi-dt{font-size:.66rem;color:var(--tx3);margin-top:1px}
+.mi-badge-ok{padding:3px 9px;border-radius:8px;font-size:.6rem;font-weight:700;background:rgba(15,207,138,.12);color:var(--ok)}
+.mi-badge-wn{padding:3px 9px;border-radius:8px;font-size:.6rem;font-weight:700;background:rgba(245,166,35,.12);color:var(--wn)}
+.mi-badge-er{padding:3px 9px;border-radius:8px;font-size:.6rem;font-weight:700;background:rgba(240,79,85,.12);color:var(--er)}
+
+/* REMINDER MOCKUP */
+.rem-mockup{display:flex;flex-direction:column;gap:10px}
+.rem-item{display:flex;align-items:center;gap:11px;padding:13px 15px;border-radius:13px;border:1px solid;transition:all .2s}
+.rem-item.due{background:rgba(240,79,85,.07);border-color:rgba(240,79,85,.25)}
+.rem-item.warn{background:rgba(245,166,35,.07);border-color:rgba(245,166,35,.25)}
+.rem-item.ok{background:rgba(15,207,138,.07);border-color:rgba(15,207,138,.2)}
+.rem-ico{font-size:1.3rem;flex-shrink:0}
+.rem-info{flex:1}
+.rem-nm{font-size:.8rem;font-weight:600}
+.rem-dt{font-size:.65rem;color:var(--tx3);margin-top:2px}
+.rem-pill{padding:3px 10px;border-radius:20px;font-size:.63rem;font-weight:700}
+.rp-due{background:rgba(240,79,85,.18);color:#f04f55}
+.rp-warn{background:rgba(245,166,35,.18);color:#f5a623}
+.rp-ok{background:rgba(15,207,138,.15);color:#0fcf8a}
+
+/* STATS */
+.highlight-section{background:var(--bg2);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);position:relative;z-index:1;}
+.highlight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd)}
+.highlight-item{background:var(--bg2);padding:40px;text-align:center}
+.hi-number{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,6vw,3.5rem);letter-spacing:-2px;line-height:1;background:var(--acg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px;}
+.hi-label{font-size:.82rem;color:var(--tx2);font-weight:400}
+
+/* DRIVE SECTION */
+.drive-card{background:linear-gradient(135deg,rgba(59,108,247,.1),rgba(167,139,250,.06));border:1px solid rgba(59,108,247,.2);border-radius:24px;padding:50px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+.drive-features{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.drive-feat{display:flex;align-items:flex-start;gap:12px}
+.df-ico{width:32px;height:32px;border-radius:8px;flex-shrink:0;background:rgba(59,108,247,.15);display:flex;align-items:center;justify-content:center;font-size:.9rem;margin-top:1px;}
+.df-txt{font-size:.83rem;color:var(--tx2);line-height:1.5}
+.df-txt strong{color:var(--tx);display:block;font-size:.87rem}
+.drive-visual{background:var(--bg3);border:1px solid var(--bd);border-radius:16px;padding:22px;font-family:monospace;font-size:.75rem;color:var(--tx3);line-height:1.8;overflow:hidden;word-break:break-all;}
+.dv-line{display:flex;flex-wrap:wrap;gap:4px 8px;min-width:0}
+.dv-key{color:var(--ac2)}.dv-val{color:var(--ok)}.dv-str{color:var(--wn)}.dv-nb{color:#a78bfa}
+.dv-comment{color:var(--tx3);font-style:italic}
+
+/* STORAGE MODES */
+.modes-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+.mode-card{background:var(--gl);border:1px solid var(--bd);border-radius:var(--r);padding:28px;transition:all .3s}
+.mode-card:hover{border-color:rgba(59,108,247,.3);transform:translateY(-2px)}
+.mode-card.featured{background:rgba(59,108,247,.08);border-color:rgba(59,108,247,.25)}
+.mode-ico{font-size:2.2rem;margin-bottom:14px}
+.mode-title{font-size:1.05rem;font-weight:700;margin-bottom:8px;letter-spacing:-.3px}
+.mode-desc{font-size:.82rem;color:var(--tx2);line-height:1.6;margin-bottom:14px}
+.mode-badge{display:inline-flex;padding:3px 10px;border-radius:20px;font-size:.65rem;font-weight:700;background:rgba(15,207,138,.12);color:var(--ok);border:1px solid rgba(15,207,138,.2);}
+.mode-list{display:flex;flex-direction:column;gap:8px}
+.mode-list-item{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--tx2)}
+.mode-list-item span:first-child{color:var(--ok);flex-shrink:0}
+
+/* CTA */
+.cta-section{text-align:center;padding:120px 40px;position:relative;z-index:1;}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(59,108,247,.15),transparent 70%);pointer-events:none;}
+.cta-title{font-size:clamp(1.7rem,6vw,4rem);font-weight:800;letter-spacing:-2px;margin-bottom:20px}
+.cta-sub{color:var(--tx2);font-size:1rem;margin-bottom:36px;font-weight:300}
+
+/* FOOTER */
+footer{border-top:1px solid var(--bd);padding:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;position:relative;z-index:1;}
+.footer-brand{display:flex;align-items:center;gap:9px}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:var(--tx3);font-size:.78rem;text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--tx2)}
+.footer-copy{color:var(--tx3);font-size:.75rem}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.2,0,0,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:16px 20px;overflow:hidden}.nav-links{display:none}
+  .nav-cta{display:none}
+  .hero{padding:100px 20px 60px}
+  section{padding:70px 20px;overflow-x:hidden}
+  .container{overflow-x:hidden}
+  .split,.modes-grid{grid-template-columns:1fr;gap:30px}
+  .split.reverse{direction:ltr}
+  .feat-card.large{grid-column:span 1}
+  .highlight-grid{grid-template-columns:1fr}
+  .highlight-item{padding:30px 20px}
+  .drive-card{grid-template-columns:1fr;padding:20px;overflow:hidden}
+  .drive-features{gap:10px}
+  .drive-feat{gap:10px}
+  .df-txt{font-size:.78rem}
+  .drive-visual{font-size:.68rem;padding:14px;overflow:hidden}
+  .sec-title{letter-spacing:-.5px;word-break:break-word}
+  .hero-title{letter-spacing:-1px;line-height:1.05}
+  .cta-title{letter-spacing:-1px}
+  .cta-section{padding:80px 24px}
+  .hi-number{letter-spacing:-1px}
+  footer{flex-direction:column;align-items:flex-start;padding:30px 20px}
+  .logos-bar{padding:18px 20px;gap:8px}
+  .logos-bar-lbl{width:100%;text-align:center;margin-bottom:4px}
+  .logo-pill{font-size:.7rem;padding:6px 12px}
+  .float-badge{display:none}
+  .phone{width:200px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <span class="nav-logo-icon">🚗</span>
+    <div><div class="nav-logo-name">AutoZen</div><div class="nav-logo-sub">MG-Softwares</div></div>
+  </div>
+  <div class="nav-links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#rappels">Rappels</a>
+    <a href="#stockage">Stockage</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="./index.html" class="nav-cta">Ouvrir l'app →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <span class="eyebrow">🚗 Carnet d'entretien automobile</span>
+  <h1 class="hero-title">Votre voiture<br>mérite <span class="grad">mieux</span></h1>
+  <p class="hero-sub">Suivez toutes vos réparations, gérez vos contrats d'entretien, recevez des rappels de révision. Vos données sur votre Google Drive personnel — ou en local.</p>
+  <div class="hero-btns">
+    <a href="./index.html" class="btn-primary">🚀 Ouvrir AutoZen</a>
+    <a href="#features" class="btn-secondary">Découvrir les fonctionnalités ↓</a>
+  </div>
+  <a href="https://play.google.com/store/apps/details?id=fr.mg_softwares.autozen" class="gplay-badge" target="_blank" rel="noopener">
+    <span class="gplay-badge-ico">▶️</span>
+    <span class="gplay-badge-txt">
+      <span class="gplay-badge-sub">Disponible sur</span>
+      <span class="gplay-badge-name">Google Play</span>
+    </span>
+  </a>
+
+  <!-- PHONE MOCKUP -->
+  <div class="hero-mockup">
+    <div class="phone-glow"></div>
+
+    <div class="float-badge left">
+      <span class="fb-ico">🔔</span>
+      <div class="fb-txt"><strong>Rappel révision</strong><span>Dans 7 jours</span></div>
+    </div>
+
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="ph-hdr">
+          <div class="ph-brand"><span class="ph-brand-ico">🚗</span><div><div class="ph-brand-nm">AutoZen</div><div class="ph-brand-sub">ENTRETIEN AUTO</div></div></div>
+          <div class="ph-icons"><div class="ph-ico">☀️</div><div class="ph-ico">🔔</div><div class="ph-ico">ℹ️</div></div>
+        </div>
+        <div class="ph-veh">Ma Prius — Toyota Prius</div>
+        <div class="ph-stats">
+          <div class="ph-stat"><div class="ph-stat-v">0€</div><div class="ph-stat-l">Ce mois</div></div>
+          <div class="ph-stat"><div class="ph-stat-v">2.7k€</div><div class="ph-stat-l">2026</div></div>
+          <div class="ph-stat"><div class="ph-stat-v">2.7k€</div><div class="ph-stat-l">Total</div></div>
+        </div>
+        <!-- Rappels -->
+        <div class="ph-rem due">
+          <span class="ph-rem-ico">🔔</span>
+          <div><div class="ph-rem-nm">Révision annuelle</div><div class="ph-rem-dt">Toyota Prius</div></div>
+          <span class="ph-rem-pill" style="background:rgba(240,79,85,.18);color:#f04f55;font-size:.45rem;font-weight:700;padding:2px 7px;border-radius:8px;margin-left:auto">2j dépassé</span>
+        </div>
+        <!-- Contrat -->
+        <div class="ph-ctr">
+          <div class="ph-ctr-top"><span class="ph-ctr-nm">Norauto · Opteven</span><span class="ph-badge-ok">Actif</span></div>
+          <div class="ph-bar"><div class="ph-bar-inner" style="width:55%;background:#0fcf8a"></div></div>
+        </div>
+        <!-- Réparations -->
+        <div class="ph-rep">
+          <div class="ph-rep-ico" style="background:rgba(240,79,85,.15)">🛑</div>
+          <div><div class="ph-rep-nm">Freins arrière</div><div class="ph-rep-dt">22/01/2026 · Norauto</div></div>
+          <div class="ph-rep-price">300€</div>
+        </div>
+        <div class="ph-rep">
+          <div class="ph-rep-ico" style="background:rgba(107,143,251,.15)">⚙️</div>
+          <div><div class="ph-rep-nm">Amortisseurs av.</div><div class="ph-rep-dt">12/01/2026 · Toyota</div></div>
+          <div class="ph-rep-price">2 692€</div>
+        </div>
+        <div class="ph-nav">
+          <div class="ph-nav-it on"><span>🏠</span><span>Accueil</span></div>
+          <div class="ph-nav-it"><span>🔧</span><span>Répar.</span></div>
+          <div class="ph-nav-it"><span>📋</span><span>Contrats</span></div>
+          <div class="ph-nav-it"><span>⚙️</span><span>Params</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="float-badge right">
+      <span class="fb-ico">💚</span>
+      <div class="fb-txt"><strong>706,43 € économisés</strong><span>grâce à vos contrats</span></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><div class="scroll-line"></div>Découvrir</div>
+</section>
+
+<!-- LOGOS BAR -->
+<div class="logos-bar">
+  <span class="logos-bar-lbl">Propulsé par</span>
+  <div class="logo-pill"><span class="lp-ico">☁️</span> Google Drive</div>
+  <div class="logo-pill"><span class="lp-ico">🔔</span> Push Notifications</div>
+  <div class="logo-pill"><span class="lp-ico">📱</span> PWA installable</div>
+  <div class="logo-pill"><span class="lp-ico">🔄</span> Sync arrière-plan</div>
+  <div class="logo-pill"><span class="lp-ico">📴</span> Mode hors ligne</div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div style="max-width:600px">
+      <div class="sec-eyebrow reveal">✦ Fonctionnalités</div>
+      <h2 class="sec-title reveal reveal-d1">Tout ce qu'il faut<br>pour ne rien oublier</h2>
+      <p class="sec-sub reveal reveal-d2">AutoZen centralise l'historique complet de votre véhicule. Réparations, contrats, rappels — tout au même endroit, partout avec vous.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card reveal">
+        <div class="feat-ico blue">🔧</div>
+        <div class="feat-title">Historique des réparations</div>
+        <div class="feat-desc">Enregistrez chaque intervention avec date, coût, garage, kilométrage et catégorie. 11 catégories par défaut + catégories personnalisées avec 40 icônes automobiles et 15 couleurs.</div>
+      </div>
+      <div class="feat-card reveal reveal-d1">
+        <div class="feat-ico green">📋</div>
+        <div class="feat-title">Gestion des contrats</div>
+        <div class="feat-desc">Suivez vos contrats d'entretien avec alertes d'expiration, calcul automatique du coût total et mesure précise des économies réalisées. Les contrats expirés sont masqués de l'accueil.</div>
+        <div class="feat-tag">💚 Calcul automatique des économies</div>
+      </div>
+      <div class="feat-card large reveal reveal-d2">
+        <div class="feat-ico purple">🔔</div>
+        <div class="feat-title">Rappels de révision intelligents</div>
+        <div class="feat-desc">Activez un rappel sur chaque réparation de type révision. Configurez la date, l'avance de notification (de 1 jour à 1 mois) et la fréquence de renouvellement automatique (3, 6, 12, 24 mois). Le Service Worker vérifie vos rappels toutes les 8h, même quand l'app est fermée.</div>
+        <div class="feat-tag">🔄 Renouvellement automatique</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-ico orange">🏷️</div>
+        <div class="feat-title">Catégories personnalisées</div>
+        <div class="feat-desc">40 icônes automobiles, 15 couleurs. Créez vos propres catégories en plus des 11 catégories par défaut (révision, freinage, pneumatiques, moteur…).</div>
+      </div>
+      <div class="feat-card reveal reveal-d1">
+        <div class="feat-ico blue">🚗</div>
+        <div class="feat-title">Multi-véhicules</div>
+        <div class="feat-desc">Gérez plusieurs véhicules depuis une seule app. Sélecteur rapide dans le header. Données isolées par véhicule : réparations, contrats, rappels.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRATS SPLIT -->
+<section id="contrats" style="padding-top:0">
+  <div class="container">
+    <div class="split reveal">
+      <div>
+        <div class="sec-eyebrow">📋 Contrats d'entretien</div>
+        <h2 class="sec-title">Savoir combien vous <span class="grad">économisez</span></h2>
+        <p class="sec-sub">AutoZen calcule automatiquement les économies générées par vos contrats : coût mensuel × durée − réparations couvertes.</p>
+        <div class="check-list">
+          <div class="check-item"><span>✓</span><span>Alerte 30j, 14j et 1j avant expiration</span></div>
+          <div class="check-item"><span>✓</span><span>Barre de progression temporelle visuelle</span></div>
+          <div class="check-item"><span>✓</span><span>Coût total calculé automatiquement</span></div>
+          <div class="check-item"><span>✓</span><span>Contrats expirés masqués de l'accueil</span></div>
+          <div class="check-item"><span>✓</span><span>Réparations liées au contrat identifiées</span></div>
+        </div>
+      </div>
+      <div class="split-visual">
+        <div class="mockup-list">
+          <div class="mockup-item">
+            <div class="mi-ico" style="background:rgba(15,207,138,.1)">📋</div>
+            <div class="mi-info"><div class="mi-nm">Opteven 3 ans</div><div class="mi-dt">Norauto · Fin juin 2027</div></div>
+            <span class="mi-badge-ok">Actif</span>
+          </div>
+          <div style="padding:12px 14px;background:rgba(15,207,138,.06);border:1px solid rgba(15,207,138,.15);border-radius:12px;font-size:.78rem">
+            <div style="display:flex;justify-content:space-between;margin-bottom:7px"><span style="color:var(--tx2)">Mensualité</span><strong>63,00 €/mois</strong></div>
+            <div style="display:flex;justify-content:space-between;margin-bottom:7px"><span style="color:var(--tx2)">Coût total</span><strong>2 205,00 €</strong></div>
+            <div style="display:flex;justify-content:space-between"><span style="color:var(--tx2)">Économies</span><strong style="color:var(--ok)">💚 706,43 €</strong></div>
+            <div style="height:4px;background:var(--gl);border-radius:2px;overflow:hidden;margin-top:12px"><div style="height:100%;width:52%;background:var(--ok);border-radius:2px"></div></div>
+            <div style="text-align:center;color:var(--tx3);font-size:.65rem;margin-top:5px">⏳ 14 mois restants</div>
+          </div>
+          <div class="mockup-item">
+            <div class="mi-ico" style="background:rgba(245,166,35,.1)">🛡️</div>
+            <div class="mi-info"><div class="mi-nm">Assurance garantie</div><div class="mi-dt">AXA · Fin déc. 2026</div></div>
+            <span class="mi-badge-wn">Attention</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RAPPELS SPLIT -->
+<section id="rappels">
+  <div class="container">
+    <div class="split reverse reveal">
+      <div class="split-visual">
+        <div class="rem-mockup">
+          <div style="font-size:.7rem;font-weight:700;color:var(--tx2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.6px">🔔 Rappels de révision</div>
+          <div class="rem-item due">
+            <span class="rem-ico">🔔</span>
+            <div class="rem-info"><div class="rem-nm">Révision annuelle</div><div class="rem-dt">Toyota Prius · 28 fév. 2026</div></div>
+            <span class="rem-pill rp-due">2j dépassé</span>
+          </div>
+          <div class="rem-item warn">
+            <span class="rem-ico">🔔</span>
+            <div class="rem-info"><div class="rem-nm">Vidange huile moteur</div><div class="rem-dt">Toyota Prius · 15 mai 2026</div></div>
+            <span class="rem-pill rp-warn">Dans 12j</span>
+          </div>
+          <div class="rem-item ok">
+            <span class="rem-ico">🔔</span>
+            <div class="rem-info"><div class="rem-nm">Contrôle technique</div><div class="rem-dt">Toyota Prius · 1 sept. 2026</div></div>
+            <span class="rem-pill rp-ok">Dans 4 mois</span>
+          </div>
+          <div style="margin-top:12px;padding:10px 12px;background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.15);border-radius:10px;font-size:.72rem;color:var(--tx2)">
+            🔄 Vérification automatique toutes les <strong style="color:var(--pu)">8 heures</strong> même app fermée
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-eyebrow">🔔 Rappels intelligents</div>
+        <h2 class="sec-title">Ne jamais rater une <span class="grad">révision</span></h2>
+        <p class="sec-sub">Configurez un rappel sur chaque révision. AutoZen vous notifie avant l'échéance et renouvelle automatiquement selon votre fréquence.</p>
+        <div class="check-list">
+          <div class="check-item"><span>✓</span><span>Notification configurable : jour J, 1j, 3j, 1 semaine, 1 mois avant</span></div>
+          <div class="check-item"><span>✓</span><span>Renouvellement automatique : 3, 6, 12, 24 mois</span></div>
+          <div class="check-item"><span>✓</span><span>Periodic Background Sync toutes les 8h (PWA installée)</span></div>
+          <div class="check-item"><span>✓</span><span>Actions depuis la notification : ✅ Fait / ⏰ +7j</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="highlight-section">
+  <div class="highlight-grid">
+    <div class="highlight-item reveal">
+      <div class="hi-number">100%</div>
+      <div class="hi-label">Vos données vous appartiennent<br>Google Drive ou local</div>
+    </div>
+    <div class="highlight-item reveal reveal-d1">
+      <div class="hi-number">8h</div>
+      <div class="hi-label">Fréquence de vérification<br>des rappels en arrière-plan</div>
+    </div>
+    <div class="highlight-item reveal reveal-d2">
+      <div class="hi-number">0€</div>
+      <div class="hi-label">Aucune publicité<br>Aucun abonnement</div>
+    </div>
+  </div>
+</div>
+
+<!-- STOCKAGE -->
+<section id="stockage">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto 60px">
+      <div class="sec-eyebrow reveal">💾 Stockage</div>
+      <h2 class="sec-title reveal reveal-d1">Vous choisissez<br>où sont vos <span class="grad">données</span></h2>
+      <p class="sec-sub reveal reveal-d2" style="margin:0 auto">Au premier lancement, AutoZen vous propose deux modes. Vous pouvez changer d'avis à tout moment depuis les paramètres.</p>
+    </div>
+    <div class="modes-grid reveal">
+      <div class="mode-card featured">
+        <div class="mode-ico">☁️</div>
+        <div class="mode-title">Google Drive <span class="mode-badge">Recommandé</span></div>
+        <div class="mode-desc">Vos données sont sauvegardées automatiquement dans un fichier <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:4px;font-size:.8em">autozen-data.json</code> sur votre Drive personnel. Accessible depuis tous vos appareils.</div>
+        <div class="mode-list">
+          <div class="mode-list-item"><span>✓</span><span>Sauvegarde automatique 3s après chaque modification</span></div>
+          <div class="mode-list-item"><span>✓</span><span>Token OAuth 1h — ré-auth silencieuse automatique</span></div>
+          <div class="mode-list-item"><span>✓</span><span>Copie locale en parallèle (double sécurité)</span></div>
+          <div class="mode-list-item"><span>✓</span><span>Export / Import JSON à tout moment</span></div>
+          <div class="mode-list-item"><span>✓</span><span>Aucun serveur tiers — fichier sur votre compte Google</span></div>
+        </div>
+      </div>
+      <div class="mode-card">
+        <div class="mode-ico">📱</div>
+        <div class="mode-title">Stockage local</div>
+        <div class="mode-desc">Données stockées uniquement dans le localStorage de votre navigateur. Aucune connexion requise. Fonctionne 100% hors ligne.</div>
+        <div class="mode-list">
+          <div class="mode-list-item"><span>✓</span><span>Aucune connexion requise</span></div>
+          <div class="mode-list-item"><span>✓</span><span>Données privées, aucun compte nécessaire</span></div>
+          <div class="mode-list-item"><span>✓</span><span>Export JSON pour sauvegardes manuelles</span></div>
+          <div class="mode-list-item"><span style="color:var(--wn)">⚠️</span><span style="color:var(--tx2)">Perte possible si le cache navigateur est effacé</span></div>
+          <div class="mode-list-item"><span style="color:var(--wn)">⚠️</span><span style="color:var(--tx2)">Non accessible depuis un autre appareil</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRIVE SECTION -->
+<section style="padding-top:0">
+  <div class="container">
+    <div class="drive-card reveal">
+      <div>
+        <div class="sec-eyebrow">☁️ Google Drive</div>
+        <h2 class="sec-title" style="font-size:clamp(1.6rem,5vw,2.2rem)">Sauvegarde<br><span class="grad">automatique</span></h2>
+        <p style="color:var(--tx2);font-size:.88rem;margin-top:12px;line-height:1.6">
+          Connectez votre compte Google une seule fois. AutoZen sauvegarde votre fichier <code style="background:var(--gl);padding:1px 5px;border-radius:4px;font-size:.8em">autozen-data.json</code> dans votre Drive personnel après chaque modification. Le token est stocké localement et renouvelé silencieusement à expiration.
+        </p>
+        <div class="drive-features">
+          <div class="drive-feat">
+            <div class="df-ico">🔒</div>
+            <div class="df-txt"><strong>Vos données uniquement</strong>Le fichier est créé dans votre Drive. Seul vous y avez accès via le scope <code>drive.file</code>.</div>
+          </div>
+          <div class="drive-feat">
+            <div class="df-ico">🔄</div>
+            <div class="df-txt"><strong>Re-auth silencieuse</strong>Le token OAuth 1h est conservé en localStorage. À l'expiration, la ré-authentification est transparente.</div>
+          </div>
+          <div class="drive-feat">
+            <div class="df-ico">💾</div>
+            <div class="df-txt"><strong>Double sécurité</strong>Chaque sauvegarde Drive crée aussi une copie locale. En cas d'indisponibilité du réseau, rien n'est perdu.</div>
+          </div>
+          <div class="drive-feat">
+            <div class="df-ico">📥</div>
+            <div class="df-txt"><strong>Import / Export JSON</strong>Téléchargez une copie locale ou importez depuis un fichier JSON existant à tout moment.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="drive-visual">
+          <div class="dv-line dv-comment">// autozen-data.json</div>
+          <div class="dv-line"><span class="dv-key">"version"</span><span style="color:var(--tx3)">: </span><span class="dv-str">"1.0.0"</span>,</div>
+          <div class="dv-line"><span class="dv-key">"savedAt"</span><span style="color:var(--tx3)">: </span><span class="dv-str">"2026-05-02T14:32Z"</span>,</div>
+          <div class="dv-line"><span class="dv-key">"vehicles"</span><span style="color:var(--tx3)">: [{</span></div>
+          <div class="dv-line" style="padding-left:16px"><span class="dv-key">"name"</span><span style="color:var(--tx3)">: </span><span class="dv-str">"Ma Prius"</span>,</div>
+          <div class="dv-line" style="padding-left:16px"><span class="dv-key">"make"</span><span style="color:var(--tx3)">: </span><span class="dv-str">"Toyota"</span></div>
+          <div class="dv-line"><span style="color:var(--tx3)">}],</span></div>
+          <div class="dv-line"><span class="dv-key">"repairs"</span><span style="color:var(--tx3)">: [</span><span class="dv-nb">3</span><span style="color:var(--tx3)"> entrées],</span></div>
+          <div class="dv-line"><span class="dv-key">"contracts"</span><span style="color:var(--tx3)">: [</span><span class="dv-nb">1</span><span style="color:var(--tx3)"> actif],</span></div>
+          <div class="dv-line"><span class="dv-key">"reminders"</span><span style="color:var(--tx3)">: [</span><span class="dv-nb">2</span><span style="color:var(--tx3)"> actifs],</span></div>
+          <div class="dv-line"><span class="dv-key">"customCats"</span><span style="color:var(--tx3)">: [</span><span class="dv-nb">1</span><span style="color:var(--tx3)"> catégorie]</span></div>
+        </div>
+        <div style="margin-top:12px;font-size:.72rem;color:var(--tx3);text-align:center">
+          💡 Token OAuth renouvelé automatiquement · Scope <code>drive.file</code> uniquement
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="app">
+  <div class="container" style="position:relative">
+    <div class="cta-glow"></div>
+    <div class="sec-eyebrow reveal" style="margin:0 auto 20px">🚗 Prêt à démarrer ?</div>
+    <h2 class="cta-title reveal reveal-d1">Commencez à<br>suivre votre <span class="grad">voiture</span></h2>
+    <p class="cta-sub reveal reveal-d2">Accès immédiat. Vos données, votre stockage, votre contrôle.</p>
+    <div class="hero-btns reveal reveal-d3">
+      <a href="./index.html" class="btn-primary">🚀 Ouvrir AutoZen</a>
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:16px" class="reveal reveal-d3">
+      <a href="https://play.google.com/store/apps/details?id=fr.mg_softwares.autozen" class="gplay-badge" target="_blank" rel="noopener">
+        <span class="gplay-badge-ico">▶️</span>
+        <span class="gplay-badge-txt">
+          <span class="gplay-badge-sub">Disponible sur</span>
+          <span class="gplay-badge-name">Google Play</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-brand">
+    <span style="font-size:1.3rem">🚗</span>
+    <div>
+      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem">AutoZen</div>
+      <div style="font-size:.65rem;color:var(--tx3)">by MG-Softwares</div>
+    </div>
+  </div>
+  <div class="footer-links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#stockage">Stockage</a>
+    <a href="https://mg-softwares.fr/privacy.html" target="_blank">Confidentialité</a>
+    <a href="./index.html">Application</a>
+  </div>
+  <div class="footer-copy">© 2026 MG-Softwares · Gilles Goudelin · v1.0.0</div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{document.getElementById('navbar').style.borderColor=window.scrollY>50?'rgba(255,255,255,.1)':'rgba(255,255,255,.07)';});
+</script>
+</body>
+</html>

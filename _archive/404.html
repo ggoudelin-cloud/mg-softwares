@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:;">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#0a0a0f">
+  <!-- ─── SEO ─── -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Page introuvable — MG Softwares">
+  <title>404 — Page introuvable · MG Softwares</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --c-bg: #0a0a0f; --c-card: #16161f; --c-border: rgba(255,255,255,0.07);
+      --c-text: #f0f0f8; --c-muted: #8888aa; --c-violet: #9b5dff;
+      --c-cyan: #00e5d4; --c-pink: #ff3d9a; --c-lime: #c8f230;
+      --font-display: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--c-bg); color: var(--c-text); font-family: var(--font-body); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+    /* Blobs */
+    .blobs { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.13; animation: blobFloat 20s ease-in-out infinite alternate; }
+    .blob-1 { width: 600px; height: 600px; background: var(--c-violet); top: -200px; left: -150px; animation-duration: 20s; }
+    .blob-2 { width: 500px; height: 500px; background: var(--c-cyan); bottom: -150px; right: -180px; animation-duration: 15s; animation-delay: -5s; }
+    .blob-3 { width: 350px; height: 350px; background: var(--c-pink); top: 40%; left: 50%; animation-duration: 22s; animation-delay: -10s; }
+    @keyframes blobFloat { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,20px) scale(1.06); } }
+    /* Nav */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid var(--c-border); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 28px; max-width: 1200px; margin: 0 auto; }
+    .logo { font-family: var(--font-display); font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; text-decoration: none; color: var(--c-text); display: flex; align-items: center; gap: 10px; }
+    .logo-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--c-lime); box-shadow: 0 0 10px var(--c-lime); animation: pulse 2.5s ease-in-out infinite; flex-shrink: 0; }
+    @keyframes pulse { 0%,100%{transform:scale(1);opacity:1;} 50%{transform:scale(1.4);opacity:0.7;} }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--c-muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--c-text); }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-cta { display: inline-flex; align-items: center; gap: 6px; background: var(--c-violet); color: #fff; padding: 9px 20px; border-radius: 10px; font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+    /* 404 Content */
+    .main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 20px; position: relative; z-index: 1; }
+    .container { text-align: center; max-width: 540px; animation: fadeUp 0.7s ease both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    .big-404 { font-family: var(--font-display); font-size: clamp(100px,22vw,180px); font-weight: 900; line-height: 1; letter-spacing: -6px; background: linear-gradient(135deg, var(--c-violet) 0%, var(--c-cyan) 60%, var(--c-lime) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 8px; animation: glitch 6s ease-in-out infinite; }
+    @keyframes glitch { 0%,90%,100%{transform:none;filter:none;} 92%{transform:translate(-3px,1px) skewX(-1deg);filter:hue-rotate(30deg);} 94%{transform:translate(3px,-1px) skewX(1deg);filter:hue-rotate(-20deg);} 96%{transform:translate(-2px,2px);filter:hue-rotate(10deg);} 98%{transform:translate(2px,-2px);filter:none;} }
+    .icon { font-size: 48px; margin-bottom: 20px; display: block; animation: bounce 3s ease-in-out infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+    h1 { font-family: var(--font-display); font-size: clamp(1.4rem,4vw,2rem); font-weight: 800; margin-bottom: 12px; }
+    p { font-size: 0.95rem; color: var(--c-muted); line-height: 1.7; margin-bottom: 36px; }
+    .sep { width: 40px; height: 2px; background: linear-gradient(90deg, var(--c-violet), var(--c-cyan)); border-radius: 2px; margin: 0 auto 28px; }
+    .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--c-violet); color: #fff; padding: 12px 26px; border-radius: 12px; font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--c-text); border: 1px solid var(--c-border); padding: 12px 26px; border-radius: 12px; font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; text-decoration: none; transition: border-color 0.2s, transform 0.2s; }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.25); transform: translateY(-2px); }
+    .quick-links { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+    .quick-link { background: var(--c-card); border: 1px solid var(--c-border); border-radius: 20px; padding: 6px 16px; font-size: 0.8rem; color: var(--c-muted); text-decoration: none; transition: color 0.2s, border-color 0.2s; }
+    .quick-link:hover { color: var(--c-text); border-color: rgba(255,255,255,0.2); }
+    /* Footer */
+    .site-footer { padding: 40px 0 32px; border-top: 1px solid var(--c-border); position: relative; z-index: 1; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-logo { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--c-text); }
+    .footer-copy { color: var(--c-muted); font-size: 0.82rem; margin-top: 4px; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { color: var(--c-muted); font-size: 0.82rem; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--c-text); }
+    @media (max-width: 768px) { .nav-links { display: none; } .nav-inner { padding: 0 16px; } .btn-row { flex-direction: column; align-items: center; } .footer-inner { flex-direction: column; align-items: flex-start; padding: 0 16px; } .footer-links { gap: 14px; } }
+  </style>
+</head>
+<body>
+
+<div class="blobs">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-dot"></div>
+      MG <span style="color:var(--c-violet)">Softwares</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">À propos</a></li>
+      <li><a href="index.html#apps">Applications</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right"></div>
+  </div>
+</nav>
+
+<main class="main">
+  <div class="container">
+    <span class="icon">🔍</span>
+    <div class="big-404">404</div>
+    <div class="sep"></div>
+    <h1>Page introuvable</h1>
+    <p>Cette page n'existe pas ou a été déplacée.<br>Pas de panique, tout le reste fonctionne parfaitement.</p>
+    <div class="btn-row">
+      <a href="index.html" class="btn-primary">🏠 Retour à l'accueil</a>
+      <a href="javascript:history.back()" class="btn-secondary">← Page précédente</a>
+    </div>
+    <div class="quick-links">
+      <a href="gamiz.html" class="quick-link">🎲 Gamiz</a>
+      <a href="privacy.html" class="quick-link">🔒 Confidentialité</a>
+      <a href="terms.html" class="quick-link">📄 CGU</a>
+      <a href="mailto:&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#64;&#109;&#103;&#45;&#115;&#111;&#102;&#116;&#119;&#97;&#114;&#101;&#115;&#46;&#102;&#114;" class="quick-link">✉️ Contact</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">MG Softwares</div>
+      <div class="footer-copy">© 2026 MG Softwares — France 🇫🇷</div>
+    </div>
+    <div class="footer-links">
+      <a href="privacy.html">Politique de confidentialité</a>
+      <a href="terms.html">Conditions d'utilisation</a>
+      <a href="mailto:&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#64;&#109;&#103;&#45;&#115;&#111;&#102;&#116;&#119;&#97;&#114;&#101;&#115;&#46;&#102;&#114;">contact@mg-softwares.fr</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

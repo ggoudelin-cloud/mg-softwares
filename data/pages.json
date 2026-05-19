@@ -1,0 +1,54 @@
+{
+  "pages": [
+    {
+      "slug": "",
+      "title": "MG Softwares — Applications mobiles & web",
+      "description": "Studio de développement indépendant français. Des applications utiles, rapides et élégantes : Gamiz, AutoZen, Budget Familial, ShopZen.",
+      "keywords": "MG Softwares, applications mobiles, développeur indépendant, Gamiz, AutoZen, Budget Familial, jeux de société, suivi automobile, France",
+      "type": "home",
+      "canonical": "https://mg-softwares.fr/",
+      "ogImage": "https://mg-softwares.fr/android-chrome-512x512.png",
+      "ogType": "website"
+    },
+    {
+      "slug": "gamiz",
+      "title": "Gamiz — Calculateur de scores pour jeux de société | MG Softwares",
+      "description": "Gamiz — Calculateur de scores pour jeux de société. Skyjo, Qwirkle, Tarot, UNO, Yams et plus. Synchronisation Google Drive. Android & Web. Gratuit.",
+      "keywords": "Gamiz, calculateur scores, jeux de société, Skyjo, Qwirkle, Tarot, UNO, Yams, scores multijoueur, Google Drive, Android, MG Softwares",
+      "type": "product",
+      "canonical": "https://mg-softwares.fr/gamiz",
+      "ogImage": "https://mg-softwares.fr/android-chrome-512x512.png",
+      "ogType": "website",
+      "content": "Gamiz"
+    },
+    {
+      "slug": "autozen",
+      "title": "AutoZen — Suivi automobile | MG Softwares",
+      "description": "AutoZen — Application de suivi automobile. Entretien, carburant, trajets. Synchronisation Google Drive. Android & Web. Gratuit.",
+      "keywords": "AutoZen, suivi automobile, entretien voiture, carburant, trajets, maintenance auto, Google Drive, Android, MG Softwares",
+      "type": "product",
+      "canonical": "https://mg-softwares.fr/autozen",
+      "ogImage": "https://mg-softwares.fr/android-chrome-512x512.png",
+      "ogType": "website",
+      "content": "AutoZen"
+    },
+    {
+      "slug": "privacy",
+      "title": "Politique de confidentialité | MG Softwares",
+      "description": "Politique de confidentialité de MG Softwares et de ses applications.",
+      "keywords": "confidentialité, données, politique de confidentialité, MG Softwares",
+      "type": "legal",
+      "canonical": "https://mg-softwares.fr/privacy",
+      "ogType": "website"
+    },
+    {
+      "slug": "terms",
+      "title": "Conditions d'utilisation | MG Softwares",
+      "description": "Conditions d'utilisation des applications MG Softwares.",
+      "keywords": "conditions, termes, utilisation, MG Softwares",
+      "type": "legal",
+      "canonical": "https://mg-softwares.fr/terms",
+      "ogType": "website"
+    }
+  ]
+}
