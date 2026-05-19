@@ -184,6 +184,22 @@
       color: var(--tx);
     }
 
+    .lang-selector {
+      padding: 6px 12px;
+      background: var(--gl);
+      border: 1px solid var(--bd);
+      border-radius: 20px;
+      color: var(--tx2);
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .lang-selector:hover {
+      border-color: rgba(212, 135, 126, 0.3);
+      color: var(--tx);
+    }
+
     .nav-cta {
       padding: 9px 18px;
       background: var(--acg);
@@ -411,6 +427,12 @@
       <a onclick="app.navigate('gamiz')">Gamiz</a>
       <a onclick="app.navigate('autozen')">AutoZen</a>
       <a onclick="app.navigate('privacy')">Confidentialité</a>
+      <select id="langSelector" class="lang-selector" onchange="app.setLanguage(this.value)">
+        <option value="fr">🇫🇷 FR</option>
+        <option value="en">🇬🇧 EN</option>
+        <option value="it">🇮🇹 IT</option>
+        <option value="de">🇩🇪 DE</option>
+      </select>
       <button class="nav-cta" onclick="app.navigate('terms')">Conditions</button>
     </div>
   </nav>
