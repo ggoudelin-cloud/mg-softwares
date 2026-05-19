@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gamiz — Calculateur de scores pour jeux de société | MG Softwares</title>
+<meta name="description" content="Gamiz — Calculateur de scores pour jeux de société. Skyjo, Qwirkle, Tarot, UNO, Yams et plus. Synchronisation Google Drive. Android &amp; Web. Gratuit.">
+<meta name="keywords" content="Gamiz, calculateur scores, jeux de société, Skyjo, Qwirkle, Tarot, UNO, Yams, scores multijoueur, Google Drive, Android, MG Softwares">
+<meta name="author" content="Lucas Goudelin — MG Softwares">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://mg-softwares.fr/gamiz.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#0d0a14">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https:;">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mg-softwares.fr/gamiz.html">
+<meta property="og:title" content="Gamiz — Calculateur de scores pour jeux de société">
+<meta property="og:description" content="Gérez les scores, joueurs et historique de vos soirées jeux. 8 jeux supportés. Sync Google Drive. Android & Web.">
+<meta property="og:image" content="https://mg-softwares.fr/android-chrome-512x512.png">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="MG Softwares">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Gamiz","operatingSystem":"Android, Web","applicationCategory":"GameApplication","description":"Calculateur de scores pour jeux de société. 8 jeux, sync Google Drive, historique complet.","url":"https://mg-softwares.fr/gamiz.html","author":{"@type":"Organization","name":"MG Softwares"},"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0a14;--bg2:#13101e;--bg3:#1a1628;
+  --salmon:#d4877e;--salmon2:#e8b0a5;--salmonl:rgba(212,135,126,.12);
+  --navy:#1e1e38;--navyl:rgba(30,30,56,.6);
+  --ac:var(--salmon);--acg:linear-gradient(135deg,#d4877e 0%,#e8957e 50%,#c86090 100%);
+  --ok:#22c880;--wn:#f5a623;--er:#f04f55;--pu:#a07af5;
+  --tx:#f0edf5;--tx2:#9890aa;--tx3:#4a4060;
+  --bd:rgba(255,255,255,.07);--gl:rgba(255,255,255,.04);--r:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);overflow-x:hidden;line-height:1.6}
+h1,h2,h3{font-family:'Syne',sans-serif}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 45% at 15% -5%,rgba(212,135,126,.18),transparent),
+             radial-gradient(ellipse 55% 40% at 88% 108%,rgba(160,122,245,.12),transparent);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 40px;background:rgba(13,10,20,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--bd);transition:border-color .3s;min-width:0;}
+.nav-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-logo-split{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;letter-spacing:-.5px;display:flex;align-items:baseline;gap:0}
+.nav-logo-g{color:var(--tx)}.nav-logo-iz{color:var(--salmon)}
+.nav-logo-sub{font-size:.6rem;color:var(--tx3);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{color:var(--tx2);font-size:.85rem;text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--tx)}
+.nav-cta{padding:9px 18px;background:var(--acg);color:#fff;border-radius:40px;font-size:.78rem;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(212,135,126,.3);transition:all .2s;white-space:nowrap;flex-shrink:0;}
+.nav-cta:hover{opacity:.9;transform:translateY(-1px)}
+
+/* HERO */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 40px 80px;text-align:center;gap:28px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(212,135,126,.1);border:1px solid rgba(212,135,126,.25);border-radius:40px;font-size:.73rem;font-weight:600;color:var(--salmon2);letter-spacing:.8px;text-transform:uppercase;animation:fadeUp .6s ease both;}
+.hero-title{font-size:clamp(2rem,8vw,5.5rem);font-weight:800;letter-spacing:-2px;line-height:1;animation:fadeUp .7s .1s ease both;max-width:100%;overflow-wrap:break-word;}
+.hero-title .grad{background:var(--acg);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:clamp(.9rem,2vw,1.15rem);color:var(--tx2);max-width:520px;font-weight:300;animation:fadeUp .7s .2s ease both;}
+.hero-btns{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;animation:fadeUp .7s .3s ease both;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;background:var(--acg);color:#fff;border-radius:40px;font-weight:700;font-size:.9rem;text-decoration:none;box-shadow:0 8px 32px rgba(212,135,126,.4);transition:all .2s;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(212,135,126,.5)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:14px 30px;background:var(--gl);border:1px solid var(--bd);color:var(--tx);border-radius:40px;font-weight:600;font-size:.9rem;text-decoration:none;backdrop-filter:blur(12px);transition:all .2s;}
+.btn-secondary:hover{background:rgba(255,255,255,.08);transform:translateY(-2px)}
+
+/* PHONE MOCKUP */
+.hero-mockup{position:relative;animation:fadeUp .8s .4s ease both;margin-top:20px;width:600px;max-width:100vw;display:flex;justify-content:center;}
+.phone{width:230px;background:var(--bg2);border-radius:38px;border:2px solid rgba(255,255,255,.1);box-shadow:0 0 0 1px rgba(0,0,0,.5),0 40px 80px rgba(0,0,0,.7),0 0 60px rgba(212,135,126,.12);overflow:hidden;position:relative;}
+.phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:80px;height:24px;background:var(--bg);border-radius:0 0 16px 16px;z-index:2;}
+.phone-screen{padding:28px 12px 12px}
+.ph-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;padding:0 2px}
+.ph-brand{display:flex;align-items:center;gap:5px}
+.ph-brand-nm{font-size:.68rem;font-weight:800;font-family:'Syne',sans-serif;color:var(--tx)}
+.ph-brand-nm span{color:var(--salmon)}
+.ph-icons{display:flex;gap:4px}
+.ph-ico{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;font-size:.6rem}
+.ph-game-tag{font-size:.55rem;font-weight:700;color:var(--salmon2);margin-bottom:8px;padding:0 2px;text-transform:uppercase;letter-spacing:.6px}
+/* Score grid 2x2 */
+.ph-scores{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
+.ph-score-card{border-radius:10px;padding:7px 8px;position:relative}
+.ph-score-card.leader{outline:2px solid rgba(255,255,255,.4)}
+.ph-sc-name{font-size:.52rem;font-weight:700;margin-bottom:2px}
+.ph-sc-pts{font-size:1.05rem;font-weight:900;line-height:1}
+.ph-sc-sub{font-size:.38rem;color:rgba(0,0,0,.5);margin-top:1px}
+.ph-crown{position:absolute;top:4px;right:6px;font-size:.55rem}
+/* Panel saisie */
+.ph-panel{background:rgba(255,255,255,.05);border:1px solid var(--bd);border-radius:12px;padding:8px;margin-bottom:6px}
+.ph-panel-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.ph-panel-nm{font-size:.58rem;font-weight:700}
+.ph-panel-pts{font-size:.55rem;color:var(--tx2)}
+.ph-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.ph-btn{border-radius:7px;padding:5px 3px;text-align:center;font-size:.58rem;font-weight:800;font-family:'Syne',sans-serif}
+/* Nav bar */
+.ph-nav{display:flex;justify-content:space-around;padding:6px 0 0;border-top:1px solid var(--bd);margin-top:6px}
+.ph-nav-it{display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.42rem;color:var(--tx3)}
+.ph-nav-it.on{color:var(--salmon)}
+.ph-nav-it span:first-child{font-size:.8rem}
+.phone-glow{position:absolute;inset:-40px;background:radial-gradient(ellipse at 50% 60%,rgba(212,135,126,.18),transparent 70%);pointer-events:none;z-index:-1;border-radius:50%;}
+
+/* BADGES FLOTTANTS */
+.float-badge{position:absolute;background:var(--bg2);border:1px solid var(--bd);border-radius:14px;padding:8px 13px;display:flex;align-items:center;gap:9px;box-shadow:0 8px 32px rgba(0,0,0,.4);backdrop-filter:blur(12px);animation:float 4s ease-in-out infinite;white-space:nowrap;}
+.float-badge.left{left:0;top:25%;animation-delay:.5s}
+.float-badge.right{right:0;top:60%;animation-delay:1.5s}
+.fb-ico{font-size:1.1rem;flex-shrink:0}
+.fb-txt{font-size:.65rem;line-height:1.3}
+.fb-txt strong{display:block;font-size:.72rem;color:var(--tx)}
+.fb-txt span{color:var(--tx2)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* SCROLL HINT */
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--tx3);font-size:.7rem;letter-spacing:1px;text-transform:uppercase;animation:fadeUp 1s .8s ease both;}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--salmon),transparent);animation:scrollPulse 2s ease-in-out infinite;}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(.8)}50%{opacity:1;transform:scaleY(1)}}
+
+/* LOGOS BAR */
+.logos-bar{position:relative;z-index:1;padding:22px 40px;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+.logos-bar-lbl{font-size:.68rem;color:var(--tx3);letter-spacing:1px;text-transform:uppercase;margin-right:8px}
+.logo-pill{display:flex;align-items:center;gap:7px;padding:7px 16px;background:var(--gl);border:1px solid var(--bd);border-radius:40px;font-size:.75rem;color:var(--tx2);transition:all .2s}
+.logo-pill:hover{background:rgba(255,255,255,.07);color:var(--tx)}
+.logo-pill .lp-ico{font-size:1rem}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:100px 40px}
+.container{max-width:1100px;margin:0 auto}
+.sec-eyebrow{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;background:rgba(212,135,126,.1);border:1px solid rgba(212,135,126,.2);border-radius:40px;font-size:.68rem;color:var(--salmon2);font-weight:600;letter-spacing:.8px;text-transform:uppercase;margin-bottom:20px;}
+.sec-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:-1.5px;line-height:1.05;margin-bottom:16px;}
+.sec-sub{color:var(--tx2);font-size:1rem;font-weight:300;max-width:500px;line-height:1.7}
+
+/* FEATURES GRID */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:60px;}
+.feat-card{background:var(--gl);border:1px solid var(--bd);border-radius:var(--r);padding:30px;position:relative;overflow:hidden;transition:all .3s;cursor:default;}
+.feat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,135,126,.06),transparent);opacity:0;transition:opacity .3s;pointer-events:none;}
+.feat-card:hover{border-color:rgba(212,135,126,.3);transform:translateY(-3px)}
+.feat-card:hover::before{opacity:1}
+.feat-card.large{grid-column:span 2}
+.feat-ico{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:20px;}
+.feat-ico.salmon{background:rgba(212,135,126,.12);border:1px solid rgba(212,135,126,.2)}
+.feat-ico.teal{background:rgba(0,229,212,.1);border:1px solid rgba(0,229,212,.2)}
+.feat-ico.purple{background:rgba(160,122,245,.1);border:1px solid rgba(160,122,245,.2)}
+.feat-ico.gold{background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.2)}
+.feat-ico.green{background:rgba(34,200,128,.1);border:1px solid rgba(34,200,128,.2)}
+.feat-title{font-size:1.1rem;font-weight:700;margin-bottom:10px;letter-spacing:-.3px}
+.feat-desc{font-size:.85rem;color:var(--tx2);line-height:1.6}
+.feat-tag{display:inline-flex;align-items:center;gap:5px;margin-top:14px;padding:4px 12px;background:rgba(34,200,128,.1);border:1px solid rgba(34,200,128,.2);border-radius:40px;font-size:.68rem;color:var(--ok);font-weight:600;}
+
+/* SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.split.reverse{direction:rtl}
+.split.reverse>*{direction:ltr}
+.split-visual{background:var(--bg2);border:1px solid var(--bd);border-radius:24px;padding:28px;position:relative;overflow:hidden;min-width:0;}
+.split-visual::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(212,135,126,.06),transparent 60%);pointer-events:none;}
+.check-list{display:flex;flex-direction:column;gap:13px;margin-top:28px}
+.check-item{display:flex;align-items:flex-start;gap:10px;font-size:.85rem}
+.check-item span:first-child{color:var(--ok);font-size:1.1rem;flex-shrink:0;margin-top:1px}
+
+/* SCORE MOCKUP */
+.score-mock{display:flex;flex-direction:column;gap:10px}
+.score-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid var(--bd);background:rgba(255,255,255,.03);transition:all .2s;overflow:hidden;}
+.score-row:hover{background:rgba(212,135,126,.07);border-color:rgba(212,135,126,.2);transform:translateX(4px)}
+.sr-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:.9rem;flex-shrink:0}
+.sr-info{flex:1;min-width:0}
+.sr-name{font-size:.82rem;font-weight:600}
+.sr-hist{font-size:.65rem;color:var(--tx3);margin-top:1px}
+.sr-score{font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:900;flex-shrink:0}
+.sr-badge{padding:3px 9px;border-radius:8px;font-size:.6rem;font-weight:700;flex-shrink:0;white-space:nowrap}
+.sb-lead{background:rgba(212,135,126,.18);color:var(--salmon)}
+.sb-2nd{background:rgba(160,122,245,.15);color:var(--pu)}
+
+/* GAMES SECTION */
+.games-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px}
+.game-card{background:var(--gl);border:1px solid var(--bd);border-radius:14px;padding:18px;transition:all .25s;cursor:default;}
+.game-card:hover{border-color:rgba(212,135,126,.3);background:rgba(212,135,126,.05);transform:translateY(-2px)}
+.game-dot{width:8px;height:8px;border-radius:50%;margin-bottom:12px}
+.game-name{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;margin-bottom:4px}
+.game-meta{font-size:.72rem;color:var(--tx3)}
+.game-rule{font-size:.68rem;font-weight:600;margin-top:8px;padding:2px 9px;border-radius:20px;display:inline-block}
+.gr-more{background:rgba(212,135,126,.12);color:var(--salmon2)}
+.gr-less{background:rgba(160,122,245,.12);color:var(--pu)}
+.gr-special{background:rgba(34,200,128,.12);color:var(--ok)}
+
+/* STATS */
+.highlight-section{background:var(--bg2);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);position:relative;z-index:1;}
+.highlight-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--bd)}
+.highlight-item{background:var(--bg2);padding:40px;text-align:center}
+.hi-number{font-family:'Syne',sans-serif;font-weight:800;font-size:3.5rem;letter-spacing:-2px;line-height:1;background:var(--acg);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px;}
+.hi-label{font-size:.82rem;color:var(--tx2);font-weight:400}
+
+/* DRIVE */
+.drive-card{background:linear-gradient(135deg,rgba(212,135,126,.08),rgba(160,122,245,.05));border:1px solid rgba(212,135,126,.18);border-radius:24px;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;overflow:hidden;}
+.drive-features{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.drive-feat{display:flex;align-items:flex-start;gap:12px;min-width:0;}
+.df-ico{width:32px;height:32px;border-radius:8px;flex-shrink:0;background:rgba(212,135,126,.15);display:flex;align-items:center;justify-content:center;font-size:.9rem;margin-top:1px;}
+.df-txt{font-size:.83rem;color:var(--tx2);line-height:1.5;min-width:0;word-break:break-word;overflow-wrap:break-word;}
+.df-txt strong{color:var(--tx);display:block;font-size:.87rem;margin-bottom:2px;}
+.df-txt code{font-size:.78em;word-break:break-all;}
+.drive-visual{background:var(--bg3);border:1px solid var(--bd);border-radius:16px;padding:20px;font-family:monospace;font-size:.72rem;color:var(--tx3);line-height:1.8;overflow-x:auto;}
+.dv-line{display:flex;gap:6px;flex-wrap:wrap;min-width:0;}
+.dv-key{color:var(--salmon2)}.dv-val{color:var(--ok)}.dv-str{color:var(--wn);word-break:break-all}.dv-nb{color:var(--pu)}
+.dv-comment{color:var(--tx3);font-style:italic}
+
+/* CTA */
+.cta-section{text-align:center;padding:120px 40px;position:relative;z-index:1;}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(212,135,126,.12),transparent 70%);pointer-events:none;}
+.cta-title{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;letter-spacing:-2px;margin-bottom:20px}
+.cta-sub{color:var(--tx2);font-size:1rem;margin-bottom:36px;font-weight:300}
+
+/* FOOTER */
+footer{border-top:1px solid var(--bd);padding:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;position:relative;z-index:1;}
+.footer-brand{display:flex;align-items:center;gap:9px}
+.footer-links{display:flex;gap:24px}
+.footer-links a{color:var(--tx3);font-size:.78rem;text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--tx2)}
+.footer-copy{color:var(--tx3);font-size:.75rem}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.2,0,0,1)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .games-grid{grid-template-columns:repeat(2,1fr)}
+  .drive-card{padding:30px;gap:28px}
+}
+@media(max-width:768px){
+  nav{padding:14px 16px}
+  .nav-links{display:none}
+  .nav-cta{font-size:.72rem;padding:8px 14px}
+  .hero{padding:90px 16px 60px;gap:20px}
+  .hero-title{font-size:clamp(1.8rem,9vw,3rem);letter-spacing:-1px;line-height:1.05}
+  .hero-sub{font-size:.9rem}
+  .hero-btns{flex-direction:column;align-items:stretch;gap:10px;width:100%;max-width:320px}
+  .btn-primary,.btn-secondary{justify-content:center;padding:13px 20px;font-size:.85rem;width:100%}
+  section{padding:60px 16px}
+  .split,.drive-card{grid-template-columns:1fr;gap:24px}
+  .split.reverse{direction:ltr}
+  .feat-card.large{grid-column:span 1}
+  .features-grid{grid-template-columns:1fr;gap:12px}
+  .highlight-grid{grid-template-columns:1fr}
+  .highlight-item{padding:30px 20px}
+  footer{flex-direction:column;align-items:flex-start;padding:24px 16px}
+  .footer-links{flex-wrap:wrap;gap:12px}
+  .float-badge{display:none}
+  .phone{width:190px}
+  .games-grid{grid-template-columns:repeat(2,1fr)}
+  .drive-card{padding:20px}
+  .drive-visual{font-size:.65rem;padding:14px}
+  .sec-title{font-size:clamp(1.6rem,6vw,2.4rem);letter-spacing:-1px;overflow-wrap:break-word;word-break:break-word;}
+  .split-visual{padding:18px}
+  .drive-visual{overflow:hidden;word-break:break-all;}
+  .sr-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .cta-section{padding:70px 16px}
+  .cta-title{font-size:clamp(1.8rem,7vw,3rem);letter-spacing:-1px}
+  .logos-bar{padding:16px 12px;gap:8px}
+  .logo-pill{font-size:.68rem;padding:5px 10px}
+  .sr-hist{display:none}
+  .sr-score{font-size:1.1rem}
+  .sr-badge{display:none}
+  .score-row{padding:10px 12px}
+  .drive-card p{font-size:.82rem}
+}
+@media(max-width:480px){
+  .games-grid{grid-template-columns:1fr}
+  .hi-number{font-size:2.8rem}
+  .drive-card{padding:16px}
+  nav{padding:12px 14px}
+  .nav-cta{padding:7px 12px;font-size:.7rem}
+  .hero-title{font-size:clamp(1.6rem,8vw,2.4rem)}
+  .logos-bar{gap:6px}
+  .logo-pill{font-size:.65rem;padding:5px 9px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">
+    <div>
+      <div class="nav-logo-split"><span class="nav-logo-g">GAM</span><span class="nav-logo-iz">IZ</span></div>
+      <div class="nav-logo-sub">MG-Softwares</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#jeux">Jeux</a>
+    <a href="#drive">Google Drive</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="https://play.google.com/store/apps/details?id=com.gamizmgsoftwares.app" class="nav-cta">Jouer maintenant →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <span class="eyebrow">🎮 Calculateur de scores</span>
+  <h1 class="hero-title">Vos soirées jeux méritent <span class="grad">mieux</span></h1>
+  <p class="hero-sub">Fini les feuilles de papier perdues et les disputes sur le score. Gamiz gère tout pendant que vous profitez du jeu — 8 jeux, historique complet, sync Google Drive.</p>
+  <div class="hero-btns">
+    <a href="https://play.google.com/store/apps/details?id=com.gamizmgsoftwares.app" class="btn-primary">🎮 Jouer maintenant</a>
+    <a href="#features" class="btn-secondary">Découvrir les fonctionnalités ↓</a>
+  </div>
+
+  <!-- PHONE MOCKUP -->
+  <div class="hero-mockup">
+    <div class="phone-glow"></div>
+
+    <div class="float-badge left">
+      <span class="fb-ico">🏆</span>
+      <div class="fb-txt"><strong>Lucas remporte la partie !</strong><span>Qwirkle · 142 pts</span></div>
+    </div>
+
+    <div class="phone">
+      <div class="phone-screen">
+        <!-- Header -->
+        <div class="ph-hdr">
+          <div class="ph-brand">
+            <div class="ph-brand-nm">GAM<span>IZ</span></div>
+          </div>
+          <div class="ph-icons">
+            <div class="ph-ico">☁️</div>
+            <div class="ph-ico">☀️</div>
+            <div class="ph-ico">ℹ️</div>
+          </div>
+        </div>
+
+        <!-- Game tag -->
+        <div class="ph-game-tag">🔷 Qwirkle · Plus gagne</div>
+
+        <!-- Scores 2x2 -->
+        <div class="ph-scores">
+          <div class="ph-score-card" style="background:#d4877e;color:#1e1e38">
+            <div class="ph-crown">👑</div>
+            <div class="ph-sc-name">Lucas</div>
+            <div class="ph-sc-pts">142</div>
+            <div class="ph-sc-sub">pts</div>
+          </div>
+          <div class="ph-score-card" style="background:rgba(80,200,180,.85);color:#0d1a18">
+            <div class="ph-sc-name">Sophie</div>
+            <div class="ph-sc-pts">98</div>
+            <div class="ph-sc-sub">pts</div>
+          </div>
+          <div class="ph-score-card" style="background:rgba(160,100,220,.8);color:#1a0d2e">
+            <div class="ph-sc-name">Poussin</div>
+            <div class="ph-sc-pts">76</div>
+            <div class="ph-sc-sub">pts</div>
+          </div>
+          <div class="ph-score-card" style="background:rgba(230,180,60,.85);color:#1e1400">
+            <div class="ph-sc-name">Cassandre</div>
+            <div class="ph-sc-pts">54</div>
+            <div class="ph-sc-sub">pts</div>
+          </div>
+        </div>
+
+        <!-- Panel saisie -->
+        <div class="ph-panel">
+          <div class="ph-panel-hdr">
+            <span class="ph-panel-nm" style="color:#d4877e">Lucas</span>
+            <span class="ph-panel-pts">142 pts · À votre tour</span>
+          </div>
+          <div class="ph-btns">
+            <div class="ph-btn" style="background:#d4877e;color:#1e1e38">+6</div>
+            <div class="ph-btn" style="background:#d4877e;color:#1e1e38">+9</div>
+            <div class="ph-btn" style="background:#d4877e;color:#1e1e38">+12</div>
+          </div>
+        </div>
+
+        <!-- Nav bar -->
+        <div class="ph-nav">
+          <div class="ph-nav-it on"><span>🎮</span><span>Jeu</span></div>
+          <div class="ph-nav-it"><span>📚</span><span>Hist.</span></div>
+          <div class="ph-nav-it"><span>ℹ️</span><span>Infos</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="float-badge right">
+      <span class="fb-ico">☁️</span>
+      <div class="fb-txt"><strong>Sync Google Drive</strong><span>Données sauvegardées</span></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><div class="scroll-line"></div>Découvrir</div>
+</section>
+
+<!-- LOGOS BAR -->
+<div class="logos-bar">
+  <span class="logos-bar-lbl">Propulsé par</span>
+  <div class="logo-pill"><span class="lp-ico">☁️</span> Google Drive</div>
+  <div class="logo-pill"><span class="lp-ico">🤖</span> Application Android</div>
+  <div class="logo-pill"><span class="lp-ico">📴</span> Hors ligne</div>
+  <div class="logo-pill"><span class="lp-ico">🌍</span> FR · EN · IT · DE</div>
+  <div class="logo-pill"><span class="lp-ico">🆓</span> Gratuit · Sans pub</div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div style="max-width:600px">
+      <div class="sec-eyebrow reveal">✦ Fonctionnalités</div>
+      <h2 class="sec-title reveal reveal-d1">Tout ce qu'il faut pour scorer <span style="background:var(--acg);-webkit-background-clip:text;-webkit-text-fill-color:transparent">sans effort</span></h2>
+      <p class="sec-sub reveal reveal-d2">Gamiz s'occupe des calculs, de l'historique et de la synchronisation. Vous, vous jouez.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card reveal">
+        <div class="feat-ico salmon">🏆</div>
+        <div class="feat-title">Suivi des scores en temps réel</div>
+        <div class="feat-desc">Boutons prédéfinis pour chaque jeu, saisie libre, annulation du dernier coup d'un tap. Le classement se met à jour instantanément après chaque score.</div>
+      </div>
+      <div class="feat-card reveal reveal-d1">
+        <div class="feat-ico teal">📊</div>
+        <div class="feat-title">Statistiques par joueur</div>
+        <div class="feat-desc">Victoires, parties jouées, jeu favori, série en cours, meilleure série et record personnel — tout est suivi automatiquement sur chaque partie.</div>
+        <div class="feat-tag">📈 Historique complet</div>
+      </div>
+      <div class="feat-card large reveal reveal-d2">
+        <div class="feat-ico gold">🎭</div>
+        <div class="feat-title">Roster de joueurs permanents</div>
+        <div class="feat-desc">Créez une équipe permanente avec 30 avatars au choix (emojis et silhouettes), couleurs personnalisées, tirage au sort du premier joueur inclus. Retrouvez vos joueurs à chaque partie en 2 secondes — plus besoin de tout ressaisir.</div>
+        <div class="feat-tag">⚡ Prêt à jouer en 2 secondes</div>
+      </div>
+      <div class="feat-card reveal">
+        <div class="feat-ico purple">🎨</div>
+        <div class="feat-title">Thèmes & personnalisation</div>
+        <div class="feat-desc">Mode sombre / clair + 5 thèmes de couleurs : Défaut, Océan, Forêt, Coucher de soleil, Violet. Sons de score et confettis de victoire configurables.</div>
+      </div>
+      <div class="feat-card reveal reveal-d1">
+        <div class="feat-ico green">📱</div>
+        <div class="feat-title">Application Android native</div>
+        <div class="feat-desc">Téléchargez Gamiz directement depuis le Play Store et installez-le comme une vraie application Android sur votre smartphone.</div>
+        <div class="feat-tag">🤖 Disponible sur le Play Store</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT : Historique -->
+<section style="padding-top:0">
+  <div class="container">
+    <div class="split reveal">
+      <div>
+        <div class="sec-eyebrow">📚 Historique</div>
+        <h2 class="sec-title">Toutes vos parties <span style="background:var(--acg);-webkit-background-clip:text;-webkit-text-fill-color:transparent">sauvegardées</span></h2>
+        <p class="sec-sub">Retrouvez chaque partie avec résultats, date et classement final. Filtrez par mois, consultez les statistiques de chaque joueur.</p>
+        <div class="check-list">
+          <div class="check-item"><span>✓</span><span>Historique filtrable par mois</span></div>
+          <div class="check-item"><span>✓</span><span>Détail score par score pour chaque joueur</span></div>
+          <div class="check-item"><span>✓</span><span>Statistiques cumulées sur toutes les parties</span></div>
+          <div class="check-item"><span>✓</span><span>Annulation de la dernière saisie depuis l'historique</span></div>
+          <div class="check-item"><span>✓</span><span>Export JSON pour sauvegarde locale</span></div>
+        </div>
+      </div>
+      <div class="split-visual">
+        <div class="score-mock">
+          <div style="font-size:.7rem;font-weight:700;color:var(--tx2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.6px">🔷 Qwirkle · Aujourd'hui 21:28</div>
+          <div class="score-row">
+            <div class="sr-avatar" style="background:#d4877e;color:#1e1e38">G</div>
+            <div class="sr-info"><div class="sr-name">Lucas</div><div class="sr-hist">+6 +12 +18 +36 +21 +9</div></div>
+            <div class="sr-score" style="color:#d4877e">142</div>
+            <span class="sr-badge sb-lead">1er</span>
+          </div>
+          <div class="score-row">
+            <div class="sr-avatar" style="background:#50c8b4;color:#0d1a18">M</div>
+            <div class="sr-info"><div class="sr-name">Sophie</div><div class="sr-hist">+9 +9 +18 +21 +6 +35</div></div>
+            <div class="sr-score" style="color:#50c8b4">98</div>
+            <span class="sr-badge sb-2nd">2e</span>
+          </div>
+          <div class="score-row">
+            <div class="sr-avatar" style="background:#a064dc;color:#1a0d2e">P</div>
+            <div class="sr-info"><div class="sr-name">Poussin</div><div class="sr-hist">+12 +18 +6 +21 +9 +10</div></div>
+            <div class="sr-score" style="color:#a064dc">76</div>
+          </div>
+          <div class="score-row">
+            <div class="sr-avatar" style="background:#e6b43c;color:#1e1400">C</div>
+            <div class="sr-info"><div class="sr-name">Cassandre</div><div class="sr-hist">+6 +9 +9 +12 +9 +9</div></div>
+            <div class="sr-score" style="color:#e6b43c">54</div>
+          </div>
+          <div style="margin-top:10px;padding:10px 12px;background:rgba(212,135,126,.08);border:1px solid rgba(212,135,126,.15);border-radius:10px;font-size:.72rem;color:var(--tx2)">
+            🏆 Victoire de <strong style="color:var(--salmon)">Lucas</strong> avec 142 pts · 4 joueurs · 6 manches
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JEUX -->
+<section id="jeux">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto 0">
+      <div class="sec-eyebrow reveal">🎲 Jeux supportés</div>
+      <h2 class="sec-title reveal reveal-d1">8 jeux, <span style="background:var(--acg);-webkit-background-clip:text;-webkit-text-fill-color:transparent">un seul endroit</span></h2>
+      <p class="sec-sub reveal reveal-d2" style="margin:0 auto">Chaque jeu a ses propres règles de score, ses boutons prédéfinis et son interface adaptée.</p>
+    </div>
+    <div class="games-grid reveal">
+      <div class="game-card">
+        <div class="game-dot" style="background:#d4877e"></div>
+        <div class="game-name">Qwirkle</div>
+        <div class="game-meta">2–4 joueurs</div>
+        <span class="game-rule gr-more">Plus de points gagne</span>
+      </div>
+      <div class="game-card">
+        <div class="game-dot" style="background:#50c8b4"></div>
+        <div class="game-name">Skyjo</div>
+        <div class="game-meta">2–8 joueurs</div>
+        <span class="game-rule gr-less">Moins de points gagne</span>
+      </div>
+      <div class="game-card">
+        <div class="game-dot" style="background:#a064dc"></div>
+        <div class="game-name">Tarot</div>
+        <div class="game-meta">3–5 joueurs</div>
+        <span class="game-rule gr-more">Plus de points gagne</span>
+      </div>
+      <div class="game-card">
+        <div class="game-dot" style="background:#e6b43c"></div>
+        <div class="game-name">UNO</div>
+        <div class="game-meta">2–10 joueurs</div>
+        <span class="game-rule gr-less">Moins de points gagne</span>
+      </div>
+      <div class="game-card">
+        <div class="game-dot" style="background:#5096dc"></div>
+        <div class="game-name">Yams / Yahtzee</div>
+        <div class="game-meta">2–8 joueurs</div>
+        <span class="game-rule gr-special">Fiche de scores dédiée</span>
+      </div>
+      <div class="game-card">
+        <div class="game-dot" style="background:#dc7850"></div>
+        <div class="game-name">Rummy</div>
+        <div class="game-meta">2–6 joueurs</div>
+        <span class="game-rule gr-less">Moins de points gagne</span>
+      </div>
+      <div class="game-card">
+        <div class="game-dot" style="background:#22c880"></div>
+        <div class="game-name">Échecs</div>
+        <div class="game-meta">2 joueurs</div>
+        <span class="game-rule gr-special">Horloge intégrée ⏱</span>
+      </div>
+      <div class="game-card">
+        <div class="game-dot" style="background:#a0c850"></div>
+        <div class="game-name">Jeu libre</div>
+        <div class="game-meta">2–10 joueurs</div>
+        <span class="game-rule gr-special">Entièrement configurable</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="highlight-section">
+  <div class="highlight-grid">
+    <div class="highlight-item reveal">
+      <div class="hi-number">8</div>
+      <div class="hi-label">Jeux de société supportés<br>dont Yams avec fiche dédiée</div>
+    </div>
+    <div class="highlight-item reveal reveal-d1">
+      <div class="hi-number">10</div>
+      <div class="hi-label">Joueurs maximum par partie<br>Avatars & couleurs personnalisés</div>
+    </div>
+    <div class="highlight-item reveal reveal-d2">
+      <div class="hi-number">0€</div>
+      <div class="hi-label">Aucune publicité<br>Aucun abonnement</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPLIT : Multi-appareils -->
+<section>
+  <div class="container">
+    <div class="split reverse reveal">
+      <div class="split-visual">
+        <div style="font-size:.7rem;font-weight:700;color:var(--tx2);margin-bottom:14px;text-transform:uppercase;letter-spacing:.6px">☁️ Partage avec vos proches</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(212,135,126,.08);border:1px solid rgba(212,135,126,.2);border-radius:12px">
+            <div style="width:36px;height:36px;border-radius:50%;background:#d4877e;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;color:#1e1e38;flex-shrink:0">G</div>
+            <div style="flex:1"><div style="font-size:.82rem;font-weight:600">Lucas</div><div style="font-size:.65rem;color:var(--tx3)">Propriétaire · Smartphone Android</div></div>
+            <span style="font-size:.65rem;font-weight:700;color:var(--ok)">● En ligne</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(80,200,180,.07);border:1px solid rgba(80,200,180,.2);border-radius:12px">
+            <div style="width:36px;height:36px;border-radius:50%;background:#50c8b4;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;color:#0d1a18;flex-shrink:0">M</div>
+            <div style="flex:1"><div style="font-size:.82rem;font-weight:600">Sophie</div><div style="font-size:.65rem;color:var(--tx3)">Invitée · Android · Sync Drive</div></div>
+            <span style="font-size:.65rem;font-weight:700;color:var(--ok)">● Synchro</span>
+          </div>
+          <div style="padding:12px 14px;background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:12px;font-size:.75rem;color:var(--tx2)">
+            🔄 Les deux appareils voient les mêmes scores en temps réel via Google Drive · Scope <code style="background:rgba(255,255,255,.08);padding:1px 5px;border-radius:4px">drive.file</code>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-eyebrow">☁️ Synchronisation</div>
+        <h2 class="sec-title">Jouez sur <span style="background:var(--acg);-webkit-background-clip:text;-webkit-text-fill-color:transparent">tous vos appareils</span></h2>
+        <p class="sec-sub">Connectez votre Google Drive une seule fois. Gamiz synchronise automatiquement vos données — partagez une session avec Sophie depuis son Android pendant que vous gérez depuis votre Android.</p>
+        <div class="check-list">
+          <div class="check-item"><span>✓</span><span>Synchronisation automatique après chaque modification</span></div>
+          <div class="check-item"><span>✓</span><span>Partagez avec vos proches — ils voient les mêmes scores</span></div>
+          <div class="check-item"><span>✓</span><span>Données stockées dans votre Drive personnel uniquement</span></div>
+          <div class="check-item"><span>✓</span><span>Fonctionne aussi 100% hors ligne sans compte</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRIVE -->
+<section id="drive" style="padding-top:0">
+  <div class="container">
+    <div class="drive-card reveal">
+      <div>
+        <div class="sec-eyebrow">☁️ Google Drive</div>
+        <h2 class="sec-title" style="font-size:2.2rem">Sauvegarde <span style="background:var(--acg);-webkit-background-clip:text;-webkit-text-fill-color:transparent">automatique</span></h2>
+        <p style="color:var(--tx2);font-size:.88rem;margin-top:12px;line-height:1.6">
+          Connectez votre compte Google une seule fois. Gamiz sauvegarde votre fichier <code style="background:var(--gl);padding:1px 5px;border-radius:4px;font-size:.8em">gamiz-data.json</code> dans votre Drive personnel. Scope <code style="background:var(--gl);padding:1px 5px;border-radius:4px;font-size:.8em">drive.file</code> — accès uniquement au fichier que Gamiz a lui-même créé.
+        </p>
+        <div class="drive-features">
+          <div class="drive-feat">
+            <div class="df-ico">🔒</div>
+            <div class="df-txt"><strong>Vos données uniquement</strong>Gamiz ne peut pas lire vos autres fichiers Drive. Scope <code>drive.file</code> strictement limité.</div>
+          </div>
+          <div class="drive-feat">
+            <div class="df-ico">🔄</div>
+            <div class="df-txt"><strong>Re-auth silencieuse</strong>Le token OAuth est conservé et renouvelé automatiquement en arrière-plan.</div>
+          </div>
+          <div class="drive-feat">
+            <div class="df-ico">👥</div>
+            <div class="df-txt"><strong>Partage multi-appareils</strong>Partagez votre session avec un proche — il voit les mêmes scores en temps réel depuis son appareil.</div>
+          </div>
+          <div class="drive-feat">
+            <div class="df-ico">📥</div>
+            <div class="df-txt"><strong>Export / Import JSON</strong>Téléchargez une copie locale ou importez depuis un fichier JSON à tout moment.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="drive-visual">
+          <div class="dv-line dv-comment">// gamiz-data.json</div>
+          <div class="dv-line"><span class="dv-key">"version"</span><span style="color:var(--tx3)">: </span><span class="dv-str">"1.0.0"</span>,</div>
+          <div class="dv-line"><span class="dv-key">"savedAt"</span><span style="color:var(--tx3)">: </span><span class="dv-str">"2026-05-02T21:28Z"</span>,</div>
+          <div class="dv-line"><span class="dv-key">"roster"</span><span style="color:var(--tx3)">: [{</span></div>
+          <div class="dv-line" style="padding-left:16px"><span class="dv-key">"name"</span><span style="color:var(--tx3)">: </span><span class="dv-str">"Lucas"</span>,</div>
+          <div class="dv-line" style="padding-left:16px"><span class="dv-key">"color"</span><span style="color:var(--tx3)">: </span><span class="dv-str">"#d4877e"</span></div>
+          <div class="dv-line"><span style="color:var(--tx3)">}, ...],</span></div>
+          <div class="dv-line"><span class="dv-key">"matches"</span><span style="color:var(--tx3)">: [</span><span class="dv-nb">12</span><span style="color:var(--tx3)"> parties],</span></div>
+          <div class="dv-line"><span class="dv-key">"themeId"</span><span style="color:var(--tx3)">: </span><span class="dv-str">"dark"</span>,</div>
+          <div class="dv-line"><span class="dv-key">"lang"</span><span style="color:var(--tx3)">: </span><span class="dv-str">"fr"</span></div>
+        </div>
+        <div style="margin-top:12px;font-size:.72rem;color:var(--tx3);text-align:center">
+          💡 Token OAuth renouvelé automatiquement · Scope <code>drive.file</code> uniquement
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="app">
+  <div class="container" style="position:relative">
+    <div class="cta-glow"></div>
+    <div class="sec-eyebrow reveal" style="margin:0 auto 20px">🎮 Prêt à jouer ?</div>
+    <h2 class="cta-title reveal reveal-d1">Commencez votre <span style="background:var(--acg);-webkit-background-clip:text;-webkit-text-fill-color:transparent">première partie</span></h2>
+    <p class="cta-sub reveal reveal-d2">Accès immédiat. Gratuit. Sans publicité. Vos données, votre contrôle.</p>
+    <div class="hero-btns reveal reveal-d3">
+      <a href="https://play.google.com/store/apps/details?id=com.gamizmgsoftwares.app" class="btn-primary">🎮 Jouer maintenant</a>
+      <a href="https://play.google.com/store/apps/details?id=com.gamizmgsoftwares.app" class="btn-secondary">📱 Play Store</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-brand">
+    <div>
+      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem;display:flex;gap:0"><span>GAM</span><span style="color:var(--salmon)">IZ</span></div>
+      <div style="font-size:.65rem;color:var(--tx3)">by MG-Softwares</div>
+    </div>
+  </div>
+  <div class="footer-links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#jeux">Jeux</a>
+    <a href="#drive">Google Drive</a>
+    <a href="https://mg-softwares.fr/privacy.html">Confidentialité</a>
+    <a href="https://play.google.com/store/apps/details?id=com.gamizmgsoftwares.app">Application</a>
+  </div>
+  <div class="footer-copy">© 2026 MG-Softwares · Lucas Goudelin · v1.0.0</div>
+</footer>
+
+<script>
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{document.getElementById('navbar').style.borderColor=window.scrollY>50?'rgba(255,255,255,.1)':'rgba(255,255,255,.07)';});
+</script>
+</body>
+</html>
