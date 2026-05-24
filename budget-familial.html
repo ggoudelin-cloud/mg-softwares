@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Budget Familial — Application de gestion financière familiale. Sécurisée, synchronisée, disponible partout.">
+<title>Budget Familial · MG Softwares</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06060e;--bg1:#0f0f1e;--bg2:#171726;--bg3:#1e1e30;
+  --accent:#d4af37;--accent2:#f0d060;
+  --text1:#f0ede6;--text2:#a0a0b8;--text3:#5a5a78;
+  --border:rgba(212,175,55,.14);--border-h:rgba(212,175,55,.32);
+  --pos:#34d399;--neg:#f87171;
+  --font-body:'Figtree',-apple-system,sans-serif;
+  --font-disp:'Syne',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text1);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid var(--border);background:rgba(6,6,14,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo-name{font-family:var(--font-disp);font-size:1rem;font-weight:800;color:var(--text1)}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{font-size:.85rem;font-weight:600;color:var(--text2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text1)}
+.nav-cta{padding:8px 18px;border-radius:10px;background:var(--accent);color:var(--bg);font-size:.85rem;font-weight:700;text-decoration:none;transition:all .2s}
+.nav-cta:hover{background:var(--accent2);transform:translateY(-1px)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 24px 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(212,175,55,.08),transparent 65%)}
+.hero-inner{text-align:center;max-width:720px;z-index:1;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(212,175,55,.1);border:1px solid var(--border-h);border-radius:100px;font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:28px;letter-spacing:.06em}
+.hero-title{font-family:var(--font-disp);font-size:clamp(2.4rem,7vw,4.2rem);font-weight:800;line-height:1.1;margin-bottom:20px;background:linear-gradient(135deg,var(--text1) 40%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.05rem;color:var(--text2);line-height:1.65;max-width:560px;margin:0 auto 36px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn-primary{padding:14px 28px;border-radius:14px;background:var(--accent);color:var(--bg);font-weight:700;font-size:.95rem;text-decoration:none;border:none;cursor:pointer;transition:all .2s}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(212,175,55,.4)}
+.btn-outline{padding:13px 28px;border-radius:14px;background:transparent;color:var(--text1);border:1.5px solid var(--border-h);font-weight:600;font-size:.95rem;text-decoration:none;transition:all .2s}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.hero-note{font-size:.78rem;color:var(--text3);margin-top:16px}
+
+/* LOGO LARGE */
+.hero-logo{margin-bottom:28px}
+.hero-logo svg{filter:drop-shadow(0 0 24px rgba(212,175,55,.35))}
+
+/* FEATURES */
+section{padding:80px 24px;max-width:1100px;margin:0 auto}
+.section-badge{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.section-title{font-family:var(--font-disp);font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;margin-bottom:14px;line-height:1.2}
+.section-sub{font-size:.95rem;color:var(--text2);max-width:520px;line-height:1.65;margin-bottom:44px}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.feat-card{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.feat-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top left,rgba(212,175,55,.05),transparent 65%);pointer-events:none}
+.feat-card:hover{transform:translateY(-3px);border-color:var(--border-h)}
+.feat-icon{width:44px;height:44px;border-radius:12px;background:rgba(212,175,55,.12);display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:14px}
+.feat-title{font-weight:700;font-size:.95rem;margin-bottom:6px}
+.feat-desc{font-size:.82rem;color:var(--text2);line-height:1.6}
+
+/* SCREENSHOTS / MOCKUP */
+.mockup-section{padding:80px 24px;background:var(--bg1);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.mockup-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.mockup-text .section-title,.mockup-text .section-sub,.mockup-text .section-badge{text-align:left}
+.mockup-frame{display:flex;justify-content:center}
+.phone{width:260px;height:520px;background:var(--bg2);border-radius:32px;border:2px solid var(--border-h);overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5);position:relative}
+.phone-notch{width:80px;height:20px;background:var(--bg);border-radius:0 0 12px 12px;margin:0 auto;position:relative;z-index:2}
+.phone-screen{padding:12px;position:relative}
+.phone-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.phone-logo-row{display:flex;align-items:center;gap:7px}
+.phone-logo-text{font-family:var(--font-disp);font-size:.75rem;font-weight:800;color:var(--text1)}
+.phone-period{font-family:var(--font-disp);font-size:.72rem;font-weight:700;color:var(--text1)}
+.phone-cards{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px}
+.phone-card{background:var(--bg3);border-radius:12px;padding:10px;border:1px solid var(--border)}
+.phone-card-lbl{font-size:.52rem;color:var(--text3);font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}
+.phone-card-amt{font-family:var(--font-disp);font-size:.88rem;font-weight:800}
+.phone-card-amt.pos{color:var(--pos)}
+.phone-card-amt.neg{color:var(--neg)}
+.phone-card-amt.acc{color:var(--accent)}
+.phone-items{display:flex;flex-direction:column;gap:5px}
+.phone-item{display:flex;align-items:center;gap:6px;padding:6px 8px;background:var(--bg3);border-radius:9px;border:1px solid var(--border)}
+.phone-item-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.phone-item-text{flex:1;font-size:.6rem;color:var(--text1);font-weight:500}
+.phone-item-amt{font-family:var(--font-disp);font-size:.65rem;font-weight:800;color:var(--neg)}
+.phone-nav{position:absolute;bottom:0;left:0;right:0;height:44px;background:var(--bg1);border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-around;padding:0 8px}
+.phone-nav-item{display:flex;flex-direction:column;align-items:center;gap:2px}
+.phone-nav-dot{width:4px;height:4px;border-radius:50%;background:var(--accent)}
+.phone-nav-line{width:18px;height:2px;border-radius:1px}
+
+/* THEMES */
+.themes-section{padding:80px 24px;max-width:1100px;margin:0 auto}
+.themes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.theme-card{border-radius:20px;overflow:hidden;border:1px solid var(--border);transition:transform .2s,border-color .2s}
+.theme-card:hover{transform:translateY(-3px);border-color:var(--border-h)}
+.theme-card-top{height:100px;display:flex;align-items:center;justify-content:center;font-family:var(--font-disp);font-size:1.1rem;font-weight:800;position:relative}
+.theme-card-bot{background:var(--bg2);padding:12px 14px}
+.theme-card-name{font-weight:700;font-size:.88rem;margin-bottom:3px}
+.theme-card-desc{font-size:.75rem;color:var(--text3)}
+
+/* SECURITY */
+.security-section{background:var(--bg1);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 24px}
+.security-inner{max-width:1100px;margin:0 auto}
+.security-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:44px}
+.sec-item{display:flex;gap:14px;align-items:flex-start}
+.sec-icon{width:42px;height:42px;border-radius:12px;background:rgba(212,175,55,.1);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.sec-text-title{font-weight:700;font-size:.9rem;margin-bottom:4px}
+.sec-text-desc{font-size:.8rem;color:var(--text2);line-height:1.6}
+
+/* CTA SECTION */
+.cta-section{padding:100px 24px;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(212,175,55,.07),transparent 65%)}
+.cta-section-inner{position:relative;z-index:1;max-width:600px;margin:0 auto}
+.cta-title{font-family:var(--font-disp);font-size:clamp(1.8rem,5vw,3rem);font-weight:800;margin-bottom:16px}
+.cta-sub{color:var(--text2);font-size:.95rem;line-height:1.65;margin-bottom:36px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.footer-logo{display:flex;align-items:center;gap:9px}
+.footer-logo-name{font-family:var(--font-disp);font-size:.88rem;font-weight:800;color:var(--text2)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:.8rem;color:var(--text3);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--text2)}
+.footer-copy{font-size:.75rem;color:var(--text3)}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-inner{animation:fadeUp .7s ease both}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);max-width:1100px;margin:0 auto}
+
+/* MOBILE */
+@media(max-width:768px){
+  .mockup-inner{grid-template-columns:1fr;text-align:center}
+  .mockup-text .section-title,.mockup-text .section-sub,.mockup-text .section-badge{text-align:center}
+  .mockup-frame{order:-1}
+  .phone{width:220px;height:430px}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg width="28" height="28" viewBox="0 0 44 44" fill="none">
+      <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,.08)"/>
+      <text x="22" y="28" text-anchor="middle" font-family="Syne,sans-serif" font-weight="800" font-size="13" fill="#d4af37">BF</text>
+    </svg>
+    <span class="nav-logo-name">Budget Familial</span>
+  </div>
+  <div class="nav-links">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#securite">Sécurité</a>
+    <a href="#themes">Thèmes</a>
+    <a href="https://mg-softwares.fr" target="_blank">MG Softwares</a>
+  </div>
+  <a href="./index.html" class="nav-cta">Ouvrir l'app →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-logo">
+      <svg width="80" height="80" viewBox="0 0 44 44" fill="none">
+        <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,.1)"/>
+        <text x="22" y="28" text-anchor="middle" font-family="Syne,sans-serif" font-weight="800" font-size="14" fill="#d4af37">BF</text>
+      </svg>
+    </div>
+    <div class="hero-badge">✦ MG Softwares · v1.0.0</div>
+    <h1 class="hero-title">Le budget familial,<br>enfin simple.</h1>
+    <p class="hero-sub">Gérez vos dépenses, revenus et épargne en famille. Sécurisé par PIN, synchronisé sur Google Drive, disponible partout — même hors ligne.</p>
+    <div class="hero-btns">
+      <a href="./index.html" class="btn-primary">Lancer l'application</a>
+      <a href="#features" class="btn-outline">Découvrir les fonctionnalités</a>
+    </div>
+    <p class="hero-note">PWA gratuite · Aucune inscription · Données privées</p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-badge">Fonctionnalités</div>
+  <h2 class="section-title">Tout ce dont vous avez besoin</h2>
+  <p class="section-sub">Une application complète et modulaire, conçue pour s'adapter à votre quotidien.</p>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">💸</div>
+      <div class="feat-title">Gestion des dépenses</div>
+      <div class="feat-desc">Ajoutez, catégorisez et suivez toutes vos dépenses. Les dépenses récurrentes sont reportées automatiquement chaque mois.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">💰</div>
+      <div class="feat-title">Revenus & Salaires</div>
+      <div class="feat-desc">Enregistrez les revenus de chaque membre du foyer et visualisez instantanément le solde disponible.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🏦</div>
+      <div class="feat-title">Épargne</div>
+      <div class="feat-desc">Gérez votre Livret A, PEL, assurance vie et autres placements. Le montant mensuel est automatiquement déduit du budget.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🛒</div>
+      <div class="feat-title">Courses</div>
+      <div class="feat-desc">Les dépenses Alimentation sont automatiquement regroupées dans une section Courses dédiée pour un suivi simplifié.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">👛</div>
+      <div class="feat-title">Argent de poche</div>
+      <div class="feat-desc">Calculez automatiquement l'argent disponible pour chaque membre du foyer après déduction des dépenses et de l'épargne.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📊</div>
+      <div class="feat-title">Graphiques & Statistiques</div>
+      <div class="feat-desc">Visualisez la répartition de vos dépenses par catégorie et l'évolution sur 6 mois. Calculez votre taux d'épargne.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🔄</div>
+      <div class="feat-title">Dépenses récurrentes</div>
+      <div class="feat-desc">Définissez un jour de prélèvement et vos dépenses se cochent automatiquement. Les périodes se créent sans action manuelle.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">👥</div>
+      <div class="feat-title">Multi-utilisateurs</div>
+      <div class="feat-desc">Ajoutez tous les membres de votre foyer avec une couleur personnalisée. Associez chaque dépense à une personne précise.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🌍</div>
+      <div class="feat-title">Multilingue</div>
+      <div class="feat-desc">Interface disponible en Français, Anglais, Allemand et Italien. Changeable à tout moment depuis les paramètres.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MOCKUP SECTION -->
+<div class="mockup-section">
+  <div class="mockup-inner">
+    <div class="mockup-text">
+      <div class="section-badge">Interface</div>
+      <h2 class="section-title">Conçu pour mobile,<br>pensé pour la famille</h2>
+      <p class="section-sub">Navigation intuitive par onglets, cartes de résumé claires, listes de dépenses lisibles d'un coup d'œil. Tout est accessible en un geste.</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+        <li style="display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--text2)"><span style="color:var(--pos);font-size:1rem">✓</span> Navigation par onglets responsive</li>
+        <li style="display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--text2)"><span style="color:var(--pos);font-size:1rem">✓</span> Bouton + contextuel selon la vue active</li>
+        <li style="display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--text2)"><span style="color:var(--pos);font-size:1rem">✓</span> Navigation mois par mois avec flèches</li>
+        <li style="display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--text2)"><span style="color:var(--pos);font-size:1rem">✓</span> Indicateur de prélèvements réglés</li>
+        <li style="display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--text2)"><span style="color:var(--pos);font-size:1rem">✓</span> Modules activables/désactivables</li>
+      </ul>
+    </div>
+    <div class="mockup-frame">
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-header">
+            <div class="phone-logo-row">
+              <svg width="18" height="18" viewBox="0 0 44 44" fill="none"><polygon points="22,2 40,12 40,32 22,42 4,32 4,12" stroke="#d4af37" stroke-width="2.5" fill="rgba(212,175,55,.1)"/><text x="22" y="28" text-anchor="middle" font-family="Syne,sans-serif" font-weight="800" font-size="13" fill="#d4af37">BF</text></svg>
+              <span class="phone-logo-text">Budget</span>
+            </div>
+            <span class="phone-period">Mai 2026</span>
+          </div>
+          <div class="phone-cards">
+            <div class="phone-card"><div class="phone-card-lbl">Revenus</div><div class="phone-card-amt pos">3 200 €</div></div>
+            <div class="phone-card"><div class="phone-card-lbl">Dépenses</div><div class="phone-card-amt neg">1 840 €</div></div>
+            <div class="phone-card"><div class="phone-card-lbl">Épargne</div><div class="phone-card-amt acc">500 €</div></div>
+            <div class="phone-card"><div class="phone-card-lbl">Solde</div><div class="phone-card-amt pos">860 €</div></div>
+          </div>
+          <div style="font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#5a5a78;margin-bottom:6px">Dépenses récentes</div>
+          <div class="phone-items">
+            <div class="phone-item"><div class="phone-item-dot" style="background:#60a5fa"></div><span class="phone-item-text">Loyer</span><span class="phone-item-amt">950 €</span></div>
+            <div class="phone-item"><div class="phone-item-dot" style="background:#f59e0b"></div><span class="phone-item-text">Voiture</span><span class="phone-item-amt">280 €</span></div>
+            <div class="phone-item"><div class="phone-item-dot" style="background:#4ade80"></div><span class="phone-item-text">Courses</span><span class="phone-item-amt">320 €</span></div>
+            <div class="phone-item"><div class="phone-item-dot" style="background:#38bdf8"></div><span class="phone-item-text">Internet</span><span class="phone-item-amt">40 €</span></div>
+          </div>
+        </div>
+        <div class="phone-nav">
+          <div class="phone-nav-item"><div class="phone-nav-dot"></div></div>
+          <div class="phone-nav-item"><div class="phone-nav-line" style="background:#5a5a78"></div></div>
+          <div class="phone-nav-item"><div class="phone-nav-line" style="background:#5a5a78"></div></div>
+          <div class="phone-nav-item"><div class="phone-nav-line" style="background:#5a5a78"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THEMES -->
+<div class="themes-section" id="themes">
+  <div class="section-badge">Personnalisation</div>
+  <h2 class="section-title">4 thèmes × 2 modes</h2>
+  <p class="section-sub">Choisissez le thème qui vous correspond, avec mode sombre ou clair, effet halo adaptatif et retour haptique.</p>
+  <div class="themes-grid">
+    <div class="theme-card">
+      <div class="theme-card-top" style="background:linear-gradient(135deg,#06060e,#1e1e30);color:#d4af37">✦ Onyx</div>
+      <div class="theme-card-bot"><div class="theme-card-name">Onyx</div><div class="theme-card-desc">Noir profond · Accent or</div></div>
+    </div>
+    <div class="theme-card">
+      <div class="theme-card-top" style="background:linear-gradient(135deg,#060d1f,#1a2850);color:#4a9eff">✦ Cobalt</div>
+      <div class="theme-card-bot"><div class="theme-card-name">Cobalt</div><div class="theme-card-desc">Marine profond · Accent bleu acier</div></div>
+    </div>
+    <div class="theme-card">
+      <div class="theme-card-top" style="background:linear-gradient(135deg,#060e0a,#162a1c);color:#00c878">✦ Forest</div>
+      <div class="theme-card-bot"><div class="theme-card-name">Forest</div><div class="theme-card-desc">Vert forêt · Accent émeraude</div></div>
+    </div>
+    <div class="theme-card">
+      <div class="theme-card-top" style="background:linear-gradient(135deg,#100610,#2a1530);color:#e879a0">✦ Rose</div>
+      <div class="theme-card-bot"><div class="theme-card-name">Rose</div><div class="theme-card-desc">Bordeaux nocturne · Accent rose</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SECURITY -->
+<div class="security-section" id="securite">
+  <div class="security-inner">
+    <div class="section-badge">Sécurité & Confidentialité</div>
+    <h2 class="section-title">Vos données, votre contrôle</h2>
+    <p class="section-sub">Aucun compte requis. Vos données restent chez vous — sur votre appareil ou sur votre Google Drive personnel.</p>
+    <div class="security-grid">
+      <div class="sec-item"><div class="sec-icon">🔐</div><div><div class="sec-text-title">Code PIN à 4 chiffres</div><div class="sec-text-desc">Accès sécurisé par PIN personnel. Hashé avec sel, jamais stocké en clair.</div></div></div>
+      <div class="sec-item"><div class="sec-icon">❓</div><div><div class="sec-text-title">Question secrète</div><div class="sec-text-desc">En cas d'oubli du PIN, une question secrète vous permet de récupérer l'accès.</div></div></div>
+      <div class="sec-item"><div class="sec-icon">🗑️</div><div><div class="sec-text-title">Auto-destruction</div><div class="sec-text-desc">Après 3 tentatives de PIN incorrectes, toutes les données sont automatiquement effacées.</div></div></div>
+      <div class="sec-item"><div class="sec-icon">📱</div><div><div class="sec-text-title">Stockage local (IndexedDB)</div><div class="sec-text-desc">Mode local : données stockées uniquement sur votre appareil. Aucun serveur tiers.</div></div></div>
+      <div class="sec-item"><div class="sec-icon">☁️</div><div><div class="sec-text-title">Google Drive personnel</div><div class="sec-text-desc">Synchronisation sur votre propre Google Drive. Vos données restent dans votre espace.</div></div></div>
+      <div class="sec-item"><div class="sec-icon">🌐</div><div><div class="sec-text-title">Disponible hors ligne</div><div class="sec-text-desc">PWA installable, fonctionne sans connexion grâce au Service Worker et au cache local.</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-section-inner">
+    <svg width="64" height="64" viewBox="0 0 44 44" fill="none" style="margin-bottom:20px;filter:drop-shadow(0 0 20px rgba(212,175,55,.4))">
+      <polygon points="22,2 40,12 40,32 22,42 4,32 4,12" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,.1)"/>
+      <text x="22" y="28" text-anchor="middle" font-family="Syne,sans-serif" font-weight="800" font-size="14" fill="#d4af37">BF</text>
+    </svg>
+    <h2 class="cta-title">Prêt à reprendre le contrôle ?</h2>
+    <p class="cta-sub">Installez Budget Familial en tant qu'application sur votre appareil et commencez à gérer votre budget dès aujourd'hui.</p>
+    <a href="./index.html" class="btn-primary" style="font-size:1rem;padding:16px 32px">Lancer Budget Familial →</a>
+    <p class="hero-note" style="margin-top:16px">Gratuit · Aucun abonnement · Aucune publicité</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <svg width="22" height="22" viewBox="0 0 44 44" fill="none"><polygon points="22,2 40,12 40,32 22,42 4,32 4,12" stroke="#d4af37" stroke-width="2" fill="rgba(212,175,55,.08)"/><text x="22" y="28" text-anchor="middle" font-family="Syne,sans-serif" font-weight="800" font-size="13" fill="#d4af37">BF</text></svg>
+      <span class="footer-logo-name">Budget Familial · MG Softwares</span>
+    </div>
+    <div class="footer-links">
+      <a href="./index.html">Application</a>
+      <a href="https://mg-softwares.fr" target="_blank">mg-softwares.fr</a>
+    </div>
+    <div class="footer-copy">© 2026 MG Softwares · Gilles Goudelin · v1.0.0 · Hébergé sur GitHub Pages</div>
+  </div>
+</footer>
+
+</body>
+</html>
