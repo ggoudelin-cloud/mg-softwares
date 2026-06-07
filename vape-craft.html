@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>VapeCraft — Studio DIY E-liquid</title>
+<meta name="description" content="VapeCraft — L'application DIY e-liquid complète. Calculateur PG/VG/nicotine, recettes, steep tracker. Android PWA par MG Softwares."/>
+<meta name="author" content="MG Softwares — Gilles Goudelin"/>
+<meta property="og:title" content="VapeCraft — Studio DIY E-liquid"/>
+<meta property="og:description" content="Calculez, créez et sauvegardez vos recettes e-liquid comme un expert."/>
+<meta property="og:type" content="website"/>
+<link rel="icon" href="icon-192.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN SYSTEM
+═══════════════════════════════════════════════════════════════ */
+:root {
+  --navy:       #080d1c;
+  --navy2:      #0c1224;
+  --navy3:      #111930;
+  --slate:      #19233d;
+  --slate2:     #1e2d4a;
+  --blue:       #4F8EF7;
+  --blue-dark:  #3a7ae8;
+  --blue-dim:   rgba(79,142,247,0.14);
+  --lime:       #A8F080;
+  --lime-dark:  #86d45e;
+  --lime-dim:   rgba(168,240,128,0.13);
+  --text:       #eaf0fb;
+  --text2:      #8896b8;
+  --text3:      #404e70;
+  --border:     rgba(79,142,247,0.13);
+  --border2:    rgba(168,240,128,0.13);
+  --glow-blue:  rgba(79,142,247,0.28);
+  --glow-lime:  rgba(168,240,128,0.22);
+  --r:          18px;
+  --r-lg:       24px;
+  --r-sm:       10px;
+  --shadow:     0 8px 40px rgba(0,0,0,0.45);
+  --shadow-lg:  0 24px 80px rgba(0,0,0,0.6);
+  --trans:      0.22s cubic-bezier(.4,0,.2,1);
+  --fd:         'Syne', sans-serif;
+  --fb:         'DM Sans', sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--fb);background:var(--navy);color:var(--text);overflow-x:hidden;line-height:1.65}
+img{max-width:100%;display:block}
+a{color:var(--blue);text-decoration:none}
+button{font-family:var(--fb);cursor:pointer;border:none}
+
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--navy2)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* ═══ NOISE ═══════════════════════════════════════════════════ */
+body::after{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  background-size:300px;opacity:.7;
+}
+
+/* ═══ NAV ═════════════════════════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;height:64px;
+  background:rgba(8,13,28,.88);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  display:flex;align-items:center;gap:11px;
+  font-family:var(--fd);font-size:1.1rem;font-weight:800;
+  color:var(--text);letter-spacing:-.025em;
+}
+.nav-icon{
+  width:34px;height:34px;border-radius:10px;
+  background:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;
+  box-shadow:0 0 14px var(--glow-blue);
+}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-link{font-size:.85rem;font-weight:500;color:var(--text2);transition:color var(--trans)}
+.nav-link:hover{color:var(--blue)}
+.nav-langs{display:flex;gap:4px}
+.nl-btn{
+  padding:5px 9px;border-radius:6px;font-size:.75rem;font-weight:700;
+  background:transparent;color:var(--text3);border:1px solid transparent;
+  cursor:pointer;transition:all var(--trans);
+}
+.nl-btn.active,.nl-btn:hover{color:var(--blue);border-color:var(--border);background:var(--slate)}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--blue);color:#fff;
+  padding:9px 20px;border-radius:24px;
+  font-size:.84rem;font-weight:700;
+  transition:all var(--trans);
+}
+.nav-cta:hover{background:var(--blue-dark);transform:translateY(-1px);box-shadow:0 4px 20px var(--glow-blue)}
+
+/* Mobile */
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.burger span{width:22px;height:2px;background:var(--text);border-radius:2px;display:block;transition:all var(--trans)}
+.mob-menu{
+  display:none;position:fixed;inset:0;z-index:190;
+  background:rgba(8,13,28,.97);backdrop-filter:blur(18px);
+  flex-direction:column;align-items:center;justify-content:center;gap:28px;
+}
+.mob-menu.open{display:flex}
+.mob-menu a{font-family:var(--fd);font-size:1.8rem;font-weight:700;color:var(--text)}
+
+/* ═══ LAYOUT ══════════════════════════════════════════════════ */
+section{position:relative;z-index:1}
+.wrap{max-width:1080px;margin:0 auto;padding:0 40px}
+
+/* ═══ BUTTONS ═════════════════════════════════════════════════ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px 30px;border-radius:50px;
+  font-family:var(--fb);font-size:.95rem;font-weight:700;
+  transition:all var(--trans);cursor:pointer;border:none;
+}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 8px 30px var(--glow-blue)}
+.btn-lime{background:var(--lime);color:var(--navy)}
+.btn-lime:hover{background:var(--lime-dark);transform:translateY(-2px);box-shadow:0 8px 30px var(--glow-lime)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-dim)}
+.btn-sm{padding:10px 22px;font-size:.86rem}
+
+/* ═══ SECTION HEADER ══════════════════════════════════════════ */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--lime-dim);border:1px solid rgba(168,240,128,.2);
+  border-radius:20px;padding:5px 14px;margin-bottom:16px;
+  font-size:.74rem;font-weight:700;color:var(--lime);
+  letter-spacing:.07em;text-transform:uppercase;
+}
+.sec-title{
+  font-family:var(--fd);font-size:clamp(1.9rem,5vw,3.2rem);
+  font-weight:800;letter-spacing:-.03em;color:var(--text);
+  line-height:1.08;margin-bottom:14px;
+}
+.sec-sub{font-size:1rem;color:var(--text2);max-width:520px;line-height:1.72}
+
+/* ═══ CARDS ═══════════════════════════════════════════════════ */
+.card{
+  background:var(--slate);border:1px solid var(--border);
+  border-radius:var(--r);padding:24px;
+  transition:all var(--trans);
+}
+.card:hover{border-color:rgba(79,142,247,.32);box-shadow:var(--shadow)}
+
+/* ═══ REVEAL ══════════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease}
+.reveal.on{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════════════════════ */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:100px 40px 80px;text-align:center;
+  position:relative;overflow:hidden;
+}
+/* Grid */
+.hero-grid{
+  position:absolute;inset:0;z-index:0;
+  background-image:
+    linear-gradient(rgba(79,142,247,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(79,142,247,.045) 1px,transparent 1px);
+  background-size:55px 55px;
+  mask-image:radial-gradient(ellipse 75% 75% at 50% 50%,#000 30%,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 75% 75% at 50% 50%,#000 30%,transparent 80%);
+}
+/* Orbs */
+.orb{position:absolute;border-radius:50%;filter:blur(72px);pointer-events:none;z-index:0}
+.o1{width:500px;height:500px;background:rgba(79,142,247,.07);top:-15%;left:-12%;animation:drift 9s ease-in-out infinite alternate}
+.o2{width:350px;height:350px;background:rgba(168,240,128,.055);bottom:5%;right:-8%;animation:drift 11s ease-in-out infinite alternate-reverse}
+.o3{width:240px;height:240px;background:rgba(79,142,247,.055);top:35%;right:18%;animation:drift 7s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(18px,-18px) scale(1.04)}}
+
+.hero-content{position:relative;z-index:1;max-width:820px}
+
+/* Badge */
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(79,142,247,.1);border:1px solid rgba(79,142,247,.22);
+  border-radius:24px;padding:8px 18px;margin-bottom:30px;
+  font-size:.82rem;font-weight:600;color:var(--blue);
+  animation:fadeUp .8s ease both;
+}
+.badge-dot{width:7px;height:7px;border-radius:50%;background:var(--lime);animation:pulse 1.6s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.8)}}
+
+/* Title */
+.hero-title{
+  font-family:var(--fd);
+  font-size:clamp(3rem,9vw,6rem);
+  font-weight:800;letter-spacing:-.04em;line-height:1;
+  margin-bottom:10px;
+  animation:fadeUp .8s .1s ease both;
+}
+.hero-title .vc{color:var(--blue)}
+.hero-title .craft{color:var(--lime)}
+
+.hero-tagline{
+  font-size:clamp(1rem,2.2vw,1.35rem);
+  font-weight:300;color:var(--text2);
+  margin-bottom:36px;line-height:1.6;
+  animation:fadeUp .8s .18s ease both;
+}
+.hero-tagline strong{color:var(--text);font-weight:500}
+
+.hero-actions{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp .8s .28s ease both;
+  margin-bottom:64px;
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* ── App mockup strip ── */
+.hero-mockup{
+  position:relative;z-index:1;
+  display:flex;justify-content:center;
+  animation:fadeUp .8s .4s ease both;
+}
+
+/* Theme cards strip */
+.theme-strip{
+  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;
+}
+.theme-card{
+  background:var(--slate);border:1px solid var(--border);
+  border-radius:var(--r);padding:14px 18px 14px 14px;
+  display:flex;align-items:center;gap:12px;
+  transition:all var(--trans);min-width:170px;
+}
+.theme-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.5)}
+.theme-dot{
+  width:36px;height:36px;border-radius:10px;flex-shrink:0;
+}
+.theme-name{font-family:var(--fd);font-size:.88rem;font-weight:700;color:var(--text)}
+.theme-sub{font-size:.72rem;color:var(--text2);margin-top:2px}
+
+/* ═══════════════════════════════════════════════════════════════
+   STATS BAR
+═══════════════════════════════════════════════════════════════ */
+.stats-bar{
+  padding:52px 0;
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  background:linear-gradient(90deg,var(--navy2) 0%,var(--navy3) 100%);
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--border);
+  border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
+}
+.stat-cell{
+  background:var(--slate);padding:30px 20px;text-align:center;
+}
+.stat-val{
+  font-family:var(--fd);font-size:2.4rem;font-weight:800;
+  letter-spacing:-.04em;color:var(--blue);display:block;
+}
+.stat-val.lime{color:var(--lime)}
+.stat-lbl{font-size:.78rem;color:var(--text2);margin-top:6px;font-weight:500}
+
+/* ═══════════════════════════════════════════════════════════════
+   CALCULATOR SECTION
+═══════════════════════════════════════════════════════════════ */
+.calc-section{padding:110px 0}
+.calc-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:52px;align-items:start;margin-top:52px;
+}
+
+/* Interactive calc demo */
+.calc-demo{
+  background:var(--slate);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:28px;
+  box-shadow:var(--shadow);
+}
+.calc-demo-title{
+  font-family:var(--fd);font-size:1rem;font-weight:800;
+  color:var(--text);margin-bottom:20px;
+  display:flex;align-items:center;gap:8px;
+}
+.calc-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.calc-field label{font-size:.72rem;font-weight:700;color:var(--text2);
+  text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:5px}
+.calc-input{
+  width:100%;background:var(--navy3);border:1px solid var(--border);
+  border-radius:var(--r-sm);color:var(--text);padding:10px 12px;
+  font-size:.92rem;font-family:var(--fb);outline:none;transition:all var(--trans);
+}
+.calc-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-dim)}
+.calc-input[type=range]{
+  -webkit-appearance:none;height:5px;background:var(--navy3);
+  border:none;border-radius:3px;padding:0;cursor:pointer;
+}
+.calc-input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:17px;height:17px;border-radius:50%;
+  background:var(--blue);box-shadow:0 0 8px var(--glow-blue);cursor:pointer;
+}
+.calc-range-vals{display:flex;justify-content:space-between;
+  font-size:.72rem;color:var(--text3);margin-top:3px}
+
+.result-box{
+  background:linear-gradient(135deg,var(--navy3) 0%,var(--slate) 100%);
+  border:1px solid var(--blue);border-radius:var(--r);padding:18px;
+  margin-top:16px;box-shadow:0 0 0 1px var(--blue-dim),var(--shadow);
+}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.result-item{
+  background:var(--slate2);border:1px solid var(--border);
+  border-radius:var(--r-sm);padding:12px;text-align:center;
+}
+.r-val{font-family:var(--fd);font-size:1.4rem;font-weight:800;color:var(--blue)}
+.r-val.lime{color:var(--lime)}
+.r-lbl{font-size:.68rem;color:var(--text2);margin-top:2px}
+.warn-pct{
+  font-size:.75rem;color:#fbbf24;margin-top:10px;
+  display:none;align-items:center;gap:6px;
+}
+.warn-pct.show{display:flex}
+
+/* Features list */
+.feat-list{display:flex;flex-direction:column;gap:20px}
+.feat-item{display:flex;gap:16px;align-items:flex-start}
+.feat-icon{
+  width:46px;height:46px;border-radius:14px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.25rem;
+}
+.feat-icon.blue{background:var(--blue-dim);border:1px solid rgba(79,142,247,.2)}
+.feat-icon.lime{background:var(--lime-dim);border:1px solid rgba(168,240,128,.2)}
+.feat-title{font-family:var(--fd);font-size:.97rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.feat-text{font-size:.86rem;color:var(--text2);line-height:1.6}
+
+/* ═══════════════════════════════════════════════════════════════
+   RECIPES SECTION
+═══════════════════════════════════════════════════════════════ */
+.recipes-section{padding:100px 0;background:var(--navy2)}
+.recipes-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:18px;margin-top:52px;
+}
+.recipe-card{
+  background:var(--slate);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;
+  transition:all var(--trans);cursor:default;
+}
+.recipe-card:hover{transform:translateY(-5px);border-color:rgba(79,142,247,.3);box-shadow:var(--shadow)}
+.recipe-thumb{
+  height:120px;display:flex;align-items:center;justify-content:center;
+  font-size:3rem;position:relative;overflow:hidden;
+}
+.recipe-body{padding:16px}
+.recipe-name{font-family:var(--fd);font-size:.97rem;font-weight:800;color:var(--text);margin-bottom:5px}
+.recipe-meta{font-size:.75rem;color:var(--text2);display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.recipe-tags{display:flex;gap:6px;flex-wrap:wrap}
+.rtag{
+  padding:2px 9px;border-radius:20px;font-size:.69rem;font-weight:700;
+  background:var(--navy3);color:var(--text2);border:1px solid var(--border);
+}
+.status-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:3px 10px;border-radius:20px;font-size:.69rem;font-weight:700;
+}
+.s-valid{background:rgba(168,240,128,.14);color:var(--lime);border:1px solid rgba(168,240,128,.25)}
+.s-steep{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.25)}
+.s-draft{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(79,142,247,.2)}
+.stars{color:#fbbf24;font-size:.8rem;letter-spacing:1px}
+
+/* ═══════════════════════════════════════════════════════════════
+   STEEP SECTION
+═══════════════════════════════════════════════════════════════ */
+.steep-section{padding:100px 0}
+.steep-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:18px;margin-top:52px;
+}
+.steep-card{
+  background:var(--slate);border:1px solid var(--border);
+  border-radius:var(--r);padding:28px;
+  position:relative;overflow:hidden;
+  transition:all var(--trans);
+}
+.steep-card::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  background:radial-gradient(ellipse 70% 60% at 50% 0%,var(--glow) 0%,transparent 70%);
+  transition:opacity var(--trans);pointer-events:none;
+}
+.steep-card:hover::before{opacity:1}
+.steep-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.steep-icon{font-size:2.2rem;margin-bottom:16px}
+.steep-name{font-family:var(--fd);font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:6px}
+.steep-dur{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:3px 12px;border-radius:20px;font-size:.73rem;font-weight:700;
+  margin-bottom:12px;
+}
+.steep-text{font-size:.85rem;color:var(--text2);line-height:1.6}
+.steep-tip{
+  margin-top:12px;padding:10px 12px;border-radius:var(--r-sm);
+  font-size:.79rem;color:var(--text2);border-left:3px solid;
+  background:var(--navy3);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   GUIDE SECTION
+═══════════════════════════════════════════════════════════════ */
+.guide-section{padding:100px 0;background:var(--navy2)}
+.guide-steps{
+  display:flex;flex-direction:column;gap:0;margin-top:52px;
+}
+.guide-step{
+  display:grid;grid-template-columns:56px 1fr;
+  gap:0 24px;position:relative;padding-bottom:36px;
+}
+.guide-step:last-child{padding-bottom:0}
+.guide-step:last-child .gs-line{display:none}
+.gs-num{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--blue);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--fd);font-size:.95rem;font-weight:800;
+  flex-shrink:0;z-index:1;position:relative;
+  box-shadow:0 0 0 4px var(--navy2),0 0 0 6px rgba(79,142,247,.3);
+}
+.gs-line{
+  position:absolute;left:24px;top:48px;bottom:0;
+  width:1px;background:linear-gradient(180deg,var(--blue) 0%,transparent 100%);
+  opacity:.35;
+}
+.gs-body{padding-top:10px}
+.gs-title{font-family:var(--fd);font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:6px}
+.gs-text{font-size:.88rem;color:var(--text2);line-height:1.68}
+.gs-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.gtag{
+  padding:3px 10px;border-radius:20px;font-size:.72rem;font-weight:600;
+  background:var(--blue-dim);color:var(--blue);border:1px solid rgba(79,142,247,.2);
+}
+.gtag.lime{background:var(--lime-dim);color:var(--lime);border-color:rgba(168,240,128,.2)}
+
+/* ═══════════════════════════════════════════════════════════════
+   THEMES SECTION
+═══════════════════════════════════════════════════════════════ */
+.themes-section{padding:100px 0}
+.themes-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:16px;margin-top:52px;
+}
+.theme-showcase{
+  border-radius:var(--r);overflow:hidden;
+  border:1px solid var(--border);
+  transition:all var(--trans);cursor:default;
+}
+.theme-showcase:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.ts-preview{height:140px;position:relative;display:flex;align-items:center;justify-content:center}
+.ts-preview-inner{
+  width:80%;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;padding:12px;
+}
+.ts-p-title{font-family:var(--fd);font-size:.72rem;font-weight:700;margin-bottom:6px}
+.ts-p-bar{height:4px;border-radius:2px;margin-bottom:5px;opacity:.8}
+.ts-p-dots{display:flex;gap:4px}
+.ts-p-dot{width:20px;height:4px;border-radius:2px;opacity:.6}
+.ts-name-row{padding:14px;border-top:1px solid rgba(255,255,255,.06)}
+.ts-name{font-family:var(--fd);font-size:.88rem;font-weight:800}
+.ts-modes{font-size:.72rem;margin-top:3px;opacity:.6}
+
+/* ═══════════════════════════════════════════════════════════════
+   DRIVE SECTION
+═══════════════════════════════════════════════════════════════ */
+.drive-section{padding:100px 0;background:var(--navy2)}
+.drive-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:60px;align-items:center;margin-top:52px;
+}
+.drive-visual{
+  background:var(--slate);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:32px;
+  position:relative;overflow:hidden;
+}
+.drive-visual::before{
+  content:'';position:absolute;top:-40%;right:-20%;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(79,142,247,.1) 0%,transparent 70%);
+  pointer-events:none;
+}
+.dv-header{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.dv-icon{
+  width:42px;height:42px;border-radius:12px;
+  background:var(--blue-dim);border:1px solid rgba(79,142,247,.2);
+  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+}
+.dv-title{font-family:var(--fd);font-size:.95rem;font-weight:800;color:var(--text)}
+.dv-sub{font-size:.76rem;color:var(--text2)}
+.sync-line{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:var(--r-sm);padding:12px 14px;margin-bottom:8px;
+}
+.sync-left{display:flex;align-items:center;gap:10px;font-size:.83rem;color:var(--text)}
+.sync-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sync-dot.ok{background:var(--lime);box-shadow:0 0 6px var(--lime)}
+.sync-dot.pend{background:#fbbf24}
+.sync-time{font-size:.72rem;color:var(--text3)}
+
+.drive-feats{display:flex;flex-direction:column;gap:18px}
+.df-item{display:flex;align-items:flex-start;gap:14px}
+.df-icon{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  background:var(--blue-dim);border:1px solid rgba(79,142,247,.18);
+}
+.df-title{font-family:var(--fd);font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:3px}
+.df-text{font-size:.83rem;color:var(--text2);line-height:1.58}
+
+/* ═══════════════════════════════════════════════════════════════
+   CTA
+═══════════════════════════════════════════════════════════════ */
+.cta-section{padding:120px 0}
+.cta-box{
+  background:linear-gradient(135deg,var(--slate) 0%,var(--slate2) 100%);
+  border:1px solid var(--border);border-radius:28px;
+  padding:70px 60px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-box::before{
+  content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);
+  width:700px;height:500px;
+  background:radial-gradient(ellipse,rgba(79,142,247,.1) 0%,transparent 65%);
+  pointer-events:none;
+}
+.cta-title{
+  font-family:var(--fd);font-size:clamp(1.8rem,5vw,3rem);
+  font-weight:800;letter-spacing:-.03em;color:var(--text);
+  margin-bottom:14px;position:relative;z-index:1;
+}
+.cta-sub{font-size:1.02rem;color:var(--text2);margin-bottom:36px;position:relative;z-index:1}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════════════ */
+footer{
+  border-top:1px solid var(--border);
+  background:var(--navy2);padding:48px 40px 36px;
+}
+.footer-inner{
+  max-width:1080px;margin:0 auto;
+  display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap;
+}
+.footer-brand{max-width:260px}
+.footer-logo{
+  font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--text);
+  display:flex;align-items:center;gap:10px;margin-bottom:10px;letter-spacing:-.02em;
+}
+.footer-desc{font-size:.8rem;color:var(--text2);line-height:1.65}
+.footer-col-title{
+  font-family:var(--fd);font-size:.72rem;font-weight:700;color:var(--text3);
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;
+}
+.footer-col a{display:block;font-size:.83rem;color:var(--text2);margin-bottom:8px;transition:color var(--trans)}
+.footer-col a:hover{color:var(--blue)}
+.footer-bottom{
+  max-width:1080px;margin:32px auto 0;
+  padding-top:22px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+.footer-copy{font-size:.76rem;color:var(--text3)}
+.footer-links a{font-size:.76rem;color:var(--text3);margin-left:18px}
+.footer-links a:hover{color:var(--text2)}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════════ */
+@media(max-width:900px){
+  .calc-layout,.drive-layout{grid-template-columns:1fr}
+  .recipes-grid{grid-template-columns:1fr 1fr}
+  .themes-grid{grid-template-columns:1fr 1fr}
+  .steep-cards{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  .nav{padding:0 20px}
+  .nav-right{display:none}
+  .burger{display:flex}
+  .wrap{padding:0 20px}
+  .hero{padding:90px 20px 60px}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .recipes-grid{grid-template-columns:1fr}
+  .themes-grid{grid-template-columns:1fr 1fr}
+  .cta-box{padding:44px 24px}
+  .footer-inner{flex-direction:column}
+  footer{padding:40px 20px}
+}
+@media(max-width:440px){
+  .themes-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .theme-strip{flex-direction:column;align-items:stretch}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="nav-icon">💨</div>
+    VapeCraft
+  </div>
+  <div class="nav-right">
+    <a href="#calc"    class="nav-link" data-i18n="nav_calc">Calculateur</a>
+    <a href="#recipes" class="nav-link" data-i18n="nav_recipes">Recettes</a>
+    <a href="#guide"   class="nav-link" data-i18n="nav_guide">Guide DIY</a>
+    <a href="#themes"  class="nav-link" data-i18n="nav_themes">Thèmes</a>
+    <div class="nav-langs">
+      <button class="nl-btn active" onclick="setLang('fr')">FR</button>
+      <button class="nl-btn" onclick="setLang('en')">EN</button>
+      <button class="nl-btn" onclick="setLang('de')">DE</button>
+      <button class="nl-btn" onclick="setLang('it')">IT</button>
+    </div>
+    <a href="#cta" class="nav-cta" data-i18n="nav_dl">▶ Télécharger</a>
+  </div>
+  <button class="burger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mob-menu">
+  <a href="#calc"    onclick="toggleMenu()" data-i18n="nav_calc">Calculateur</a>
+  <a href="#recipes" onclick="toggleMenu()" data-i18n="nav_recipes">Recettes</a>
+  <a href="#guide"   onclick="toggleMenu()" data-i18n="nav_guide">Guide DIY</a>
+  <a href="#cta"     onclick="toggleMenu()" data-i18n="nav_dl">Télécharger</a>
+  <div class="nav-langs" style="margin-top:12px">
+    <button class="nl-btn active" onclick="setLang('fr');toggleMenu()">FR</button>
+    <button class="nl-btn" onclick="setLang('en');toggleMenu()">EN</button>
+    <button class="nl-btn" onclick="setLang('de');toggleMenu()">DE</button>
+    <button class="nl-btn" onclick="setLang('it');toggleMenu()">IT</button>
+  </div>
+</div>
+
+<!-- ═══ HERO ═══════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      <span data-i18n="hero_badge">Application Android PWA · MG Softwares</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="vc">Vape</span><span class="craft">Craft</span>
+    </h1>
+    <p class="hero-tagline" data-i18n="hero_tagline">
+      <strong>Calculez</strong>, créez et sauvegardez vos recettes e-liquid.<br/>Le studio DIY complet pour vapoteurs exigeants.
+    </p>
+    <div class="hero-actions">
+      <a href="#cta" class="btn btn-blue" data-i18n="hero_cta1">▶ Google Play</a>
+      <a href="#calc" class="btn btn-ghost" data-i18n="hero_cta2">Tester le calculateur</a>
+    </div>
+    <!-- Theme strip -->
+    <div class="hero-mockup">
+      <div class="theme-strip">
+        <div class="theme-card" style="border-color:rgba(79,142,247,.3)">
+          <div class="theme-dot" style="background:linear-gradient(135deg,#0d1117,#4F8EF7)"></div>
+          <div><div class="theme-name">🌌 Nebula</div><div class="theme-sub">Navy · Bleu</div></div>
+        </div>
+        <div class="theme-card" style="border-color:rgba(168,240,128,.3)">
+          <div class="theme-dot" style="background:linear-gradient(135deg,#0a1a0f,#A8F080)"></div>
+          <div><div class="theme-name">🌴 Tropical</div><div class="theme-sub">Lime · Orange</div></div>
+        </div>
+        <div class="theme-card" style="border-color:rgba(212,168,75,.3)">
+          <div class="theme-dot" style="background:linear-gradient(135deg,#12100c,#d4a84b)"></div>
+          <div><div class="theme-name">🍂 Tobacco</div><div class="theme-sub">Or · Caramel</div></div>
+        </div>
+        <div class="theme-card" style="border-color:rgba(56,189,248,.3)">
+          <div class="theme-dot" style="background:linear-gradient(135deg,#060d14,#38bdf8)"></div>
+          <div><div class="theme-name">❄️ Arctic</div><div class="theme-sub">Glacier · Cyan</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ══════════════════════════════════════════════════ -->
+<div class="stats-bar">
+  <div class="wrap">
+    <div class="stats-grid reveal">
+      <div class="stat-cell"><span class="stat-val">4</span><div class="stat-lbl" data-i18n="stat_themes">Thèmes × 2 modes</div></div>
+      <div class="stat-cell"><span class="stat-val lime">∞</span><div class="stat-lbl" data-i18n="stat_recipes">Recettes illimitées</div></div>
+      <div class="stat-cell"><span class="stat-val">4</span><div class="stat-lbl" data-i18n="stat_langs">Langues</div></div>
+      <div class="stat-cell"><span class="stat-val">0</span><div class="stat-lbl" data-i18n="stat_ads">Publicités</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CALCULATOR ═════════════════════════════════════════════ -->
+<section class="calc-section" id="calc">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i18n="calc_eyebrow">🧮 Calculateur</div>
+      <h2 class="sec-title" data-i18n="calc_title">Précision au mL près</h2>
+      <p class="sec-sub" data-i18n="calc_sub">Entrez vos paramètres, VapeCraft calcule instantanément les volumes exacts de chaque composant.</p>
+    </div>
+    <div class="calc-layout">
+      <!-- INTERACTIVE DEMO -->
+      <div class="calc-demo reveal d1">
+        <div class="calc-demo-title">🧪 <span data-i18n="calc_demo_title">Calculateur interactif</span></div>
+        <div class="calc-row">
+          <div class="calc-field">
+            <label data-i18n="f_vol">Volume total (mL)</label>
+            <input class="calc-input" id="d-vol" type="number" value="100" min="1" max="5000" oninput="liveCalc()"/>
+          </div>
+          <div class="calc-field">
+            <label data-i18n="f_nic">Nicotine cible (mg/mL)</label>
+            <input class="calc-input" id="d-nic" type="number" value="3" min="0" max="36" step="0.5" oninput="liveCalc()"/>
+          </div>
+        </div>
+        <div class="calc-field" style="margin-bottom:14px">
+          <label>PG / VG — <span id="pg-lbl">30</span>% PG · <span id="vg-lbl">70</span>% VG</label>
+          <input class="calc-input" id="d-pg" type="range" min="0" max="100" value="30" oninput="syncRange(this)"/>
+          <div class="calc-range-vals"><span>0% PG</span><span>50/50</span><span>100% PG</span></div>
+        </div>
+        <div class="calc-row">
+          <div class="calc-field">
+            <label data-i18n="f_boost">Booster (mg/mL)</label>
+            <select class="calc-input" id="d-boost" onchange="liveCalc()">
+              <option value="20" selected>20 mg/mL</option>
+              <option value="18">18 mg/mL</option>
+              <option value="10">10 mg/mL</option>
+              <option value="50">50 mg/mL (sel)</option>
+            </select>
+          </div>
+          <div class="calc-field">
+            <label data-i18n="f_arome_pct">Arômes total (%)</label>
+            <input class="calc-input" id="d-arome" type="number" value="10" min="0" max="30" step="0.5" oninput="liveCalc()"/>
+          </div>
+        </div>
+        <div class="warn-pct" id="warn-arome">⚠️ <span data-i18n="warn_arome">Total arômes &gt; 20% — vérifiez vos dosages</span></div>
+        <div class="result-box">
+          <div class="result-grid">
+            <div class="result-item"><div class="r-val" id="r-pg">27.0</div><div class="r-lbl">mL PG</div></div>
+            <div class="result-item"><div class="r-val" id="r-vg">63.0</div><div class="r-lbl">mL VG</div></div>
+            <div class="result-item"><div class="r-val lime" id="r-boost">15.0</div><div class="r-lbl">mL <span data-i18n="r_boost">booster</span></div></div>
+            <div class="result-item"><div class="r-val lime" id="r-arome">10.0</div><div class="r-lbl">mL <span data-i18n="r_arome">arômes</span></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- FEATURES -->
+      <div class="feat-list">
+        <div class="feat-item reveal d1">
+          <div class="feat-icon blue">🔬</div>
+          <div>
+            <div class="feat-title" data-i18n="ft1_title">Base PG/VG</div>
+            <div class="feat-text" data-i18n="ft1_text">Curseur intuitif PG/VG synchronisé. Calcul automatique de la base restante après booster et arômes.</div>
+          </div>
+        </div>
+        <div class="feat-item reveal d2">
+          <div class="feat-icon blue">⚡</div>
+          <div>
+            <div class="feat-title" data-i18n="ft2_title">Nicotine & boosters</div>
+            <div class="feat-text" data-i18n="ft2_text">Compatible 4 concentrations (10 / 18 / 20 mg/mL et sels de nicotine 50 mg/mL). Volume exact calculé.</div>
+          </div>
+        </div>
+        <div class="feat-item reveal d3">
+          <div class="feat-icon lime">🍓</div>
+          <div>
+            <div class="feat-title" data-i18n="ft3_title">Jusqu'à 10 arômes</div>
+            <div class="feat-text" data-i18n="ft3_text">Ajoutez jusqu'à 10 arômes individuels avec leur pourcentage. Alerte automatique si le total dépasse 20%.</div>
+          </div>
+        </div>
+        <div class="feat-item reveal d4">
+          <div class="feat-icon lime">📊</div>
+          <div>
+            <div class="feat-title" data-i18n="ft4_title">Résultats instantanés</div>
+            <div class="feat-text" data-i18n="ft4_text">Chaque modification recalcule les volumes en temps réel. Précision à 0.1 mL.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RECIPES ════════════════════════════════════════════════ -->
+<section class="recipes-section" id="recipes">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i18n="rec_eyebrow">📋 Recettes</div>
+      <h2 class="sec-title" data-i18n="rec_title">Vos créations, organisées</h2>
+      <p class="sec-sub" data-i18n="rec_sub">Chaque recette est une fiche complète : photo, calculs, étapes de préparation, steep tracker et notes.</p>
+    </div>
+    <div class="recipes-grid">
+      <!-- Card 1 -->
+      <div class="recipe-card reveal d1">
+        <div class="recipe-thumb" style="background:linear-gradient(135deg,#1a0a0f,#3d1220)">🍓🍋</div>
+        <div class="recipe-body">
+          <div class="recipe-name">Fraise Citron Givré</div>
+          <div class="recipe-meta">
+            <span>100 mL · 70VG/30PG</span>
+            <span>3 mg/mL</span>
+          </div>
+          <div class="recipe-tags">
+            <span class="rtag" data-i18n="tag_fruity">Fruité</span>
+            <span class="rtag" data-i18n="tag_fresh">Frais</span>
+            <span class="status-badge s-valid">✅ <span data-i18n="s_valid">Validée</span></span>
+          </div>
+          <div class="stars" style="margin-top:8px">★★★★★</div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="recipe-card reveal d2">
+        <div class="recipe-thumb" style="background:linear-gradient(135deg,#1a100a,#3d2512)">☕🍮</div>
+        <div class="recipe-body">
+          <div class="recipe-name">Caramel Café</div>
+          <div class="recipe-meta">
+            <span>50 mL · 50/50</span>
+            <span>6 mg/mL</span>
+          </div>
+          <div class="recipe-tags">
+            <span class="rtag" data-i18n="tag_gourmet">Gourmand</span>
+            <span class="status-badge s-steep">⏳ <span data-i18n="s_steep">En steep (14j)</span></span>
+          </div>
+          <div class="stars" style="margin-top:8px">★★★★☆</div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="recipe-card reveal d3">
+        <div class="recipe-thumb" style="background:linear-gradient(135deg,#071520,#0a2535)">🌊❄️</div>
+        <div class="recipe-body">
+          <div class="recipe-name">Ice Blue Wave</div>
+          <div class="recipe-meta">
+            <span>200 mL · Max VG</span>
+            <span>0 mg/mL</span>
+          </div>
+          <div class="recipe-tags">
+            <span class="rtag" data-i18n="tag_menthol">Menthol</span>
+            <span class="rtag" data-i18n="tag_fresh">Frais</span>
+            <span class="status-badge s-draft">📝 <span data-i18n="s_draft">Brouillon</span></span>
+          </div>
+          <div class="stars" style="margin-top:8px">★★★☆☆</div>
+        </div>
+      </div>
+    </div>
+    <!-- Features -->
+    <div class="reveal" style="margin-top:40px;display:flex;gap:14px;flex-wrap:wrap">
+      <div class="card" style="flex:1;min-width:200px;display:flex;gap:12px;align-items:flex-start">
+        <span style="font-size:1.5rem">📷</span>
+        <div><div style="font-family:var(--fd);font-weight:700;font-size:.9rem;margin-bottom:4px" data-i18n="rf1_title">Photo</div><div style="font-size:.82rem;color:var(--text2)" data-i18n="rf1_text">Photo depuis l'appareil ou la galerie</div></div>
+      </div>
+      <div class="card" style="flex:1;min-width:200px;display:flex;gap:12px;align-items:flex-start">
+        <span style="font-size:1.5rem">📋</span>
+        <div><div style="font-family:var(--fd);font-weight:700;font-size:.9rem;margin-bottom:4px" data-i18n="rf2_title">Étapes</div><div style="font-size:.82rem;color:var(--text2)" data-i18n="rf2_text">Préparation numérotée step by step</div></div>
+      </div>
+      <div class="card" style="flex:1;min-width:200px;display:flex;gap:12px;align-items:flex-start">
+        <span style="font-size:1.5rem">⭐</span>
+        <div><div style="font-family:var(--fd);font-weight:700;font-size:.9rem;margin-bottom:4px" data-i18n="rf3_title">Notes & rating</div><div style="font-size:.82rem;color:var(--text2)" data-i18n="rf3_text">Difficulté, évaluation ★ et notes perso</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STEEP ══════════════════════════════════════════════════ -->
+<section class="steep-section" id="steep">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i18n="steep_eyebrow">⏰ Steep tracker</div>
+      <h2 class="sec-title" data-i18n="steep_title">La maturation, maîtrisée</h2>
+      <p class="sec-sub" data-i18n="steep_sub">Choisissez votre méthode de steep et tracez la durée de maturation de chaque recette.</p>
+    </div>
+    <div class="steep-cards">
+      <div class="steep-card reveal d1" style="--glow:rgba(56,189,248,.12)">
+        <div class="steep-icon">❄️</div>
+        <div class="steep-name" data-i18n="sc1_name">Steep à froid</div>
+        <div class="steep-dur" style="background:rgba(56,189,248,.12);color:#38bdf8;border:1px solid rgba(56,189,248,.25)">⏱ 1–4 semaines</div>
+        <div class="steep-text" data-i18n="sc1_text">Méthode douce et naturelle. Le e-liquid mature à température ambiante dans l'obscurité, bouchon légèrement ouvert pour l'aération.</div>
+        <div class="steep-tip" style="border-color:#38bdf8;color:#7dd3fc" data-i18n="sc1_tip">💡 Agitez quotidiennement pour homogénéiser les arômes.</div>
+      </div>
+      <div class="steep-card reveal d2" style="--glow:rgba(251,191,36,.1)">
+        <div class="steep-icon">🔥</div>
+        <div class="steep-name" data-i18n="sc2_name">Steep à chaud</div>
+        <div class="steep-dur" style="background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.25)">⏱ 1–3 heures</div>
+        <div class="steep-text" data-i18n="sc2_text">Bain-marie à 50°C maximum. La chaleur accélère la fusion des arômes dans la base. Idéal pour les mélanges gourmands et tabac.</div>
+        <div class="steep-tip" style="border-color:#fbbf24;color:#fcd34d" data-i18n="sc2_tip">💡 Ne dépassez pas 60°C — la nicotine se dégrade au-delà.</div>
+      </div>
+      <div class="steep-card reveal d3" style="--glow:rgba(192,132,252,.1)">
+        <div class="steep-icon">🔊</div>
+        <div class="steep-name" data-i18n="sc3_name">Ultrasons</div>
+        <div class="steep-dur" style="background:rgba(192,132,252,.12);color:#c084fc;border:1px solid rgba(192,132,252,.25)">⏱ 20–60 minutes</div>
+        <div class="steep-text" data-i18n="sc3_text">Cuve à ultrasons pour un steep express. Les vibrations micro-mécaniques fusionnent les molécules d'arômes rapidement et uniformément.</div>
+        <div class="steep-tip" style="border-color:#c084fc;color:#d8b4fe" data-i18n="sc3_tip">💡 Méthode professionnelle — résultats comparables à 1 semaine à froid.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GUIDE ══════════════════════════════════════════════════ -->
+<section class="guide-section" id="guide">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i18n="guide_eyebrow">📖 Guide DIY</div>
+      <h2 class="sec-title" data-i18n="guide_title">Tout pour débuter</h2>
+      <p class="sec-sub" data-i18n="guide_sub">VapeCraft intègre un guide complet pour vous accompagner de vos premiers mL jusqu'à vos créations les plus complexes.</p>
+    </div>
+    <div class="guide-steps">
+
+      <div class="guide-step reveal d1">
+        <div>
+          <div class="gs-num">1</div>
+          <div class="gs-line"></div>
+        </div>
+        <div class="gs-body">
+          <div class="gs-title" data-i18n="g1_title">Comprendre la base PG/VG</div>
+          <div class="gs-text" data-i18n="g1_text">La base est le socle de tout e-liquid. Le PG (Propylène Glycol) porte les arômes et produit le hit en gorge. Le VG (Glycérine Végétale) génère les nuages de vapeur et adoucit la sensation.</div>
+          <div class="gs-tags">
+            <span class="gtag">50/50 → universel</span>
+            <span class="gtag">70VG → subohm</span>
+            <span class="gtag lime">Max VG → cloud</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step reveal d2">
+        <div>
+          <div class="gs-num">2</div>
+          <div class="gs-line"></div>
+        </div>
+        <div class="gs-body">
+          <div class="gs-title" data-i18n="g2_title">Choisir sa nicotine</div>
+          <div class="gs-text" data-i18n="g2_text">Les boosters nicotine (20 mg/mL standard) s'ajoutent selon votre taux cible. Les sels de nicotine (50 mg/mL) offrent un hit plus doux à taux élevé — idéaux pour les petites résistances.</div>
+          <div class="gs-tags">
+            <span class="gtag">0 mg → sans</span>
+            <span class="gtag">3 mg → léger</span>
+            <span class="gtag">6 mg → modéré</span>
+            <span class="gtag lime">12+ mg → fort</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step reveal d3">
+        <div>
+          <div class="gs-num">3</div>
+          <div class="gs-line"></div>
+        </div>
+        <div class="gs-body">
+          <div class="gs-title" data-i18n="g3_title">Doser ses arômes</div>
+          <div class="gs-text" data-i18n="g3_text">Les arômes concentrés se dosent entre 5% et 20% du volume total. Chaque fabricant a ses recommandations. Commencez à 10%, ajustez après steep. Ne jamais dépasser 20% sans test préalable.</div>
+          <div class="gs-tags">
+            <span class="gtag">5–10% → discret</span>
+            <span class="gtag">10–15% → équilibré</span>
+            <span class="gtag lime">15–20% → intense</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step reveal d4">
+        <div>
+          <div class="gs-num">4</div>
+          <div class="gs-line"></div>
+        </div>
+        <div class="gs-body">
+          <div class="gs-title" data-i18n="g4_title">Combiner plusieurs arômes</div>
+          <div class="gs-text" data-i18n="g4_text">Les recettes complexes mixent une base (arôme principal, 8–12%), une note haute (arôme d'attaque, 3–5%) et un modificateur (fraîcheur, douceur, gorge, 1–3%). Notez vos ratios gagnants dans VapeCraft !</div>
+          <div class="gs-tags">
+            <span class="gtag lime">base + top note + modificateur</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step reveal">
+        <div>
+          <div class="gs-num" style="background:var(--lime);color:var(--navy)">5</div>
+        </div>
+        <div class="gs-body">
+          <div class="gs-title" data-i18n="g5_title">Steeper et valider</div>
+          <div class="gs-text" data-i18n="g5_text">Après mélange, la plupart des recettes s'améliorent avec la maturation. Notez la date, la méthode, et réévaluez après steep. VapeCraft trace tout pour vous : durée, type, et résultat final.</div>
+          <div class="gs-tags">
+            <span class="gtag lime">Brouillon → En steep → Validée ✅</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THEMES ═════════════════════════════════════════════════ -->
+<section class="themes-section" id="themes">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i18n="themes_eyebrow">🎨 Thèmes</div>
+      <h2 class="sec-title" data-i18n="themes_title">4 univers visuels</h2>
+      <p class="sec-sub" data-i18n="themes_sub">Chaque thème est disponible en mode clair et sombre. Changez selon votre humeur, votre environnement, votre style.</p>
+    </div>
+    <div class="themes-grid">
+      <!-- Nebula -->
+      <div class="theme-showcase reveal d1">
+        <div class="ts-preview" style="background:linear-gradient(145deg,#0d1117 0%,#1c2333 100%)">
+          <div class="ts-preview-inner">
+            <div class="ts-p-title" style="color:#4F8EF7">VapeCraft</div>
+            <div class="ts-p-bar" style="background:linear-gradient(90deg,#4F8EF7,#A8F080);width:70%"></div>
+            <div class="ts-p-dots">
+              <div class="ts-p-dot" style="background:#4F8EF7;width:30px"></div>
+              <div class="ts-p-dot" style="background:#A8F080;width:20px"></div>
+            </div>
+          </div>
+        </div>
+        <div class="ts-name-row" style="background:#0d1117">
+          <div class="ts-name" style="color:#e6edf3">🌌 Nebula</div>
+          <div class="ts-modes" style="color:#8b949e" data-i18n="dark_light">Sombre · Clair</div>
+        </div>
+      </div>
+      <!-- Tropical -->
+      <div class="theme-showcase reveal d2">
+        <div class="ts-preview" style="background:linear-gradient(145deg,#0a1a0f 0%,#1a3024 100%)">
+          <div class="ts-preview-inner">
+            <div class="ts-p-title" style="color:#A8F080">VapeCraft</div>
+            <div class="ts-p-bar" style="background:linear-gradient(90deg,#A8F080,#fb923c);width:70%"></div>
+            <div class="ts-p-dots">
+              <div class="ts-p-dot" style="background:#A8F080;width:30px"></div>
+              <div class="ts-p-dot" style="background:#fb923c;width:20px"></div>
+            </div>
+          </div>
+        </div>
+        <div class="ts-name-row" style="background:#0a1a0f">
+          <div class="ts-name" style="color:#ecfdf5">🌴 Tropical</div>
+          <div class="ts-modes" style="color:#86efac" data-i18n="dark_light">Sombre · Clair</div>
+        </div>
+      </div>
+      <!-- Tobacco -->
+      <div class="theme-showcase reveal d3">
+        <div class="ts-preview" style="background:linear-gradient(145deg,#12100c 0%,#2e2516 100%)">
+          <div class="ts-preview-inner">
+            <div class="ts-p-title" style="color:#d4a84b">VapeCraft</div>
+            <div class="ts-p-bar" style="background:linear-gradient(90deg,#d4a84b,#e8755a);width:70%"></div>
+            <div class="ts-p-dots">
+              <div class="ts-p-dot" style="background:#d4a84b;width:30px"></div>
+              <div class="ts-p-dot" style="background:#e8755a;width:20px"></div>
+            </div>
+          </div>
+        </div>
+        <div class="ts-name-row" style="background:#12100c">
+          <div class="ts-name" style="color:#fdf8ef">🍂 Tobacco</div>
+          <div class="ts-modes" style="color:#c9b48a" data-i18n="dark_light">Sombre · Clair</div>
+        </div>
+      </div>
+      <!-- Arctic -->
+      <div class="theme-showcase reveal d4">
+        <div class="ts-preview" style="background:linear-gradient(145deg,#060d14 0%,#122336 100%)">
+          <div class="ts-preview-inner">
+            <div class="ts-p-title" style="color:#38bdf8">VapeCraft</div>
+            <div class="ts-p-bar" style="background:linear-gradient(90deg,#38bdf8,#a5f3fc);width:70%"></div>
+            <div class="ts-p-dots">
+              <div class="ts-p-dot" style="background:#38bdf8;width:30px"></div>
+              <div class="ts-p-dot" style="background:#a5f3fc;width:20px"></div>
+            </div>
+          </div>
+        </div>
+        <div class="ts-name-row" style="background:#060d14">
+          <div class="ts-name" style="color:#f0f9ff">❄️ Arctic</div>
+          <div class="ts-modes" style="color:#7dd3fc" data-i18n="dark_light">Sombre · Clair</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DRIVE ═══════════════════════════════════════════════════ -->
+<section class="drive-section" id="drive">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" data-i18n="drive_eyebrow">☁️ Google Drive</div>
+      <h2 class="sec-title" data-i18n="drive_title">Vos recettes, partout</h2>
+      <p class="sec-sub" data-i18n="drive_sub">Synchronisez avec votre Google Drive personnel. Accédez à vos recettes depuis n'importe quel appareil, sans serveur tiers.</p>
+    </div>
+    <div class="drive-layout">
+      <div class="drive-visual reveal d1">
+        <div class="dv-header">
+          <div class="dv-icon">☁️</div>
+          <div>
+            <div class="dv-title">Google Drive</div>
+            <div class="dv-sub" data-i18n="dv_sub">vapecraft-data.json · appDataFolder</div>
+          </div>
+        </div>
+        <div class="sync-line">
+          <div class="sync-left"><div class="sync-dot ok"></div>Fraise Citron Givré</div>
+          <div class="sync-time" data-i18n="sync_now">À l'instant</div>
+        </div>
+        <div class="sync-line">
+          <div class="sync-left"><div class="sync-dot ok"></div>Caramel Café</div>
+          <div class="sync-time">14:32</div>
+        </div>
+        <div class="sync-line">
+          <div class="sync-left"><div class="sync-dot pend"></div>Ice Blue Wave</div>
+          <div class="sync-time" data-i18n="sync_pend">En attente…</div>
+        </div>
+        <div style="margin-top:16px;padding:12px 14px;background:var(--navy3);border-radius:var(--r-sm);border:1px solid rgba(168,240,128,.2)">
+          <div style="font-size:.75rem;color:var(--lime);font-weight:700;margin-bottom:4px" data-i18n="privacy_label">🔒 Vie privée</div>
+          <div style="font-size:.78rem;color:var(--text2)" data-i18n="privacy_text">Vos données restent dans votre espace Drive personnel. MG Softwares n'a accès à rien.</div>
+        </div>
+      </div>
+      <div class="drive-feats">
+        <div class="df-item reveal d1">
+          <div class="df-icon">🔄</div>
+          <div>
+            <div class="df-title" data-i18n="df1_title">Sync automatique</div>
+            <div class="df-text" data-i18n="df1_text">Chaque sauvegarde de recette déclenche une synchronisation Drive automatique en arrière-plan.</div>
+          </div>
+        </div>
+        <div class="df-item reveal d2">
+          <div class="df-icon">🔀</div>
+          <div>
+            <div class="df-title" data-i18n="df2_title">Fusion intelligente</div>
+            <div class="df-text" data-i18n="df2_text">Plusieurs appareils ? VapeCraft fusionne les recettes en conservant toujours la version la plus récente.</div>
+          </div>
+        </div>
+        <div class="df-item reveal d3">
+          <div class="df-icon">📴</div>
+          <div>
+            <div class="df-title" data-i18n="df3_title">Fonctionne hors-ligne</div>
+            <div class="df-text" data-i18n="df3_text">IndexedDB local garantit l'accès complet à vos recettes même sans connexion. Sync différée à la reconnexion.</div>
+          </div>
+        </div>
+        <div class="df-item reveal d4">
+          <div class="df-icon">📤</div>
+          <div>
+            <div class="df-title" data-i18n="df4_title">Export & import JSON</div>
+            <div class="df-text" data-i18n="df4_text">Exportez toutes vos recettes en JSON pour une sauvegarde locale ou un partage. Import d'un fichier en un tap.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA ════════════════════════════════════════════════════ -->
+<section class="cta-section" id="cta">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <div class="cta-title" data-i18n="cta_title">Prêt à créer votre premier e-liquid ?</div>
+      <div class="cta-sub" data-i18n="cta_sub">VapeCraft est gratuit, sans publicité et respecte votre vie privée. Disponible sur Google Play.</div>
+      <div class="cta-actions">
+        <a href="https://play.google.com/store/apps/developer?id=MG+Softwares" target="_blank" class="btn btn-blue" data-i18n="cta_play">▶ Google Play</a>
+        <a href="https://mg-softwares.fr" target="_blank" class="btn btn-ghost" data-i18n="cta_site">mg-softwares.fr ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div style="width:28px;height:28px;border-radius:8px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:.8rem">💨</div>
+        VapeCraft
+      </div>
+      <div class="footer-desc" data-i18n="footer_desc">Studio DIY e-liquid · Application Android PWA<br/>par MG Softwares — Gilles Goudelin</div>
+    </div>
+    <div style="display:flex;gap:40px;flex-wrap:wrap">
+      <div class="footer-col">
+        <div class="footer-col-title" data-i18n="fc_app">Application</div>
+        <a href="#calc" data-i18n="nav_calc">Calculateur</a>
+        <a href="#recipes" data-i18n="nav_recipes">Recettes</a>
+        <a href="#steep" data-i18n="nav_steep">Steep tracker</a>
+        <a href="#guide" data-i18n="nav_guide">Guide DIY</a>
+        <a href="#themes" data-i18n="nav_themes">Thèmes</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title" data-i18n="fc_links">Liens</div>
+        <a href="https://play.google.com/store/apps/developer?id=MG+Softwares" target="_blank">Google Play</a>
+        <a href="https://mg-softwares.fr" target="_blank">MG Softwares</a>
+        <a href="mailto:contact@mg-softwares.fr" data-i18n="fc_contact">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 MG Softwares · Gilles Goudelin · <span data-i18n="footer_indie">Développeur indépendant</span></div>
+    <div class="footer-links">
+      <a href="https://mg-softwares.fr" target="_blank">mg-softwares.fr</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════
+   SCRIPTS
+═══════════════════════════════════════════════════════════════ -->
+<script>
+/* ─── i18n ─────────────────────────────────────────────────── */
+const T = {
+  fr:{
+    nav_calc:'Calculateur', nav_recipes:'Recettes', nav_guide:'Guide DIY',
+    nav_themes:'Thèmes', nav_dl:'▶ Télécharger', nav_steep:'Steep',
+    hero_badge:'Application Android PWA · MG Softwares',
+    hero_tagline:'<strong>Calculez</strong>, créez et sauvegardez vos recettes e-liquid.<br/>Le studio DIY complet pour vapoteurs exigeants.',
+    hero_cta1:'▶ Google Play', hero_cta2:'Tester le calculateur',
+    stat_themes:'Thèmes × 2 modes', stat_recipes:'Recettes illimitées',
+    stat_langs:'Langues', stat_ads:'Publicités',
+    calc_eyebrow:'🧮 Calculateur', calc_title:'Précision au mL près',
+    calc_sub:'Entrez vos paramètres, VapeCraft calcule instantanément les volumes exacts de chaque composant.',
+    calc_demo_title:'Calculateur interactif',
+    f_vol:'Volume total (mL)', f_nic:'Nicotine cible (mg/mL)',
+    f_boost:'Booster (mg/mL)', f_arome_pct:'Arômes total (%)',
+    warn_arome:'Total arômes > 20% — vérifiez vos dosages',
+    r_boost:'booster', r_arome:'arômes',
+    ft1_title:'Base PG/VG', ft1_text:'Curseur intuitif PG/VG synchronisé. Calcul automatique de la base restante après booster et arômes.',
+    ft2_title:'Nicotine & boosters', ft2_text:'Compatible 4 concentrations (10 / 18 / 20 mg/mL et sels de nicotine 50 mg/mL). Volume exact calculé.',
+    ft3_title:'Jusqu\'à 10 arômes', ft3_text:'Ajoutez jusqu\'à 10 arômes individuels avec leur pourcentage. Alerte automatique si le total dépasse 20%.',
+    ft4_title:'Résultats instantanés', ft4_text:'Chaque modification recalcule les volumes en temps réel. Précision à 0.1 mL.',
+    rec_eyebrow:'📋 Recettes', rec_title:'Vos créations, organisées',
+    rec_sub:'Chaque recette est une fiche complète : photo, calculs, étapes de préparation, steep tracker et notes.',
+    tag_fruity:'Fruité', tag_fresh:'Frais', tag_gourmet:'Gourmand', tag_menthol:'Menthol',
+    s_valid:'Validée', s_steep:'En steep (14j)', s_draft:'Brouillon',
+    rf1_title:'Photo', rf1_text:'Photo depuis l\'appareil ou la galerie',
+    rf2_title:'Étapes', rf2_text:'Préparation numérotée step by step',
+    rf3_title:'Notes & rating', rf3_text:'Difficulté, évaluation ★ et notes perso',
+    steep_eyebrow:'⏰ Steep tracker', steep_title:'La maturation, maîtrisée',
+    steep_sub:'Choisissez votre méthode de steep et tracez la durée de maturation de chaque recette.',
+    sc1_name:'Steep à froid', sc1_text:'Méthode douce et naturelle. Le e-liquid mature à température ambiante dans l\'obscurité, bouchon légèrement ouvert pour l\'aération.',
+    sc1_tip:'💡 Agitez quotidiennement pour homogénéiser les arômes.',
+    sc2_name:'Steep à chaud', sc2_text:'Bain-marie à 50°C maximum. La chaleur accélère la fusion des arômes dans la base. Idéal pour les mélanges gourmands et tabac.',
+    sc2_tip:'💡 Ne dépassez pas 60°C — la nicotine se dégrade au-delà.',
+    sc3_name:'Ultrasons', sc3_text:'Cuve à ultrasons pour un steep express. Les vibrations micro-mécaniques fusionnent les molécules d\'arômes rapidement et uniformément.',
+    sc3_tip:'💡 Méthode professionnelle — résultats comparables à 1 semaine à froid.',
+    guide_eyebrow:'📖 Guide DIY', guide_title:'Tout pour débuter',
+    guide_sub:'VapeCraft intègre un guide complet pour vous accompagner de vos premiers mL jusqu\'à vos créations les plus complexes.',
+    g1_title:'Comprendre la base PG/VG', g1_text:'La base est le socle de tout e-liquid. Le PG porte les arômes et produit le hit en gorge. Le VG génère les nuages de vapeur et adoucit la sensation.',
+    g2_title:'Choisir sa nicotine', g2_text:'Les boosters nicotine (20 mg/mL standard) s\'ajoutent selon votre taux cible. Les sels de nicotine (50 mg/mL) offrent un hit plus doux à taux élevé.',
+    g3_title:'Doser ses arômes', g3_text:'Les arômes concentrés se dosent entre 5% et 20% du volume total. Commencez à 10%, ajustez après steep.',
+    g4_title:'Combiner plusieurs arômes', g4_text:'Les recettes complexes mixent une base (8–12%), une note haute (3–5%) et un modificateur (1–3%). Notez vos ratios gagnants dans VapeCraft !',
+    g5_title:'Steeper et valider', g5_text:'Après mélange, la plupart des recettes s\'améliorent avec la maturation. VapeCraft trace tout : durée, type, et résultat final.',
+    themes_eyebrow:'🎨 Thèmes', themes_title:'4 univers visuels',
+    themes_sub:'Chaque thème est disponible en mode clair et sombre. Changez selon votre humeur, votre style.',
+    dark_light:'Sombre · Clair',
+    drive_eyebrow:'☁️ Google Drive', drive_title:'Vos recettes, partout',
+    drive_sub:'Synchronisez avec votre Google Drive personnel. Accédez à vos recettes depuis n\'importe quel appareil, sans serveur tiers.',
+    dv_sub:'vapecraft-data.json · appDataFolder',
+    sync_now:'À l\'instant', sync_pend:'En attente…',
+    privacy_label:'🔒 Vie privée', privacy_text:'Vos données restent dans votre espace Drive personnel. MG Softwares n\'a accès à rien.',
+    df1_title:'Sync automatique', df1_text:'Chaque sauvegarde de recette déclenche une synchronisation Drive automatique en arrière-plan.',
+    df2_title:'Fusion intelligente', df2_text:'Plusieurs appareils ? VapeCraft fusionne les recettes en conservant la version la plus récente.',
+    df3_title:'Fonctionne hors-ligne', df3_text:'IndexedDB local garantit l\'accès complet à vos recettes même sans connexion.',
+    df4_title:'Export & import JSON', df4_text:'Exportez toutes vos recettes en JSON pour une sauvegarde locale ou un partage.',
+    cta_title:'Prêt à créer votre premier e-liquid ?',
+    cta_sub:'VapeCraft est gratuit, sans publicité et respecte votre vie privée. Disponible sur Google Play.',
+    cta_play:'▶ Google Play', cta_site:'mg-softwares.fr ↗',
+    footer_desc:'Studio DIY e-liquid · Application Android PWA<br/>par MG Softwares — Gilles Goudelin',
+    fc_app:'Application', fc_links:'Liens', fc_contact:'Contact', footer_indie:'Développeur indépendant',
+  },
+  en:{
+    nav_calc:'Calculator', nav_recipes:'Recipes', nav_guide:'DIY Guide',
+    nav_themes:'Themes', nav_dl:'▶ Download', nav_steep:'Steep',
+    hero_badge:'Android PWA App · MG Softwares',
+    hero_tagline:'<strong>Calculate</strong>, create and save your e-liquid recipes.<br/>The complete DIY studio for demanding vapers.',
+    hero_cta1:'▶ Google Play', hero_cta2:'Try the calculator',
+    stat_themes:'Themes × 2 modes', stat_recipes:'Unlimited recipes',
+    stat_langs:'Languages', stat_ads:'Ads',
+    calc_eyebrow:'🧮 Calculator', calc_title:'Precision to 0.1 mL',
+    calc_sub:'Enter your parameters, VapeCraft instantly calculates the exact volumes of each component.',
+    calc_demo_title:'Interactive calculator',
+    f_vol:'Total volume (mL)', f_nic:'Target nicotine (mg/mL)',
+    f_boost:'Booster (mg/mL)', f_arome_pct:'Total flavors (%)',
+    warn_arome:'Total flavors > 20% — check your dosages',
+    r_boost:'booster', r_arome:'flavors',
+    ft1_title:'PG/VG base', ft1_text:'Intuitive synchronized PG/VG slider. Automatic calculation of remaining base after booster and flavors.',
+    ft2_title:'Nicotine & boosters', ft2_text:'Compatible with 4 concentrations (10 / 18 / 20 mg/mL and nic salts 50 mg/mL). Exact volume calculated.',
+    ft3_title:'Up to 10 flavors', ft3_text:'Add up to 10 individual flavors with their percentages. Automatic alert if total exceeds 20%.',
+    ft4_title:'Instant results', ft4_text:'Every change recalculates volumes in real time. Accuracy to 0.1 mL.',
+    rec_eyebrow:'📋 Recipes', rec_title:'Your creations, organized',
+    rec_sub:'Each recipe is a complete file: photo, calculations, preparation steps, steep tracker and notes.',
+    tag_fruity:'Fruity', tag_fresh:'Fresh', tag_gourmet:'Gourmet', tag_menthol:'Menthol',
+    s_valid:'Validated', s_steep:'Steeping (14d)', s_draft:'Draft',
+    rf1_title:'Photo', rf1_text:'Photo from camera or gallery',
+    rf2_title:'Steps', rf2_text:'Numbered step-by-step preparation',
+    rf3_title:'Notes & rating', rf3_text:'Difficulty, ★ rating and personal notes',
+    steep_eyebrow:'⏰ Steep tracker', steep_title:'Curing, mastered',
+    steep_sub:'Choose your steeping method and track the curing time of each recipe.',
+    sc1_name:'Cold steep', sc1_text:'Gentle and natural method. The e-liquid matures at room temperature in the dark.',
+    sc1_tip:'💡 Shake daily to homogenize flavors.',
+    sc2_name:'Warm steep', sc2_text:'Water bath at max 50°C. Heat accelerates flavor fusion. Ideal for gourmet and tobacco blends.',
+    sc2_tip:'💡 Do not exceed 60°C — nicotine degrades beyond that.',
+    sc3_name:'Ultrasonic', sc3_text:'Ultrasonic cleaner for express steeping. Micro-mechanical vibrations fuse flavor molecules quickly.',
+    sc3_tip:'💡 Professional method — results comparable to 1 week cold steep.',
+    guide_eyebrow:'📖 DIY Guide', guide_title:'Everything to get started',
+    guide_sub:'VapeCraft includes a complete guide to accompany you from your first mL to your most complex creations.',
+    g1_title:'Understanding PG/VG base', g1_text:'PG carries flavors and produces throat hit. VG generates vapor clouds and softens the sensation.',
+    g2_title:'Choosing your nicotine', g2_text:'Nicotine boosters (20 mg/mL standard) are added based on your target level. Nic salts (50 mg/mL) offer a smoother hit at high levels.',
+    g3_title:'Dosing your flavors', g3_text:'Concentrated flavors are dosed between 5% and 20% of total volume. Start at 10%, adjust after steeping.',
+    g4_title:'Combining multiple flavors', g4_text:'Complex recipes mix a base (8–12%), a top note (3–5%) and a modifier (1–3%). Record your winning ratios in VapeCraft!',
+    g5_title:'Steep and validate', g5_text:'After mixing, most recipes improve with curing. VapeCraft tracks everything: duration, method, and final result.',
+    themes_eyebrow:'🎨 Themes', themes_title:'4 visual universes',
+    themes_sub:'Each theme is available in light and dark mode. Switch according to your mood and style.',
+    dark_light:'Dark · Light',
+    drive_eyebrow:'☁️ Google Drive', drive_title:'Your recipes, everywhere',
+    drive_sub:'Sync with your personal Google Drive. Access your recipes from any device, without a third-party server.',
+    dv_sub:'vapecraft-data.json · appDataFolder',
+    sync_now:'Just now', sync_pend:'Pending…',
+    privacy_label:'🔒 Privacy', privacy_text:'Your data stays in your personal Drive space. MG Softwares has no access.',
+    df1_title:'Automatic sync', df1_text:'Each recipe save triggers an automatic Drive sync in the background.',
+    df2_title:'Smart merge', df2_text:'Multiple devices? VapeCraft merges recipes keeping the most recent version.',
+    df3_title:'Works offline', df3_text:'Local IndexedDB guarantees full access to your recipes without connection.',
+    df4_title:'JSON export & import', df4_text:'Export all your recipes as JSON for local backup or sharing.',
+    cta_title:'Ready to create your first e-liquid?',
+    cta_sub:'VapeCraft is free, ad-free and respects your privacy. Available on Google Play.',
+    cta_play:'▶ Google Play', cta_site:'mg-softwares.fr ↗',
+    footer_desc:'DIY E-liquid Studio · Android PWA App<br/>by MG Softwares — Gilles Goudelin',
+    fc_app:'App', fc_links:'Links', fc_contact:'Contact', footer_indie:'Independent developer',
+  },
+  de:{
+    nav_calc:'Rechner', nav_recipes:'Rezepte', nav_guide:'DIY-Leitfaden',
+    nav_themes:'Themen', nav_dl:'▶ Herunterladen', nav_steep:'Steep',
+    hero_badge:'Android-PWA-App · MG Softwares',
+    hero_tagline:'<strong>Berechnen</strong>, erstellen und speichern Sie Ihre E-liquid-Rezepte.<br/>Das komplette DIY-Studio für anspruchsvolle Dampfer.',
+    hero_cta1:'▶ Google Play', hero_cta2:'Rechner ausprobieren',
+    stat_themes:'Themen × 2 Modi', stat_recipes:'Unbegrenzte Rezepte',
+    stat_langs:'Sprachen', stat_ads:'Werbung',
+    calc_eyebrow:'🧮 Rechner', calc_title:'Präzision auf 0,1 mL',
+    calc_sub:'Geben Sie Ihre Parameter ein, VapeCraft berechnet sofort die genauen Volumina jeder Komponente.',
+    calc_demo_title:'Interaktiver Rechner',
+    f_vol:'Gesamtvolumen (mL)', f_nic:'Ziel-Nikotin (mg/mL)',
+    f_boost:'Booster (mg/mL)', f_arome_pct:'Aromen gesamt (%)',
+    warn_arome:'Gesamtaromen > 20% — Dosierungen prüfen',
+    r_boost:'Booster', r_arome:'Aromen',
+    ft1_title:'PG/VG-Basis', ft1_text:'Intuitiver PG/VG-Schieberegler. Automatische Berechnung der Restbasis nach Booster und Aromen.',
+    ft2_title:'Nikotin & Booster', ft2_text:'Kompatibel mit 4 Konzentrationen (10 / 18 / 20 mg/mL und Nikotinsalze 50 mg/mL).',
+    ft3_title:'Bis zu 10 Aromen', ft3_text:'Bis zu 10 individuelle Aromen mit Prozentsätzen. Automatische Warnung bei > 20%.',
+    ft4_title:'Sofortige Ergebnisse', ft4_text:'Jede Änderung berechnet Volumina in Echtzeit. Genauigkeit 0,1 mL.',
+    rec_eyebrow:'📋 Rezepte', rec_title:'Ihre Kreationen, organisiert',
+    rec_sub:'Jedes Rezept ist eine vollständige Akte: Foto, Berechnungen, Zubereitungsschritte, Steep-Tracker und Notizen.',
+    tag_fruity:'Fruchtig', tag_fresh:'Frisch', tag_gourmet:'Gourmet', tag_menthol:'Menthol',
+    s_valid:'Validiert', s_steep:'Im Steep (14T)', s_draft:'Entwurf',
+    rf1_title:'Foto', rf1_text:'Foto von Kamera oder Galerie',
+    rf2_title:'Schritte', rf2_text:'Nummerierte schrittweise Zubereitung',
+    rf3_title:'Notizen & Bewertung', rf3_text:'Schwierigkeit, ★ Bewertung und persönliche Notizen',
+    steep_eyebrow:'⏰ Steep-Tracker', steep_title:'Reifung, beherrscht',
+    steep_sub:'Wählen Sie Ihre Steep-Methode und verfolgen Sie die Reifezeit jedes Rezepts.',
+    sc1_name:'Kalt-Steep', sc1_text:'Sanfte Methode. Das E-liquid reift bei Raumtemperatur im Dunkeln.',
+    sc1_tip:'💡 Täglich schütteln um Aromen zu homogenisieren.',
+    sc2_name:'Warm-Steep', sc2_text:'Wasserbad bei max. 50°C. Wärme beschleunigt die Aromafusion.',
+    sc2_tip:'💡 Nicht über 60°C — Nikotin degradiert darüber.',
+    sc3_name:'Ultraschall', sc3_text:'Ultraschallreiniger für Express-Steep. Mikromechanische Schwingungen fusionieren Aromamoleküle schnell.',
+    sc3_tip:'💡 Profi-Methode — vergleichbar mit 1 Woche Kalt-Steep.',
+    guide_eyebrow:'📖 DIY-Leitfaden', guide_title:'Alles zum Einstieg',
+    guide_sub:'VapeCraft enthält einen vollständigen Leitfaden.',
+    g1_title:'PG/VG-Basis verstehen', g1_text:'PG trägt Aromen und erzeugt Halsschlag. VG erzeugt Dampfwolken.',
+    g2_title:'Nikotin wählen', g2_text:'Nikotin-Booster nach Zielgehalt hinzufügen. Nikotinsalze für sanfteren Halsschlag.',
+    g3_title:'Aromen dosieren', g3_text:'Zwischen 5% und 20% des Gesamtvolumens. Mit 10% starten, nach Steep anpassen.',
+    g4_title:'Mehrere Aromen kombinieren', g4_text:'Basis (8–12%) + Top-Note (3–5%) + Modifikator (1–3%). Gewinnerrezepte in VapeCraft notieren!',
+    g5_title:'Steepen und validieren', g5_text:'VapeCraft verfolgt alles: Dauer, Methode und Endergebnis.',
+    themes_eyebrow:'🎨 Themen', themes_title:'4 visuelle Welten',
+    themes_sub:'Jedes Thema im hellen oder dunklen Modus.',
+    dark_light:'Dunkel · Hell',
+    drive_eyebrow:'☁️ Google Drive', drive_title:'Ihre Rezepte, überall',
+    drive_sub:'Mit Ihrem persönlichen Google Drive synchronisieren. Auf jedem Gerät verfügbar.',
+    dv_sub:'vapecraft-data.json · appDataFolder',
+    sync_now:'Gerade eben', sync_pend:'Ausstehend…',
+    privacy_label:'🔒 Datenschutz', privacy_text:'Ihre Daten bleiben in Ihrem Drive. MG Softwares hat keinen Zugriff.',
+    df1_title:'Automatische Synchronisierung', df1_text:'Jedes Speichern löst eine automatische Drive-Synchronisierung aus.',
+    df2_title:'Intelligente Zusammenführung', df2_text:'Mehrere Geräte? VapeCraft behält die aktuellste Version.',
+    df3_title:'Offline-Funktion', df3_text:'IndexedDB garantiert vollen Zugriff ohne Verbindung.',
+    df4_title:'JSON-Export & -Import', df4_text:'Alle Rezepte als JSON exportieren.',
+    cta_title:'Bereit, Ihr erstes E-liquid zu erstellen?',
+    cta_sub:'VapeCraft ist kostenlos, werbefrei und respektiert Ihre Privatsphäre. Auf Google Play.',
+    cta_play:'▶ Google Play', cta_site:'mg-softwares.fr ↗',
+    footer_desc:'DIY E-liquid Studio · Android-PWA-App<br/>von MG Softwares — Gilles Goudelin',
+    fc_app:'App', fc_links:'Links', fc_contact:'Kontakt', footer_indie:'Unabhängiger Entwickler',
+  },
+  it:{
+    nav_calc:'Calcolatore', nav_recipes:'Ricette', nav_guide:'Guida DIY',
+    nav_themes:'Temi', nav_dl:'▶ Scarica', nav_steep:'Steep',
+    hero_badge:'App Android PWA · MG Softwares',
+    hero_tagline:'<strong>Calcola</strong>, crea e salva le tue ricette e-liquid.<br/>Lo studio DIY completo per i vaper esigenti.',
+    hero_cta1:'▶ Google Play', hero_cta2:'Prova il calcolatore',
+    stat_themes:'Temi × 2 modalità', stat_recipes:'Ricette illimitate',
+    stat_langs:'Lingue', stat_ads:'Pubblicità',
+    calc_eyebrow:'🧮 Calcolatore', calc_title:'Precisione al decimo di mL',
+    calc_sub:'Inserisci i parametri, VapeCraft calcola istantaneamente i volumi esatti di ogni componente.',
+    calc_demo_title:'Calcolatore interattivo',
+    f_vol:'Volume totale (mL)', f_nic:'Nicotina target (mg/mL)',
+    f_boost:'Booster (mg/mL)', f_arome_pct:'Aromi totale (%)',
+    warn_arome:'Aromi totali > 20% — verifica i dosaggi',
+    r_boost:'booster', r_arome:'aromi',
+    ft1_title:'Base PG/VG', ft1_text:'Cursore PG/VG sincronizzato. Calcolo automatico della base rimanente.',
+    ft2_title:'Nicotina & booster', ft2_text:'Compatibile con 4 concentrazioni (10 / 18 / 20 mg/mL e sali 50 mg/mL).',
+    ft3_title:'Fino a 10 aromi', ft3_text:'Aggiungi fino a 10 aromi con percentuali. Avviso automatico se totale > 20%.',
+    ft4_title:'Risultati istantanei', ft4_text:'Ogni modifica ricalcola i volumi in tempo reale. Precisione 0,1 mL.',
+    rec_eyebrow:'📋 Ricette', rec_title:'Le tue creazioni, organizzate',
+    rec_sub:'Ogni ricetta è una scheda completa: foto, calcoli, fasi di preparazione, steep tracker e note.',
+    tag_fruity:'Fruttato', tag_fresh:'Fresco', tag_gourmet:'Gourmet', tag_menthol:'Mentolo',
+    s_valid:'Validata', s_steep:'In steep (14g)', s_draft:'Bozza',
+    rf1_title:'Foto', rf1_text:'Foto dalla fotocamera o galleria',
+    rf2_title:'Fasi', rf2_text:'Preparazione numerata passo dopo passo',
+    rf3_title:'Note & valutazione', rf3_text:'Difficoltà, valutazione ★ e note personali',
+    steep_eyebrow:'⏰ Steep tracker', steep_title:'La maturazione, padroneggiata',
+    steep_sub:'Scegli il tuo metodo di steep e traccia la durata di maturazione di ogni ricetta.',
+    sc1_name:'Steep a freddo', sc1_text:'Metodo dolce e naturale. L\'e-liquid matura a temperatura ambiente al buio.',
+    sc1_tip:'💡 Agita quotidianamente per omogeneizzare gli aromi.',
+    sc2_name:'Steep a caldo', sc2_text:'Bagno maria a max 50°C. Il calore accelera la fusione degli aromi.',
+    sc2_tip:'💡 Non superare 60°C — la nicotina si degrada oltre.',
+    sc3_name:'Ultrasuoni', sc3_text:'Vasca a ultrasuoni per steep express. Le vibrazioni fondono le molecole di aroma rapidamente.',
+    sc3_tip:'💡 Metodo professionale — risultati paragonabili a 1 settimana a freddo.',
+    guide_eyebrow:'📖 Guida DIY', guide_title:'Tutto per iniziare',
+    guide_sub:'VapeCraft include una guida completa per accompagnarti dai primi mL alle creazioni più complesse.',
+    g1_title:'Capire la base PG/VG', g1_text:'PG trasporta gli aromi e produce il colpo in gola. VG genera nuvole di vapore.',
+    g2_title:'Scegliere la nicotina', g2_text:'Booster nicotina secondo il tasso target. Sali di nicotina per un colpo più morbido.',
+    g3_title:'Dosare gli aromi', g3_text:'Tra il 5% e il 20% del volume totale. Inizia al 10%, regola dopo steep.',
+    g4_title:'Combinare più aromi', g4_text:'Base (8–12%) + nota alta (3–5%) + modificatore (1–3%). Annota le tue ricette vincenti!',
+    g5_title:'Steep e validazione', g5_text:'VapeCraft traccia tutto: durata, metodo e risultato finale.',
+    themes_eyebrow:'🎨 Temi', themes_title:'4 universi visivi',
+    themes_sub:'Ogni tema disponibile in modalità chiaro e scuro.',
+    dark_light:'Scuro · Chiaro',
+    drive_eyebrow:'☁️ Google Drive', drive_title:'Le tue ricette, ovunque',
+    drive_sub:'Sincronizza con il tuo Google Drive personale. Accedi da qualsiasi dispositivo.',
+    dv_sub:'vapecraft-data.json · appDataFolder',
+    sync_now:'Adesso', sync_pend:'In attesa…',
+    privacy_label:'🔒 Privacy', privacy_text:'I tuoi dati rimangono nel tuo Drive personale. MG Softwares non ha accesso.',
+    df1_title:'Sincronizzazione automatica', df1_text:'Ogni salvataggio attiva una sincronizzazione automatica.',
+    df2_title:'Fusione intelligente', df2_text:'Più dispositivi? VapeCraft conserva la versione più recente.',
+    df3_title:'Funziona offline', df3_text:'IndexedDB locale garantisce accesso completo senza connessione.',
+    df4_title:'Export & import JSON', df4_text:'Esporta tutte le ricette in JSON per backup o condivisione.',
+    cta_title:'Pronto a creare il tuo primo e-liquid?',
+    cta_sub:'VapeCraft è gratuito, senza pubblicità e rispetta la tua privacy. Disponibile su Google Play.',
+    cta_play:'▶ Google Play', cta_site:'mg-softwares.fr ↗',
+    footer_desc:'Studio DIY e-liquid · App Android PWA<br/>di MG Softwares — Gilles Goudelin',
+    fc_app:'App', fc_links:'Link', fc_contact:'Contatto', footer_indie:'Sviluppatore indipendente',
+  }
+};
+
+let LANG = localStorage.getItem('vc_lp_lang') || 'fr';
+function t(k){ return (T[LANG]&&T[LANG][k]) || T.fr[k] || k; }
+function applyI18n(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    el.innerHTML = t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('.nl-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent.trim()===LANG.toUpperCase());
+  });
+  document.documentElement.lang = LANG;
+}
+function setLang(l){ LANG=l; localStorage.setItem('vc_lp_lang',l); applyI18n(); }
+
+/* ─── Calculator ─────────────────────────────────────────── */
+function syncRange(el){
+  const pg = parseInt(el.value);
+  document.getElementById('pg-lbl').textContent = pg;
+  document.getElementById('vg-lbl').textContent = 100-pg;
+  liveCalc();
+}
+function liveCalc(){
+  const vol  = parseFloat(document.getElementById('d-vol').value)||100;
+  const pg   = parseInt(document.getElementById('d-pg').value)||30;
+  const vg   = 100-pg;
+  const nic  = parseFloat(document.getElementById('d-nic').value)||0;
+  const boost= parseFloat(document.getElementById('d-boost').value)||20;
+  const aPct = parseFloat(document.getElementById('d-arome').value)||0;
+
+  const boostVol = nic>0 ? (nic*vol)/boost : 0;
+  const aromeVol = (aPct/100)*vol;
+  const base     = Math.max(0, vol-boostVol-aromeVol);
+  const pgVol    = (pg/100)*base;
+  const vgVol    = (vg/100)*base;
+
+  document.getElementById('r-pg').textContent    = pgVol.toFixed(1);
+  document.getElementById('r-vg').textContent    = vgVol.toFixed(1);
+  document.getElementById('r-boost').textContent = boostVol.toFixed(1);
+  document.getElementById('r-arome').textContent = aromeVol.toFixed(1);
+
+  const w = document.getElementById('warn-arome');
+  w.classList.toggle('show', aPct>20);
+}
+
+/* ─── Mobile menu ────────────────────────────────────────── */
+function toggleMenu(){ document.getElementById('mob-menu').classList.toggle('open'); }
+
+/* ─── Scroll reveal ──────────────────────────────────────── */
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ─── INIT ───────────────────────────────────────────────── */
+applyI18n();
+liveCalc();
+
+/* ─── SW ─────────────────────────────────────────────────── */
+if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body>
+</html>
