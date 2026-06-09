@@ -85,6 +85,19 @@ nav{
 .btn-ghost{background:var(--card);color:var(--text);border:1px solid var(--border)}
 .btn-ghost:hover{border-color:rgba(255,255,255,.2)}
 
+
+/* ── LANG SWITCHER ──────────────────────────────────────────── */
+.nav-lang{position:relative;display:flex;align-items:center;}
+.nav-lang-btn{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:6px 12px;cursor:pointer;font-family:var(--fb);font-size:.82rem;font-weight:600;color:var(--text);transition:background .2s,border-color .2s;white-space:nowrap;}
+.nav-lang-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);}
+.nla{font-size:.58rem;opacity:.5;transition:transform .2s;margin-left:2px;}
+.nav-lang.open .nla{transform:rotate(180deg);}
+.nav-lang-dd{position:absolute;top:calc(100% + 10px);right:0;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:6px;display:none;flex-direction:column;gap:2px;min-width:148px;box-shadow:0 16px 48px rgba(0,0,0,.6);z-index:500;}
+.nav-lang.open .nav-lang-dd{display:flex;}
+.nlo{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:.85rem;font-weight:500;color:var(--muted);transition:background .15s,color .15s;}
+.nlo:hover{background:rgba(255,255,255,.06);color:var(--text);}
+.nlo.active{color:var(--violet);font-weight:700;}
+
 /* ── HERO ───────────────────────────────────────────────────── */
 .hero{min-height:100vh;display:flex;align-items:center;padding-top:80px}
 .hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
@@ -619,7 +632,17 @@ footer{
       <li><a href="#apps" data-i18n="nav.apps">Applications</a></li>
       <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     </ul>
-    <span class="nav-lang-slot"></span>
+    <div class="nav-lang" id="nav-lang">
+      <button class="nav-lang-btn" onclick="document.getElementById('nav-lang').classList.toggle('open');event.stopPropagation()">
+        <span id="nlf">🇫🇷</span><span id="nll">FR</span><span class="nla">▼</span>
+      </button>
+      <div class="nav-lang-dd">
+        <div class="nlo" onclick="switchLang('fr')">🇫🇷 Français</div>
+        <div class="nlo" onclick="switchLang('en')">🇬🇧 English</div>
+        <div class="nlo" onclick="switchLang('it')">🇮🇹 Italiano</div>
+        <div class="nlo" onclick="switchLang('de')">🇩🇪 Deutsch</div>
+      </div>
+    </div>
     <a href="#apps" class="btn btn-primary" style="padding:10px 22px;font-size:.85rem" data-i18n="nav.cta">Voir les apps →</a>
   </div>
 </nav>
@@ -1830,6 +1853,24 @@ window.addEventListener('scroll', () => {
 })();
 </script>
 
-<script src="i18n.js"></script>
+<script src="i18n.js">
+/* ── LANG SWITCHER ─────────────────────────────────────── */
+var _LF={fr:'🇫🇷',en:'🇬🇧',it:'🇮🇹',de:'🇩🇪'},_LL={fr:'FR',en:'EN',it:'IT',de:'DE'};
+function switchLang(code){
+  document.getElementById('nav-lang').classList.remove('open');
+  document.getElementById('nlf').textContent=_LF[code]||'🇫🇷';
+  document.getElementById('nll').textContent=_LL[code]||'FR';
+  document.querySelectorAll('.nlo').forEach(function(o){o.classList.toggle('active',o.textContent.trim().startsWith(_LF[code]));});
+  try{localStorage.setItem('mgs_lang',code);}catch(e){}
+  if(window._mgsI18n) window._mgsI18n.setLang(code);
+}
+(function(){
+  try{var l=localStorage.getItem('mgs_lang')||'fr';
+    document.getElementById('nlf').textContent=_LF[l]||'🇫🇷';
+    document.getElementById('nll').textContent=_LL[l]||'FR';
+  }catch(e){}
+  document.addEventListener('click',function(){var el=document.getElementById('nav-lang');if(el)el.classList.remove('open');});
+})();
+
+</script>
 </body>
-</html>
