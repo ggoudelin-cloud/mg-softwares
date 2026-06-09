@@ -431,12 +431,13 @@
   function mountPickers(lang) {
     /* Supprimer anciens */
     document.querySelectorAll('.mgs-lang-picker').forEach(function(p){p.remove();});
-    /* Points d'ancrage */
-    var anchors = ['.nav-inner','.mgs-header-inner'];
-    anchors.forEach(function(sel){
-      document.querySelectorAll(sel).forEach(function(el){
-        el.appendChild(createPicker(lang));
-      });
+    /* Slot explicite dans la nav (index.html) */
+    document.querySelectorAll('.nav-lang-slot').forEach(function(slot){
+      slot.appendChild(createPicker(lang));
+    });
+    /* Fallback : header légal/légales (mgs-header-inner) */
+    document.querySelectorAll('.mgs-header-inner').forEach(function(el){
+      el.appendChild(createPicker(lang));
     });
     /* Dans la bannière cookie si elle existe */
     if(window._mgsUpdateCookieBanner) window._mgsUpdateCookieBanner(lang);

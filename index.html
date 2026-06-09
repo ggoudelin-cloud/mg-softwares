@@ -599,7 +599,6 @@ footer{
 .legal-footer a:hover{text-decoration:underline}
 @media(max-width:768px){.legal-top{padding:32px 20px 24px}.legal-sections{padding:28px 20px 0}}
 </style>
-<script src="i18n.js"></script>
 </head>
 <body>
 
@@ -620,6 +619,7 @@ footer{
       <li><a href="#apps" data-i18n="nav.apps">Applications</a></li>
       <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
     </ul>
+    <span class="nav-lang-slot"></span>
     <a href="#apps" class="btn btn-primary" style="padding:10px 22px;font-size:.85rem" data-i18n="nav.cta">Voir les apps →</a>
   </div>
 </nav>
@@ -1830,5 +1830,6 @@ window.addEventListener('scroll', () => {
 })();
 </script>
 
+<script src="i18n.js"></script>
 </body>
 </html>
