@@ -56,7 +56,7 @@
     ul li strong{color:var(--c-text);font-weight:600;}
     ul li a{color:var(--c-violet);text-decoration:none;}
     ul li a:hover{text-decoration:underline;}
-    .app-tag{display:inline-block;background:rgba(155,93,255,0.12);color:var(--c-violet);font-size:0.75rem;font-weight:700;padding:3px 10px;border-radius:6px;margin-right:6px;margin-bottom:8px;}.app-tag.az{background:rgba(59,108,247,0.12);color:#6b8ffb;}.app-sub-h{font-size:0.82rem;font-weight:700;color:var(--c-text);margin:20px 0 8px;}
+    .app-tag{display:inline-block;background:rgba(155,93,255,0.12);color:var(--c-violet);font-size:0.75rem;font-weight:700;padding:3px 10px;border-radius:6px;margin-right:6px;margin-bottom:8px;}.app-tag.az{background:rgba(59,108,247,0.12);color:#6b8ffb;}.app-tag.bf{background:rgba(212,175,55,0.12);color:#d4af37;}.app-tag.vc{background:rgba(79,142,247,0.12);color:#4F8EF7;}.app-sub-h{font-size:0.82rem;font-weight:700;color:var(--c-text);margin:20px 0 8px;}
     .info-box{background:var(--c-card);border:1px solid var(--c-border);border-left:3px solid var(--c-lime);border-radius:12px;padding:16px 20px;font-size:0.88rem;color:var(--c-muted);margin-bottom:16px;font-weight:300;}
     footer{margin-top:64px;padding-top:28px;border-top:1px solid var(--c-border);text-align:center;font-size:0.82rem;color:var(--c-muted);}
     footer a{color:var(--c-violet);text-decoration:none;}
@@ -77,7 +77,7 @@
 
 <div class="container">
   <div class="page-top">
-    <div class="badge" data-i18n="priv.updated">Dernière mise à jour : 3 mai 2026</div>
+    <div class="badge" data-i18n="priv.updated">Dernière mise à jour : 9 juin 2026</div>
     <h1 data-i18n="priv.title">Politique de confidentialité</h1>
     <p class="subtitle" data-i18n="priv.subtitle">Applicable à l'ensemble des applications MG Softwares</p>
   </div>
@@ -135,9 +135,35 @@
     </ul>
     <p style="font-size:0.85rem;color:var(--c-muted);margin-top:4px">Révoquer l'accès : <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a> ou Paramètres → Déconnecter Drive dans l'application.</p>
     <p class="app-sub-h">Notifications push (optionnel) :</p>
-    <p data-i18n="priv.s3.az.notif" style="font-size:0.85rem;color:var(--c-muted)">AutoZen utilise les notifications push (via Service Worker) pour les rappels de révision, si vous y avez consenti dans votre navigateur. Aucune donnée n'est transmise à des serveurs tiers. Révocable à tout moment dans les paramètres du navigateur.</p>
+    <p style="font-size:0.85rem;color:var(--c-muted)">AutoZen utilise les notifications push (via Service Worker) pour les rappels de révision, si vous y avez consenti dans votre navigateur. Aucune donnée n'est transmise à des serveurs tiers. Révocable à tout moment dans les paramètres du navigateur.</p>
 
-    <div class="info-box" style="margin-top:20px" data-i18n="priv.s3.box">🔒 Toutes les données sont chiffrées en transit (HTTPS) et ne sont jamais vendues, partagées ou utilisées à des fins publicitaires.</div>
+    <p style="margin:32px 0 8px"><span class="app-tag bf">Budget Familial</span></p>
+    <p class="app-sub-h">Stockage local sur votre appareil :</p>
+    <ul>
+      <li>Catégories de dépenses et de revenus (créées par l'utilisateur)</li>
+      <li>Transactions financières (montant, date, catégorie, description)</li>
+      <li>Objectifs d'épargne et budgets mensuels</li>
+      <li>Préférences de l'application (devise, thème, langue)</li>
+    </ul>
+    <p class="app-sub-h">Si vous activez Google Drive (optionnel) :</p>
+    <p style="font-size:0.85rem;color:var(--c-muted);margin-bottom:8px">Budget Familial crée un fichier <code>budget-data.json</code> dans votre Drive personnel. L'accès est strictement limité à ce seul fichier (<strong>scope drive.file</strong>). Budget Familial ne peut pas lire, modifier ou supprimer vos autres fichiers Google Drive.</p>
+    <ul>
+      <li>Adresse email Google (pour identifier le compte et synchroniser)</li>
+      <li>Token OAuth (stocké localement de manière sécurisée, renouvelé automatiquement)</li>
+      <li>Identifiant du fichier <code>budget-data.json</code> sur Google Drive</li>
+    </ul>
+    <p style="font-size:0.85rem;color:var(--c-muted);margin-top:4px">Révoquer l'accès : <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a> ou Paramètres → Déconnecter Drive dans l'application.</p>
+
+    <p style="margin:32px 0 8px"><span class="app-tag vc">VapeCraft</span></p>
+    <p class="app-sub-h">Stockage local sur votre appareil uniquement :</p>
+    <ul>
+      <li>Recettes e-liquid (ratio PG/VG, taux de nicotine, arômes, volumes)</li>
+      <li>Historique de steep (dates, durées, notes)</li>
+      <li>Préférences de l'application (thème, unités)</li>
+    </ul>
+    <p style="font-size:0.85rem;color:var(--c-muted)">VapeCraft ne collecte aucune donnée personnelle. Toutes les données restent exclusivement sur votre appareil via le stockage local du navigateur (localStorage). Aucune synchronisation cloud, aucun compte requis.</p>
+
+    <div class="info-box" style="margin-top:24px">🔒 Toutes les données sont chiffrées en transit (HTTPS) et ne sont jamais vendues, partagées ou utilisées à des fins publicitaires.</div>
   </section>
 
   <section>

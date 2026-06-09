@@ -1524,7 +1524,7 @@ window.addEventListener('scroll', () => {
   </div>
   <div class="legal-body">
     <div class="legal-top">
-      <div class="legal-badge" data-i18n="legal.priv.badge">Dernière mise à jour : 3 mai 2026</div>
+      <div class="legal-badge" data-i18n="legal.priv.badge">Dernière mise à jour : 9 juin 2026</div>
       <h1 class="legal-title" data-i18n="legal.priv.title">Politique de confidentialité</h1>
       <p class="legal-sub" data-i18n="legal.priv.sub">Applicable à l'ensemble des applications MG Softwares</p>
     </div>
@@ -1588,18 +1588,28 @@ window.addEventListener('scroll', () => {
         <div style="margin:22px 0 6px"><span class="ltag bf">Budget Familial</span></div>
         <span class="lsubh">Stockage local sur votre appareil :</span>
         <ul class="legal-ul">
-          <li>Salaires, dépenses, épargnes et objectifs financiers (saisis par l'utilisateur)</li>
-          <li>Budgets mensuels par catégorie et préférences de l'application</li>
+          <li>Catégories de dépenses et de revenus (créées par l'utilisateur)</li>
+          <li>Transactions financières (montant, date, catégorie, description)</li>
+          <li>Objectifs d'épargne et budgets mensuels</li>
+          <li>Préférences de l'application (devise, thème, langue)</li>
         </ul>
         <span class="lsubh">Si vous activez Google Drive (optionnel) :</span>
-        <p class="legal-p">Budget Familial crée un fichier chiffré AES-256 dans votre Drive personnel. L'accès est strictement limité à ce seul fichier (<strong>scope drive.file</strong>).</p>
+        <p class="legal-p">Budget Familial crée un fichier <code>budget-data.json</code> dans votre Drive personnel. L'accès est strictement limité à ce seul fichier (<strong>scope drive.file</strong>). Budget Familial ne peut pas lire, modifier ou supprimer vos autres fichiers Google Drive.</p>
         <ul class="legal-ul">
           <li>Adresse email Google (pour identifier le compte et synchroniser)</li>
           <li>Token OAuth (stocké de manière sécurisée, renouvelé automatiquement)</li>
+          <li>Identifiant du fichier <code>budget-data.json</code> sur Google Drive</li>
         </ul>
+        <p class="legal-p">Révoquer l'accès : <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a> ou Paramètres → Déconnecter Drive dans l'application.</p>
 
         <div style="margin:22px 0 6px"><span class="ltag vc">VapeCraft</span></div>
-        <p class="legal-p">VapeCraft ne collecte <strong>aucune donnée personnelle</strong>. L'ensemble des recettes et préférences est stocké <strong>localement sur votre appareil</strong> uniquement. Aucune connexion à un service tiers n'est requise.</p>
+        <span class="lsubh">Stockage local sur votre appareil uniquement :</span>
+        <ul class="legal-ul">
+          <li>Recettes e-liquid (ratio PG/VG, taux de nicotine, arômes, volumes)</li>
+          <li>Historique de steep (dates, durées, notes)</li>
+          <li>Préférences de l'application (thème, unités)</li>
+        </ul>
+        <p class="legal-p">VapeCraft ne collecte <strong>aucune donnée personnelle</strong>. Toutes les données restent exclusivement sur votre appareil. Aucune synchronisation cloud ni compte requis.</p>
 
         <div class="linfo" style="margin-top:18px">🔒 Toutes les données sont chiffrées en transit (HTTPS) et ne sont jamais vendues, partagées ou utilisées à des fins publicitaires.</div>
       </div>
