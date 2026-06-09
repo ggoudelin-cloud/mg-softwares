@@ -155,13 +155,20 @@
     <p style="font-size:0.85rem;color:var(--c-muted);margin-top:4px">Révoquer l'accès : <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a> ou Paramètres → Déconnecter Drive dans l'application.</p>
 
     <p style="margin:32px 0 8px"><span class="app-tag vc">VapeCraft</span></p>
-    <p class="app-sub-h">Stockage local sur votre appareil uniquement :</p>
+    <p class="app-sub-h">Stockage local sur votre appareil :</p>
     <ul>
       <li>Recettes e-liquid (ratio PG/VG, taux de nicotine, arômes, volumes)</li>
       <li>Historique de steep (dates, durées, notes)</li>
       <li>Préférences de l'application (thème, unités)</li>
     </ul>
-    <p style="font-size:0.85rem;color:var(--c-muted)">VapeCraft ne collecte aucune donnée personnelle. Toutes les données restent exclusivement sur votre appareil via le stockage local du navigateur (localStorage). Aucune synchronisation cloud, aucun compte requis.</p>
+    <p class="app-sub-h">Si vous activez Google Drive (optionnel) :</p>
+    <p style="font-size:0.85rem;color:var(--c-muted);margin-bottom:8px">VapeCraft crée un fichier <code>vape-backup.json</code> dans votre Drive personnel. L'accès est strictement limité à ce seul fichier (<strong>scope drive.file</strong>). VapeCraft ne peut pas lire, modifier ou supprimer vos autres fichiers Google Drive.</p>
+    <ul>
+      <li>Adresse email Google (pour identifier le compte et synchroniser)</li>
+      <li>Token OAuth (stocké de manière sécurisée, renouvelé automatiquement)</li>
+      <li>Identifiant du fichier <code>vape-backup.json</code> sur Google Drive</li>
+    </ul>
+    <p style="font-size:0.85rem;color:var(--c-muted);margin-top:4px">Révoquer l'accès : <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a> ou Paramètres → Déconnecter Drive dans l'application.</p>
 
     <div class="info-box" style="margin-top:24px">🔒 Toutes les données sont chiffrées en transit (HTTPS) et ne sont jamais vendues, partagées ou utilisées à des fins publicitaires.</div>
   </section>
