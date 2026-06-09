@@ -319,7 +319,9 @@
     'footer.about2': { fr:'À propos',      en:'About',    it:'Chi siamo',  de:'Über uns'   },
     'footer.apps2':  { fr:'Applications',  en:'Apps',     it:'App',        de:'Apps'       },
     'footer.priv2':  { fr:'Confidentialité',en:'Privacy', it:'Privacy',    de:'Datenschutz'},
-    'footer.terms2': { fr:'CGU',           en:'Terms',    it:'Termini',    de:'Nutzungsbedingungen'},
+    'footer.terms2':   { fr:'CGU',             en:'Terms',          it:'Termini',          de:'Nutzungsbedingungen'},
+    'footer.mentions2':{ fr:'Mentions légales', en:'Legal notice',   it:'Note legali',      de:'Impressum'         },
+    'footer.mentions': { fr:'Mentions légales', en:'Legal notice',   it:'Note legali',      de:'Impressum'         },
     'footer.copy2':  { fr:'© 2026 MG Softwares — Gilles Goudelin', en:'© 2026 MG Softwares — Gilles Goudelin', it:'© 2026 MG Softwares — Gilles Goudelin', de:'© 2026 MG Softwares — Gilles Goudelin' },
     /* LEGAL MODALS HEADERS */
     'legal.priv.title':{ fr:'Politique de confidentialité', en:'Privacy Policy', it:'Informativa sulla privacy', de:'Datenschutzerklärung' },
@@ -328,6 +330,9 @@
     'legal.terms.title':{ fr:'Conditions d\'utilisation', en:'Terms of Use', it:'Termini di utilizzo', de:'Nutzungsbedingungen' },
     'legal.terms.badge':{ fr:'Dernière mise à jour : 9 juin 2026', en:'Last updated: June 9, 2026', it:'Ultimo aggiornamento: 9 giugno 2026', de:'Zuletzt aktualisiert: 9. Juni 2026' },
     'legal.terms.sub':  { fr:'Applicable à l\'ensemble des applications MG Softwares', en:'Applicable to all MG Softwares applications', it:'Applicabile a tutte le applicazioni MG Softwares', de:'Gilt für alle MG Softwares Anwendungen' },
+    'legal.mentions.title':{ fr:'Mentions légales', en:'Legal notice', it:'Note legali', de:'Impressum' },
+    'legal.mentions.badge':{ fr:'Conformément à la loi n° 2004-575 du 21 juin 2004 (LCEN)', en:'Pursuant to French Law n° 2004-575 of June 21, 2004 (LCEN)', it:'Ai sensi della legge francese n° 2004-575 del 21 giugno 2004 (LCEN)', de:'Gemäß dem französischen Gesetz Nr. 2004-575 vom 21. Juni 2004 (LCEN)' },
+    'legal.mentions.sub':  { fr:'Site : mg-softwares.fr', en:'Website: mg-softwares.fr', it:'Sito: mg-softwares.fr', de:'Webseite: mg-softwares.fr' },
     /* APP MODALS HERO */
     'modal.gamiz.eye':  { fr:'🎮 Calculateur de scores',        en:'🎮 Score Calculator',          it:'🎮 Calcolatore punteggi',       de:'🎮 Punkterechner'         },
     'modal.gamiz.title':{ fr:'Vos soirées jeux méritent <span class="grad">mieux</span>', en:'Your game nights deserve <span class="grad">better</span>', it:'Le vostre serate meritano <span class="grad">di più</span>', de:'Ihre Spieleabende verdienen <span class="grad">mehr</span>' },
