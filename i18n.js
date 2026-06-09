@@ -78,7 +78,7 @@
 
     /* MODAL PRIVACY */
     'modal.privacy.title':  { fr:'Politique de confidentialité', en:'Privacy Policy', it:'Informativa sulla privacy', de:'Datenschutzerklärung' },
-    'modal.privacy.date':   { fr:'Dernière mise à jour : 3 mai 2026 — Applicable à toutes les applications MG Softwares', en:'Last updated: May 3, 2026 — Applicable to all MG Softwares applications', it:'Ultimo aggiornamento: 3 maggio 2026 — Applicabile a tutte le applicazioni MG Softwares', de:'Zuletzt aktualisiert: 3. Mai 2026 — Gilt für alle MG Softwares Anwendungen' },
+    'modal.privacy.date':   { fr:'Dernière mise à jour : 9 juin 2026 — Applicable à toutes les applications MG Softwares', en:'Last updated: June 9, 2026 — Applicable to all MG Softwares applications', it:'Ultimo aggiornamento: 9 giugno 2026 — Applicabile a tutte le applicazioni MG Softwares', de:'Zuletzt aktualisiert: 9. Juni 2026 — Gilt für alle MG Softwares Anwendungen' },
     'modal.privacy.body': {
       fr: `
         <div class="modal-section"><h3>1. Qui sommes-nous ?</h3><p><strong>MG Softwares</strong> est un studio de développement indépendant basé en France, édité par <strong>Gilles Goudelin</strong>.<br>Contact : ${_emLink}<br>Site : <a href="https://mg-softwares.fr">https://mg-softwares.fr</a></p></div>
@@ -195,7 +195,7 @@
     'priv.title':    { fr:'Politique de confidentialité', en:'Privacy Policy',          it:'Informativa sulla privacy', de:'Datenschutzerklärung'  },
     'priv.subtitle': { fr:'Applicable à l\'ensemble des applications MG Softwares',    en:'Applicable to all MG Softwares applications', it:'Applicabile a tutte le applicazioni MG Softwares', de:'Gilt für alle MG Softwares Anwendungen' },
     'priv.back':     { fr:'← Retour au site', en:'← Back to site', it:'← Torna al sito', de:'← Zurück zur Website' },
-    'priv.updated':  { fr:'Dernière mise à jour : 3 mai 2026', en:'Last updated: May 3, 2026', it:'Ultimo aggiornamento: 3 maggio 2026', de:'Zuletzt aktualisiert: 3. Mai 2026' },
+    'priv.updated':  { fr:'Dernière mise à jour : 9 juin 2026', en:'Last updated: June 9, 2026', it:'Ultimo aggiornamento: 9 giugno 2026', de:'Zuletzt aktualisiert: 9. Juni 2026' },
     'priv.s1.h':     { fr:'1. Qui sommes-nous ?',              en:'1. Who are we?',               it:'1. Chi siamo?',                     de:'1. Wer sind wir?'             },
     'priv.s1.p':     { fr:'<strong>MG Softwares</strong> est un studio de développement indépendant basé en France, édité par <strong>Gilles Goudelin</strong>.', en:'<strong>MG Softwares</strong> is an independent development studio based in France, operated by <strong>Gilles Goudelin</strong>.', it:'<strong>MG Softwares</strong> è uno studio di sviluppo indipendente con sede in Francia, gestito da <strong>Gilles Goudelin</strong>.', de:'<strong>MG Softwares</strong> ist ein unabhängiges Entwicklungsstudio mit Sitz in Frankreich, betrieben von <strong>Gilles Goudelin</strong>.' },
     'priv.s1.li1':   { fr:'Contact :', en:'Contact:', it:'Contatto:', de:'Kontakt:' },
@@ -242,7 +242,7 @@
     'terms.title':   { fr:'Conditions d\'utilisation', en:'Terms of Use',     it:'Termini di utilizzo', de:'Nutzungsbedingungen' },
     'terms.subtitle':{ fr:'Applicable à l\'ensemble des applications MG Softwares', en:'Applicable to all MG Softwares applications', it:'Applicabile a tutte le applicazioni MG Softwares', de:'Gilt für alle MG Softwares Anwendungen' },
     'terms.back':    { fr:'← Retour au site', en:'← Back to site', it:'← Torna al sito', de:'← Zurück zur Website' },
-    'terms.updated': { fr:'Dernière mise à jour : 3 mai 2026', en:'Last updated: May 3, 2026', it:'Ultimo aggiornamento: 3 maggio 2026', de:'Zuletzt aktualisiert: 3. Mai 2026' },
+    'terms.updated': { fr:'Dernière mise à jour : 9 juin 2026', en:'Last updated: June 9, 2026', it:'Ultimo aggiornamento: 9 giugno 2026', de:'Zuletzt aktualisiert: 9. Juni 2026' },
     'terms.s1.h':    { fr:'1. Présentation', en:'1. Overview', it:'1. Presentazione', de:'1. Übersicht' },
     'terms.s1.p1':   { fr:'<strong>MG Softwares</strong> est un studio de développement indépendant édité par <strong>Gilles Goudelin</strong>, France.', en:'<strong>MG Softwares</strong> is an independent development studio operated by <strong>Gilles Goudelin</strong>, France.', it:'<strong>MG Softwares</strong> è uno studio di sviluppo indipendente gestito da <strong>Gilles Goudelin</strong>, Francia.', de:'<strong>MG Softwares</strong> ist ein unabhängiges Entwicklungsstudio, betrieben von <strong>Gilles Goudelin</strong>, Frankreich.' },
     'terms.s1.p2':   { fr:'Les présentes conditions régissent l\'utilisation des applications suivantes :', en:'These terms govern the use of the following applications:', it:'I presenti termini regolano l\'utilizzo delle seguenti applicazioni:', de:'Diese Bedingungen regeln die Nutzung der folgenden Anwendungen:' },
@@ -323,10 +323,10 @@
     'footer.copy2':  { fr:'© 2026 MG Softwares — Gilles Goudelin', en:'© 2026 MG Softwares — Gilles Goudelin', it:'© 2026 MG Softwares — Gilles Goudelin', de:'© 2026 MG Softwares — Gilles Goudelin' },
     /* LEGAL MODALS HEADERS */
     'legal.priv.title':{ fr:'Politique de confidentialité', en:'Privacy Policy', it:'Informativa sulla privacy', de:'Datenschutzerklärung' },
-    'legal.priv.badge':{ fr:'Dernière mise à jour : 3 mai 2026', en:'Last updated: May 3, 2026', it:'Ultimo aggiornamento: 3 maggio 2026', de:'Zuletzt aktualisiert: 3. Mai 2026' },
+    'legal.priv.badge':{ fr:'Dernière mise à jour : 9 juin 2026', en:'Last updated: June 9, 2026', it:'Ultimo aggiornamento: 9 giugno 2026', de:'Zuletzt aktualisiert: 9. Juni 2026' },
     'legal.priv.sub':  { fr:'Applicable à l\'ensemble des applications MG Softwares', en:'Applicable to all MG Softwares applications', it:'Applicabile a tutte le applicazioni MG Softwares', de:'Gilt für alle MG Softwares Anwendungen' },
     'legal.terms.title':{ fr:'Conditions d\'utilisation', en:'Terms of Use', it:'Termini di utilizzo', de:'Nutzungsbedingungen' },
-    'legal.terms.badge':{ fr:'Dernière mise à jour : 3 mai 2026', en:'Last updated: May 3, 2026', it:'Ultimo aggiornamento: 3 maggio 2026', de:'Zuletzt aktualisiert: 3. Mai 2026' },
+    'legal.terms.badge':{ fr:'Dernière mise à jour : 9 juin 2026', en:'Last updated: June 9, 2026', it:'Ultimo aggiornamento: 9 giugno 2026', de:'Zuletzt aktualisiert: 9. Juni 2026' },
     'legal.terms.sub':  { fr:'Applicable à l\'ensemble des applications MG Softwares', en:'Applicable to all MG Softwares applications', it:'Applicabile a tutte le applicazioni MG Softwares', de:'Gilt für alle MG Softwares Anwendungen' },
     /* APP MODALS HERO */
     'modal.gamiz.eye':  { fr:'🎮 Calculateur de scores',        en:'🎮 Score Calculator',          it:'🎮 Calcolatore punteggi',       de:'🎮 Punkterechner'         },
