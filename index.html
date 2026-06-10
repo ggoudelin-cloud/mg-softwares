@@ -1520,8 +1520,8 @@ window.addEventListener('scroll', () => {
 <div class="modal" id="modal-privacy">
   <div class="modal-drag" onclick="closeModal()"></div>
   <div class="modal-close">
-    <div class="modal-app-name">🔒 Politique de confidentialité</div>
-    <button class="modal-close-btn" onclick="closeModal()">✕ Fermer</button>
+    <div class="modal-app-name" data-i18n="modal.priv.label">🔒 Politique de confidentialité</div>
+    <button class="modal-close-btn" onclick="closeModal()" data-i18n="modal.close">✕ Fermer</button>
   </div>
   <div class="legal-body">
     <div class="legal-top">
@@ -1529,7 +1529,7 @@ window.addEventListener('scroll', () => {
       <h1 class="legal-title" data-i18n="legal.priv.title">Politique de confidentialité</h1>
       <p class="legal-sub" data-i18n="legal.priv.sub">Applicable à l'ensemble des applications MG Softwares</p>
     </div>
-    <div class="legal-sections">
+    <div class="legal-sections" data-i18n="modal.privacy.body">
 
       <div class="legal-section">
         <div class="legal-h">1. Qui sommes-nous ?</div>
@@ -1683,8 +1683,8 @@ window.addEventListener('scroll', () => {
 <div class="modal" id="modal-terms">
   <div class="modal-drag" onclick="closeModal()"></div>
   <div class="modal-close">
-    <div class="modal-app-name">📋 Conditions d'utilisation</div>
-    <button class="modal-close-btn" onclick="closeModal()">✕ Fermer</button>
+    <div class="modal-app-name" data-i18n="modal.terms.label">📋 Conditions d'utilisation</div>
+    <button class="modal-close-btn" onclick="closeModal()" data-i18n="modal.close">✕ Fermer</button>
   </div>
   <div class="legal-body">
     <div class="legal-top">
@@ -1692,7 +1692,7 @@ window.addEventListener('scroll', () => {
       <h1 class="legal-title" data-i18n="legal.terms.title">Conditions d'utilisation</h1>
       <p class="legal-sub" data-i18n="legal.terms.sub">Applicable à l'ensemble des applications MG Softwares</p>
     </div>
-    <div class="legal-sections">
+    <div class="legal-sections" data-i18n="modal.terms.body">
 
       <div class="legal-section">
         <div class="legal-h">1. Présentation</div>
